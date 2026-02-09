@@ -54,6 +54,7 @@
   --primary: var(--rg-primary);
   --primary-dark: var(--rg-primary-dark);
   --primary-light: var(--rg-primary-light);
+  --secondary: #1e3a5f;
   --success: var(--rg-success);
   --warning: var(--rg-warning);
   --danger: var(--rg-danger);
@@ -68,6 +69,8 @@
   --gray-700: var(--rg-gray-700);
   --gray-800: var(--rg-gray-800);
   --gray-900: var(--rg-gray-900);
+  --sidebar-width: var(--rg-sidebar-width);
+  --header-height: var(--rg-topbar-height);
 }
 
 /* === 2. Base Reset ======================================================= */

@@ -225,15 +225,16 @@ class Rental_Gates_Routing {
         }
 
         if (file_exists($template_path)) {
-            $current_page = 'dashboard';
+            // Parse current section from URL for any dashboard role
+            $current_page = '';
             if (isset($_SERVER['REQUEST_URI'])) {
                 $uri = urldecode($_SERVER['REQUEST_URI']);
-                if (preg_match('#/rental-gates/dashboard/([^?]+)#', $uri, $matches)) {
+                if (preg_match('#/rental-gates/(?:dashboard|staff|tenant|vendor|admin)/([^?]+)#', $uri, $matches)) {
                     $current_page = trim($matches[1], '/');
                 }
             }
 
-            if ($current_page === 'dashboard' || empty($current_page)) {
+            if (empty($current_page)) {
                 $query_section = get_query_var('rental_gates_section');
                 if (!empty($query_section)) {
                     $current_page = $query_section;
@@ -256,8 +257,19 @@ class Rental_Gates_Routing {
                 }
             }
 
+            // Determine content template with role-specific sections directory
             if (strpos($template, 'dashboard/') === 0) {
-                $content_template = $this->get_dashboard_content_template($current_page);
+                $sections_dir = RENTAL_GATES_PLUGIN_DIR . 'templates/dashboard/sections/';
+                if (strpos($template, 'dashboard/staff') === 0) {
+                    $sections_dir = RENTAL_GATES_PLUGIN_DIR . 'templates/dashboard/staff/sections/';
+                } elseif (strpos($template, 'dashboard/tenant') === 0) {
+                    $sections_dir = RENTAL_GATES_PLUGIN_DIR . 'templates/dashboard/tenant/sections/';
+                } elseif (strpos($template, 'dashboard/vendor') === 0) {
+                    $sections_dir = RENTAL_GATES_PLUGIN_DIR . 'templates/dashboard/vendor/sections/';
+                } elseif (strpos($template, 'dashboard/admin') === 0) {
+                    $sections_dir = RENTAL_GATES_PLUGIN_DIR . 'templates/dashboard/admin/sections/';
+                }
+                $content_template = $this->get_dashboard_content_template($current_page, $sections_dir);
             }
 
             ob_start();
@@ -276,13 +288,15 @@ class Rental_Gates_Routing {
         }
     }
 
-    private function get_dashboard_content_template($section)
+    private function get_dashboard_content_template($section, $sections_dir = null)
     {
-        $sections_dir = RENTAL_GATES_PLUGIN_DIR . 'templates/dashboard/sections/';
+        if (!$sections_dir) {
+            $sections_dir = RENTAL_GATES_PLUGIN_DIR . 'templates/dashboard/sections/';
+        }
 
         if (isset($_SERVER['REQUEST_URI'])) {
             $uri = urldecode($_SERVER['REQUEST_URI']);
-            if (preg_match('#/rental-gates/dashboard/([^?]+)#', $uri, $matches)) {
+            if (preg_match('#/rental-gates/(?:dashboard|staff|tenant|vendor|admin)/([^?]+)#', $uri, $matches)) {
                 $section = trim($matches[1], '/');
             }
         }
@@ -293,7 +307,10 @@ class Rental_Gates_Routing {
         switch ($base) {
             case 'dashboard':
             case '':
-                return $sections_dir . 'overview.php';
+                if (file_exists($sections_dir . 'overview.php')) {
+                    return $sections_dir . 'overview.php';
+                }
+                return $sections_dir . 'dashboard.php';
 
             case 'buildings':
                 if (count($parts) === 1) {
@@ -449,7 +466,15 @@ class Rental_Gates_Routing {
                 return $sections_dir . 'staff.php';
 
             default:
-                return $sections_dir . 'overview.php';
+                // For non-owner roles, try the section name directly as a file
+                $direct_file = $sections_dir . $base . '.php';
+                if (file_exists($direct_file)) {
+                    return $direct_file;
+                }
+                if (file_exists($sections_dir . 'overview.php')) {
+                    return $sections_dir . 'overview.php';
+                }
+                return $sections_dir . 'dashboard.php';
         }
     }
 }

@@ -22,8 +22,15 @@ class Rental_Gates_Enqueue {
      */
     public function enqueue_public_assets()
     {
-        // Only load on Rental Gates pages
-        if (!get_query_var('rental_gates_page')) {
+        // Only load on Rental Gates pages (check both query var and URL)
+        $is_rental_gates_page = get_query_var('rental_gates_page');
+        if (!$is_rental_gates_page) {
+            $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+            if (strpos($request_uri, '/rental-gates/') !== false) {
+                $is_rental_gates_page = true;
+            }
+        }
+        if (!$is_rental_gates_page) {
             return;
         }
 
@@ -175,8 +182,12 @@ class Rental_Gates_Enqueue {
      */
     public function output_preconnect_hints()
     {
-        if (!get_query_var('rental_gates_page')) {
-            return;
+        $is_rental_gates_page = get_query_var('rental_gates_page');
+        if (!$is_rental_gates_page) {
+            $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+            if (strpos($request_uri, '/rental-gates/') === false) {
+                return;
+            }
         }
         echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
         echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
@@ -338,8 +349,8 @@ class Rental_Gates_Enqueue {
     private function get_current_section() {
         $uri = isset($_SERVER['REQUEST_URI']) ? urldecode($_SERVER['REQUEST_URI']) : '';
 
-        // Dashboard section: /rental-gates/dashboard/buildings/123/edit → "buildings"
-        if (preg_match('#/rental-gates/dashboard/([^/?]+)#', $uri, $m)) {
+        // Dashboard section: /rental-gates/{role}/buildings/123/edit → "buildings"
+        if (preg_match('#/rental-gates/(?:dashboard|staff|tenant|vendor|admin)/([^/?]+)#', $uri, $m)) {
             return $m[1];
         }
 
