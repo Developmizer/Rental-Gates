@@ -225,15 +225,19 @@ class Rental_Gates_Routing {
         }
 
         if (file_exists($template_path)) {
-            $current_page = 'dashboard';
+            $current_page = '';
             if (isset($_SERVER['REQUEST_URI'])) {
                 $uri = urldecode($_SERVER['REQUEST_URI']);
-                if (preg_match('#/rental-gates/dashboard/([^?]+)#', $uri, $matches)) {
+                // Match section path for all dashboard-type URLs:
+                // /rental-gates/dashboard/buildings/42/edit → buildings/42/edit
+                // /rental-gates/admin/support             → support
+                // /rental-gates/staff/maintenance          → maintenance
+                if (preg_match('#/rental-gates/(?:dashboard|admin|staff|tenant|vendor)/([^?]+)#', $uri, $matches)) {
                     $current_page = trim($matches[1], '/');
                 }
             }
 
-            if ($current_page === 'dashboard' || empty($current_page)) {
+            if (empty($current_page)) {
                 $query_section = get_query_var('rental_gates_section');
                 if (!empty($query_section)) {
                     $current_page = $query_section;

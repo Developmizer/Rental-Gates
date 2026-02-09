@@ -110,7 +110,9 @@ endif;
 // Prepare template variables
 // ---------------------------------------------------------------------------
 $current_user    = wp_get_current_user();
-$section_label   = ucfirst(str_replace('-', ' ', $current_page ?: 'Dashboard'));
+// Extract the base section slug for nav matching (e.g., 'buildings' from 'buildings/42/edit')
+$current_section = explode('/', trim($current_page ?: '', '/'))[0];
+$section_label   = ucfirst(str_replace('-', ' ', $current_section ?: 'Dashboard'));
 $page_title      = esc_html($section_label . ' - Rental Gates Dashboard');
 $breadcrumbs     = rg_generate_breadcrumbs($dashboard_base, $current_page);
 $notification_count = 0;
@@ -158,7 +160,7 @@ if (function_exists('rg_get_unread_notification_count')) {
                 <?php endif; ?>
                 <ul class="rg-nav-list">
                     <?php foreach ($group['items'] as $item) :
-                        $is_active = ($current_page === $item['section']);
+                        $is_active = ($current_section === $item['section']) || ($current_page === $item['section']);
                     ?>
                         <li class="rg-nav-item">
                             <a href="<?php echo esc_url($item['href']); ?>"

@@ -49,6 +49,14 @@ class Rental_Gates_Enqueue {
             RENTAL_GATES_VERSION
         );
 
+        // Mobile-specific styles
+        wp_enqueue_style(
+            'rental-gates-mobile',
+            RENTAL_GATES_PLUGIN_URL . 'assets/css/mobile.css',
+            array('rental-gates-components'),
+            RENTAL_GATES_VERSION
+        );
+
         // Google Fonts
         wp_enqueue_style(
             'rental-gates-fonts',
