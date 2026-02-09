@@ -204,7 +204,7 @@ $page_title = $is_edit ? __('Edit Lease', 'rental-gates') : __('New Lease', 'ren
         <!-- Tenants -->
         <div class="rg-form-section">
             <h3 class="rg-form-section-title"><?php _e('Tenants', 'rental-gates'); ?></h3>
-            <p style="color: var(--gray-500); font-size: 14px; margin-bottom: 16px;">
+            <p style="color: var(--rg-gray-500); font-size: 14px; margin-bottom: 16px;">
                 <?php _e('Add tenants who will be on this lease. At least one tenant is required to activate the lease.', 'rental-gates'); ?>
             </p>
             
@@ -386,7 +386,7 @@ function renderSelectedTenants() {
     const jsonInput = document.getElementById('tenants-json');
     
     if (selectedTenants.length === 0) {
-        container.innerHTML = '<p style="color: var(--gray-400); text-align: center; padding: 20px;"><?php _e('No tenants added yet', 'rental-gates'); ?></p>';
+        container.innerHTML = '<p style="color: var(--rg-gray-400); text-align: center; padding: 20px;"><?php _e('No tenants added yet', 'rental-gates'); ?></p>';
     } else {
         container.innerHTML = selectedTenants.map(t => {
             const initials = t.name.split(' ').map(n => n[0]).join('').toUpperCase();
@@ -397,12 +397,12 @@ function renderSelectedTenants() {
                         <div class="rg-selected-tenant-avatar">${initials}</div>
                         <div>
                             <strong>${t.name}</strong>
-                            <span style="font-size: 13px; color: var(--gray-500); display: block;">${t.email}</span>
+                            <span style="font-size: 13px; color: var(--rg-gray-500); display: block;">${t.email}</span>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="padding: 2px 8px; background: var(--gray-100); border-radius: 12px; font-size: 12px;">${roleLabels[t.role]}</span>
-                        <button type="button" onclick="removeTenantFromList(${t.tenant_id})" style="background: none; border: none; cursor: pointer; color: var(--gray-400);">
+                        <span style="padding: 2px 8px; background: var(--rg-gray-100); border-radius: 12px; font-size: 12px;">${roleLabels[t.role]}</span>
+                        <button type="button" onclick="removeTenantFromList(${t.tenant_id})" style="background: none; border: none; cursor: pointer; color: var(--rg-gray-400);">
                             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                             </svg>
