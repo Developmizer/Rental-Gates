@@ -324,7 +324,7 @@ class Rental_Gates_Ajax_Payments {
                 try {
                     Rental_Gates_Invoice::create_from_payment($payment_id, 'receipt');
                 } catch (Exception $e) {
-                    error_log('Rental Gates - Receipt generation error: ' . $e->getMessage());
+                    Rental_Gates_Logger::error('payments', 'Receipt generation failed', array('payment_id' => $payment_id, 'exception' => $e->getMessage()));
                 }
             }
 
@@ -345,7 +345,7 @@ class Rental_Gates_Ajax_Payments {
                 'payment_id' => $payment_id,
             ));
         } catch (Exception $e) {
-            error_log('Rental Gates - Record Manual Payment Error: ' . $e->getMessage());
+            Rental_Gates_Logger::error('payments', 'Record manual payment failed', array('exception' => $e->getMessage()));
             wp_send_json_error(array('message' => __('An error occurred while recording the payment', 'rental-gates')));
         }
     }
@@ -420,7 +420,7 @@ class Rental_Gates_Ajax_Payments {
                 'errors' => $result['errors'] ?? array(),
             ));
         } catch (Exception $e) {
-            error_log('Rental Gates - Generate Rent Payments Error: ' . $e->getMessage());
+            Rental_Gates_Logger::error('payments', 'Generate rent payments failed', array('exception' => $e->getMessage()));
             wp_send_json_error(array('message' => __('An error occurred while generating payments', 'rental-gates')));
         }
     }
@@ -545,7 +545,7 @@ class Rental_Gates_Ajax_Payments {
                 'payment_id' => $payment_id,
             ));
         } catch (Exception $e) {
-            error_log('Rental Gates - Create Pending Payment Error: ' . $e->getMessage());
+            Rental_Gates_Logger::error('payments', 'Create pending payment failed', array('exception' => $e->getMessage()));
             wp_send_json_error(array('message' => __('An error occurred while creating the payment', 'rental-gates')));
         }
     }
@@ -750,7 +750,7 @@ class Rental_Gates_Ajax_Payments {
                 'message' => __('Invoice generated successfully', 'rental-gates'),
             ));
         } catch (Exception $e) {
-            error_log('Rental Gates - Generate Invoice Error: ' . $e->getMessage());
+            Rental_Gates_Logger::error('payments', 'Generate invoice failed', array('exception' => $e->getMessage()));
             wp_send_json_error(array('message' => __('An error occurred while generating the invoice', 'rental-gates')));
         }
     }

@@ -23,6 +23,10 @@ class Rental_Gates_Autoloader {
         'Rental_Gates_Activator'            => 'includes/class-rental-gates-activator.php',
         'Rental_Gates_Deactivator'          => 'includes/class-rental-gates-deactivator.php',
 
+        // Logging & Monitoring
+        'Rental_Gates_Logger'               => 'includes/class-rental-gates-logger.php',
+        'Rental_Gates_Health'               => 'includes/class-rental-gates-health.php',
+
         // Security & Performance
         'Rental_Gates_Security'             => 'includes/class-rental-gates-security.php',
         'Rental_Gates_Cache'                => 'includes/class-rental-gates-cache.php',

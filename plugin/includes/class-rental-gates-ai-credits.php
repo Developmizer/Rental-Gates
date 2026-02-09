@@ -437,6 +437,11 @@ class Rental_Gates_AI_Credits
 
         } catch (Exception $e) {
             $wpdb->query('ROLLBACK');
+            Rental_Gates_Logger::error('ai_credits', 'Credit deduction failed', array(
+                'org_id' => $org_id,
+                'amount' => $amount,
+                'error'  => $e->getMessage(),
+            ));
             return new WP_Error('deduction_error', $e->getMessage());
         }
     }
@@ -494,9 +499,9 @@ class Rental_Gates_AI_Credits
                 $org_id
             ));
 
-            error_log("Rental Gates AI Credits: Updated {$pool} by {$amount} for org {$org_id}, result: " . ($result !== false ? 'success' : 'failed'));
+            Rental_Gates_Logger::debug('ai_credits', 'Credits updated', array('pool' => $pool, 'amount' => $amount, 'org_id' => $org_id, 'result' => ($result !== false ? 'success' : 'failed')));
         } else {
-            error_log("Rental Gates AI Credits: Balance table does not exist, cannot add credits");
+            Rental_Gates_Logger::error('ai_credits', 'Balance table does not exist, cannot add credits');
             return new WP_Error('no_table', __('Credit balance table not found', 'rental-gates'));
         }
 
@@ -1029,7 +1034,7 @@ class Rental_Gates_AI_Credits
     {
         global $wpdb;
 
-        error_log("Rental Gates AI Credits: Starting purchase completion - org:{$org_id}, credits:{$credits}, pi:{$payment_intent_id}");
+        Rental_Gates_Logger::info('ai_credits', 'Starting purchase completion', array('org_id' => $org_id, 'credits' => $credits, 'payment_intent_id' => $payment_intent_id));
 
         // Record purchase
         $purchases_table = $wpdb->prefix . 'rg_ai_credit_purchases';
@@ -1043,7 +1048,7 @@ class Rental_Gates_AI_Credits
             ));
 
             if ($existing) {
-                error_log("Rental Gates AI Credits: Purchase already completed (idempotency) - id:{$existing}");
+                Rental_Gates_Logger::info('ai_credits', 'Purchase already completed (idempotency)', array('purchase_id' => $existing));
                 return true;
             }
 
@@ -1058,7 +1063,7 @@ class Rental_Gates_AI_Credits
             ));
 
             $purchase_id = $wpdb->insert_id;
-            error_log("Rental Gates AI Credits: Created purchase record - id:{$purchase_id}");
+            Rental_Gates_Logger::info('ai_credits', 'Created purchase record', array('purchase_id' => $purchase_id));
         }
 
         // Add credits
@@ -1067,7 +1072,7 @@ class Rental_Gates_AI_Credits
         ));
 
         if ($result) {
-            error_log("Rental Gates AI Credits: Credits added successfully - org:{$org_id}, credits:{$credits}");
+            Rental_Gates_Logger::info('ai_credits', 'Credits added successfully', array('org_id' => $org_id, 'credits' => $credits));
 
             // Generate Invoice
             if (class_exists('Rental_Gates_Stripe') && class_exists('Rental_Gates_Subscription_Invoice')) {
@@ -1088,14 +1093,14 @@ class Rental_Gates_AI_Credits
                     $invoice = Rental_Gates_Subscription_Invoice::create_from_payment($org_id, $items, $amount, $payment_intent_id);
 
                     if (is_wp_error($invoice)) {
-                        error_log("Rental Gates AI Credits: Failed to create invoice - " . $invoice->get_error_message());
+                        Rental_Gates_Logger::error('ai_credits', 'Failed to create invoice', array('error' => $invoice->get_error_message()));
                     } else {
-                        error_log("Rental Gates AI Credits: Created invoice #{$invoice['invoice_number']}");
+                        Rental_Gates_Logger::info('ai_credits', 'Created invoice', array('invoice_number' => $invoice['invoice_number']));
                     }
                 }
             }
         } else {
-            error_log("Rental Gates AI Credits: Failed to add credits - org:{$org_id}");
+            Rental_Gates_Logger::error('ai_credits', 'Failed to add credits', array('org_id' => $org_id));
         }
 
         return $result;

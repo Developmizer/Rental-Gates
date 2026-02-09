@@ -472,6 +472,7 @@ class Rental_Gates_Security {
             try {
                 $org_id = Rental_Gates_Roles::get_organization_id();
             } catch (Exception $e) {
+                Rental_Gates_Logger::warning('security', 'Failed to get organization ID', array('error' => $e->getMessage()));
                 $org_id = null;
             }
         }

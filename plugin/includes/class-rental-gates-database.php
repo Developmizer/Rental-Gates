@@ -154,6 +154,7 @@ class Rental_Gates_Database
             '2.7.3'  => 'migrate_to_273',
             '2.15.0' => 'migrate_to_2150',
             '2.15.2' => 'migrate_to_2152',
+            '2.16.0' => 'migrate_to_2160',
         );
 
         foreach ($migrations as $version => $method) {
@@ -172,7 +173,7 @@ class Rental_Gates_Database
                         'from_version' => $from_version,
                     ));
                 }
-                error_log("Rental Gates: Migration to {$version} failed - stopping");
+                Rental_Gates_Logger::error('db', 'Migration failed - stopping', array('version' => $version));
                 return false;
             }
 
@@ -195,7 +196,7 @@ class Rental_Gates_Database
         global $wpdb;
 
         if (!method_exists($this, $method)) {
-            error_log("Rental Gates: Migration method {$method} not found");
+            Rental_Gates_Logger::error('db', 'Migration method not found', array('method' => $method));
             return false;
         }
 
@@ -206,7 +207,7 @@ class Rental_Gates_Database
 
             if ($result === false) {
                 $wpdb->query('ROLLBACK');
-                error_log("Rental Gates: Migration to {$version} returned false - rolling back");
+                Rental_Gates_Logger::error('db', 'Migration returned false - rolling back', array('version' => $version));
                 return false;
             }
 
@@ -215,7 +216,7 @@ class Rental_Gates_Database
 
         } catch (Exception $e) {
             $wpdb->query('ROLLBACK');
-            error_log("Rental Gates: Migration to {$version} exception: " . $e->getMessage());
+            Rental_Gates_Logger::error('db', 'Migration exception', array('version' => $version, 'exception' => $e->getMessage()));
             return false;
         }
     }
@@ -280,6 +281,55 @@ class Rental_Gates_Database
     }
 
     /**
+     * Migration 2.16.0 - Performance indexes
+     *
+     * Adds missing indexes on columns frequently used in WHERE/JOIN/ORDER BY
+     * across reports, Stripe webhooks, and subscription lifecycle queries.
+     */
+    private function migrate_to_2160()
+    {
+        global $wpdb;
+
+        $indexes = array(
+            // Critical: Stripe webhook deduplication
+            array($wpdb->prefix . 'rg_payments', 'idx_stripe_pi', 'stripe_payment_intent_id'),
+            array($wpdb->prefix . 'rg_ai_credit_purchases', 'idx_stripe_pi', 'stripe_payment_intent_id'),
+            // Report queries: date-range payment lookups
+            array($wpdb->prefix . 'rg_payments', 'idx_paid_at', 'paid_at'),
+            // Composite: org + date for financial reports
+            array($wpdb->prefix . 'rg_payments', 'idx_org_paid_at', 'organization_id, paid_at'),
+            // Maintenance completion reports
+            array($wpdb->prefix . 'rg_work_orders', 'idx_completed_at', 'completed_at'),
+            array($wpdb->prefix . 'rg_work_orders', 'idx_org_completed_at', 'organization_id, completed_at'),
+            // Active tenant queries (removed_at IS NULL)
+            array($wpdb->prefix . 'rg_lease_tenants', 'idx_lease_removed', 'lease_id, removed_at'),
+            // Subscription lifecycle
+            array($wpdb->prefix . 'rg_subscriptions', 'idx_cancel_period_end', 'cancel_at_period_end'),
+            // Payment method default lookup
+            array($wpdb->prefix . 'rg_payment_methods', 'idx_is_default', 'is_default'),
+            // Payment audit trail
+            array($wpdb->prefix . 'rg_payments', 'idx_paid_by', 'paid_by_user_id'),
+        );
+
+        foreach ($indexes as $idx) {
+            list($table, $name, $columns) = $idx;
+
+            if ($wpdb->get_var("SHOW TABLES LIKE '{$table}'") !== $table) {
+                continue;
+            }
+
+            $existing = $wpdb->get_results("SHOW INDEX FROM `{$table}` WHERE Key_name = '{$name}'");
+            if (!empty($existing)) {
+                continue;
+            }
+
+            $wpdb->query("ALTER TABLE `{$table}` ADD INDEX `{$name}` ({$columns})");
+        }
+
+        return true;
+    }
+
+    /**
      * Create magic_links table if it doesn't exist
      * Called during migration for existing installations
      */
@@ -306,7 +356,7 @@ class Rental_Gates_Database
                 KEY expires_at (expires_at)
             ) $charset_collate;";
             dbDelta($sql);
-            error_log("Rental Gates: Created magic_links table");
+            Rental_Gates_Logger::info('db', 'Created magic_links table');
         }
     }
 
@@ -341,7 +391,7 @@ class Rental_Gates_Database
                 UNIQUE KEY organization_id (organization_id)
             ) $charset_collate;";
             dbDelta($sql);
-            error_log("Rental Gates: Created AI credit balances table");
+            Rental_Gates_Logger::info('db', 'Created AI credit balances table');
         }
 
         // AI Credit Transactions
@@ -368,7 +418,7 @@ class Rental_Gates_Database
                 KEY created_at (created_at)
             ) $charset_collate;";
             dbDelta($sql);
-            error_log("Rental Gates: Created AI credit transactions table");
+            Rental_Gates_Logger::info('db', 'Created AI credit transactions table');
         }
 
         // AI Credit Packs
@@ -393,7 +443,7 @@ class Rental_Gates_Database
                 UNIQUE KEY slug (slug)
             ) $charset_collate;";
             dbDelta($sql);
-            error_log("Rental Gates: Created AI credit packs table");
+            Rental_Gates_Logger::info('db', 'Created AI credit packs table');
         }
 
         // AI Credit Purchases
@@ -417,7 +467,7 @@ class Rental_Gates_Database
                 KEY status (status)
             ) $charset_collate;";
             dbDelta($sql);
-            error_log("Rental Gates: Created AI credit purchases table");
+            Rental_Gates_Logger::info('db', 'Created AI credit purchases table');
         }
     }
 

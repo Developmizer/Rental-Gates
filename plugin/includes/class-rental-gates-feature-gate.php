@@ -558,10 +558,14 @@ class Rental_Gates_Feature_Gate
         }
 
         $plan = $this->get_org_plan($org_id);
+
+        // Batch all counts in a single query (fixes N+1 from individual get_usage calls)
+        $counts = $this->batch_get_counts($org_id);
+
         $usage = array();
 
         foreach ($this->limit_definitions as $resource => $def) {
-            $current = $this->get_usage($resource, $org_id);
+            $current = $counts[$resource] ?? 0;
             $limit = $plan['limits'][$resource] ?? 0;
 
             $usage[$resource] = array(
@@ -576,6 +580,69 @@ class Rental_Gates_Feature_Gate
         }
 
         return $usage;
+    }
+
+    /**
+     * Batch-fetch all resource counts in a single UNION query.
+     *
+     * Replaces N individual COUNT queries with 1 combined query.
+     * Storage is still calculated separately (filesystem-based).
+     *
+     * @param int $org_id Organization ID
+     * @return array Resource key => count
+     */
+    private function batch_get_counts($org_id)
+    {
+        global $wpdb;
+
+        if (!$org_id) {
+            return array();
+        }
+
+        $unions = array();
+
+        foreach ($this->limit_definitions as $resource => $def) {
+            if ($def['table'] === null) {
+                continue; // storage_gb handled separately
+            }
+
+            $table = $wpdb->prefix . $def['table'];
+
+            if (isset($def['role_filter'])) {
+                $roles = "'" . implode("','", array_map('esc_sql', $def['role_filter'])) . "'";
+                $unions[] = $wpdb->prepare(
+                    "SELECT %s AS resource, COUNT(*) AS cnt FROM `{$table}` WHERE organization_id = %d AND role IN ({$roles})",
+                    $resource,
+                    $org_id
+                );
+            } else {
+                $unions[] = $wpdb->prepare(
+                    "SELECT %s AS resource, COUNT(*) AS cnt FROM `{$table}` WHERE organization_id = %d",
+                    $resource,
+                    $org_id
+                );
+            }
+        }
+
+        $counts = array();
+
+        if (!empty($unions)) {
+            $sql = implode(' UNION ALL ', $unions);
+            $results = $wpdb->get_results($sql);
+
+            if ($results) {
+                foreach ($results as $row) {
+                    $counts[$row->resource] = intval($row->cnt);
+                }
+            }
+        }
+
+        // Storage is filesystem-based, always separate
+        if (isset($this->limit_definitions['storage_gb'])) {
+            $counts['storage_gb'] = $this->calculate_storage_usage($org_id);
+        }
+
+        return $counts;
     }
 
     /**
