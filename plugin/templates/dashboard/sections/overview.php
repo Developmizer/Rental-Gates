@@ -60,114 +60,31 @@ $priority_colors = array(
 );
 ?>
 
+<!-- Section spacing -->
 <style>
-    .rg-dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 24px; }
-    
-    .rg-metric-card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid var(--gray-200); position: relative; overflow: hidden; }
-    .rg-metric-card.highlight { border-color: #3b82f6; background: linear-gradient(135deg, #eff6ff 0%, #fff 100%); }
-    .rg-metric-card.success { border-color: #10b981; background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%); }
-    .rg-metric-card.warning { border-color: #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #fff 100%); }
-    .rg-metric-card.danger { border-color: #ef4444; background: linear-gradient(135deg, #fef2f2 0%, #fff 100%); }
-    
-    .rg-metric-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-    .rg-metric-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-    .rg-metric-icon.blue { background: #dbeafe; color: #2563eb; }
-    .rg-metric-icon.green { background: #d1fae5; color: #059669; }
-    .rg-metric-icon.yellow { background: #fef3c7; color: #d97706; }
-    .rg-metric-icon.red { background: #fee2e2; color: #dc2626; }
-    .rg-metric-icon.purple { background: #ede9fe; color: #7c3aed; }
-    
-    .rg-metric-value { font-size: 32px; font-weight: 700; color: var(--gray-900); line-height: 1; }
-    .rg-metric-value.success { color: #059669; }
-    .rg-metric-value.warning { color: #d97706; }
-    .rg-metric-value.danger { color: #dc2626; }
-    .rg-metric-label { font-size: 14px; color: var(--gray-500); margin-top: 4px; }
-    .rg-metric-trend { font-size: 12px; margin-top: 8px; display: flex; align-items: center; gap: 4px; }
-    .rg-metric-trend.up { color: #059669; }
-    .rg-metric-trend.down { color: #dc2626; }
-    
-    .rg-two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px; }
-    .rg-three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px; }
-    
-    .rg-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; }
-    .rg-card-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
-    .rg-card-title { font-size: 16px; font-weight: 600; color: var(--gray-900); margin: 0; }
-    .rg-card-link { font-size: 13px; color: #3b82f6; text-decoration: none; font-weight: 500; }
-    .rg-card-link:hover { text-decoration: underline; }
-    .rg-card-body { padding: 16px 20px; }
-    
-    .rg-chart-container { height: 220px; position: relative; }
-    
-    .rg-list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
-    .rg-list-item:last-child { border-bottom: none; }
-    .rg-list-item-main { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
-    .rg-list-item-title { font-weight: 500; color: var(--gray-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .rg-list-item-title a { color: inherit; text-decoration: none; }
-    .rg-list-item-title a:hover { color: #3b82f6; }
-    .rg-list-item-meta { font-size: 13px; color: var(--gray-500); }
-    .rg-list-item-badge { flex-shrink: 0; margin-left: 12px; }
-    
-    .rg-badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
-    .rg-badge.red { background: #fee2e2; color: #dc2626; }
-    .rg-badge.yellow { background: #fef3c7; color: #d97706; }
-    .rg-badge.blue { background: #dbeafe; color: #2563eb; }
-    .rg-badge.green { background: #d1fae5; color: #059669; }
-    .rg-badge.purple { background: #ede9fe; color: #7c3aed; }
-    .rg-badge.gray { background: #f3f4f6; color: #6b7280; }
-    
-    .rg-priority-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-    
-    .rg-quick-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .rg-quick-action { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px; background: var(--gray-50); border-radius: 10px; text-decoration: none; color: var(--gray-700); transition: all 0.2s; }
-    .rg-quick-action:hover { background: #eff6ff; color: #2563eb; }
-    .rg-quick-action svg { width: 24px; height: 24px; }
-    .rg-quick-action span { font-size: 13px; font-weight: 500; }
-    
-    .rg-empty-state { text-align: center; padding: 30px 20px; color: var(--gray-400); }
-    .rg-empty-state svg { width: 40px; height: 40px; margin-bottom: 8px; opacity: 0.5; }
-    
-    .rg-donut-chart { display: flex; align-items: center; gap: 20px; }
-    .rg-donut-svg { width: 120px; height: 120px; }
-    .rg-donut-legend { display: flex; flex-direction: column; gap: 8px; }
-    .rg-legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
-    .rg-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .rg-legend-value { font-weight: 600; color: var(--gray-900); margin-left: auto; }
-    
-    .rg-alert-banner { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-    .rg-alert-banner.danger { background: #fee2e2; border-color: #fca5a5; }
-    .rg-alert-banner svg { width: 20px; height: 20px; flex-shrink: 0; }
-    .rg-alert-banner.danger svg { color: #dc2626; }
-    .rg-alert-banner span { font-size: 14px; color: var(--gray-700); }
-    .rg-alert-banner a { color: #2563eb; font-weight: 500; text-decoration: none; margin-left: auto; }
-    
-    @media (max-width: 1200px) {
-        .rg-dashboard-grid { grid-template-columns: repeat(2, 1fr); }
-        .rg-two-col { grid-template-columns: 1fr; }
-        .rg-three-col { grid-template-columns: 1fr; }
-    }
-    
-    @media (max-width: 768px) {
-        .rg-dashboard-grid { grid-template-columns: 1fr; }
-        .rg-quick-actions { grid-template-columns: repeat(2, 1fr); }
-    }
+    .rg-dashboard-grid { margin-bottom: var(--rg-space-6); }
+    .rg-two-col { margin-bottom: var(--rg-space-6); }
+    .rg-three-col { margin-bottom: var(--rg-space-6); }
+    .rg-card + .rg-card { margin-top: 0; }
+    .rg-section-gap { margin-bottom: var(--rg-space-6); }
 </style>
 
-<!-- Getting Started (show if no buildings) - at the top -->
+<!-- Getting Started (show if no buildings) -->
 <?php if ($org_stats['buildings'] === 0): ?>
-<div class="rg-card" style="margin-bottom: 24px; background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); color: #fff; border: none;">
-    <div class="rg-card-body" style="padding: 32px;">
-        <h2 style="margin: 0 0 12px; font-size: 24px; font-weight: 700;"><?php _e('Welcome to Rental Gates!', 'rental-gates'); ?> 👋</h2>
-        <p style="opacity: 0.9; margin-bottom: 24px; font-size: 15px; line-height: 1.6;">
-            <?php _e('Get started by adding your first building. Simply click on the map to drop a pin and set your property location. From there, you can add units, tenants, and start managing your properties.', 'rental-gates'); ?>
+<div class="rg-alert-banner" style="background: linear-gradient(135deg, hsl(215 50% 23%) 0%, var(--rg-primary) 100%); color: #fff; border: none; padding: var(--rg-space-6); flex-direction: column; align-items: flex-start; gap: var(--rg-space-4);">
+    <div>
+        <h2 style="margin: 0 0 8px; font-size: var(--rg-font-xl); font-weight: 700; color: #fff;"><?php _e('Welcome to Rental Gates!', 'rental-gates'); ?></h2>
+        <p style="opacity: 0.9; margin: 0; font-size: var(--rg-font-base); line-height: 1.6; color: #fff;">
+            <?php _e('Get started by adding your first building. Simply click on the map to drop a pin and set your property location.', 'rental-gates'); ?>
         </p>
-        <a href="<?php echo home_url('/rental-gates/dashboard/buildings/add'); ?>" style="display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #1e3a5f; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            <?php _e('Add Your First Building', 'rental-gates'); ?>
-        </a>
     </div>
+    <a href="<?php echo home_url('/rental-gates/dashboard/buildings/add'); ?>" class="rg-btn" style="background: #fff; color: hsl(215 50% 23%); font-weight: 600;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <?php _e('Add Your First Building', 'rental-gates'); ?>
+    </a>
 </div>
 <?php endif; ?>
 
@@ -287,50 +204,33 @@ $priority_colors = array(
     <div class="rg-card">
         <div class="rg-card-header">
             <h2 class="rg-card-title"><?php _e('Revenue Trend', 'rental-gates'); ?></h2>
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <select id="periodSelector" style="padding: 6px 12px; border: 1px solid var(--gray-300); border-radius: 6px; font-size: 13px; background: #fff;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <select id="periodSelector" class="rg-form-select" style="padding: 6px 12px; font-size: 13px; min-width: auto; width: auto;">
                     <option value="last_7_days" <?php selected($period, 'last_7_days'); ?>><?php _e('Last 7 Days', 'rental-gates'); ?></option>
                     <option value="last_30_days" <?php selected($period, 'last_30_days'); ?>><?php _e('Last 30 Days', 'rental-gates'); ?></option>
                     <option value="month" <?php selected($period, 'month'); ?>><?php _e('This Month', 'rental-gates'); ?></option>
                     <option value="quarter" <?php selected($period, 'quarter'); ?>><?php _e('This Quarter', 'rental-gates'); ?></option>
                     <option value="year" <?php selected($period, 'year'); ?>><?php _e('This Year', 'rental-gates'); ?></option>
                 </select>
-                <span style="font-size: 13px; color: var(--gray-500);"><?php _e('Last 12 months', 'rental-gates'); ?></span>
             </div>
         </div>
         <div class="rg-card-body">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <div style="display: flex; gap: 8px;">
-                    <button onclick="exportChart('revenueChart', 'revenue-trend')" style="padding: 6px 12px; background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 12px; cursor: pointer; color: var(--gray-700);">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        <?php _e('Export', 'rental-gates'); ?>
-                    </button>
-                </div>
-            </div>
             <div class="rg-chart-container">
                 <canvas id="revenueChart"></canvas>
             </div>
         </div>
-    </div>
-    
-    <!-- Revenue by Building -->
-    <?php if (!empty($financial_analytics['revenue_by_building'])): ?>
-    <div class="rg-card" style="grid-column: 1 / -1;">
-        <div class="rg-card-header">
-            <h2 class="rg-card-title"><?php _e('Revenue by Building', 'rental-gates'); ?></h2>
-        </div>
-        <div class="rg-card-body">
-            <div class="rg-chart-container" style="height: 300px;">
-                <canvas id="revenueByBuildingChart"></canvas>
-            </div>
+        <div class="rg-card-footer" style="justify-content: flex-start;">
+            <button onclick="exportChart('revenueChart', 'revenue-trend')" class="rg-btn rg-btn-outline rg-btn-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <?php _e('Export', 'rental-gates'); ?>
+            </button>
         </div>
     </div>
-    <?php endif; ?>
-    
+
     <!-- Unit Status Breakdown -->
     <div class="rg-card">
         <div class="rg-card-header">
@@ -338,7 +238,7 @@ $priority_colors = array(
             <a href="<?php echo home_url('/rental-gates/dashboard/buildings'); ?>" class="rg-card-link"><?php _e('View All', 'rental-gates'); ?></a>
         </div>
         <div class="rg-card-body">
-            <?php 
+            <?php
             $units = $org_stats['units'];
             $total_units = max(1, $units['total']);
             ?>
@@ -357,12 +257,12 @@ $priority_colors = array(
                         $pct = ($seg['value'] / $total_units) * 100;
                     ?>
                         <circle cx="18" cy="18" r="15.91549430918954" fill="transparent" stroke="<?php echo $seg['color']; ?>" stroke-width="3" stroke-dasharray="<?php echo $pct; ?> <?php echo 100 - $pct; ?>" stroke-dashoffset="<?php echo $offset; ?>"></circle>
-                    <?php 
+                    <?php
                         $offset -= $pct;
-                    endforeach; 
+                    endforeach;
                     ?>
-                    <text x="18" y="18" text-anchor="middle" dy=".3em" style="font-size: 8px; font-weight: 700; fill: var(--gray-900);"><?php echo $units['total']; ?></text>
-                    <text x="18" y="22" text-anchor="middle" style="font-size: 3px; fill: var(--gray-500);">units</text>
+                    <text x="18" y="18" text-anchor="middle" dy=".3em" style="font-size: 8px; font-weight: 700; fill: var(--rg-gray-900);"><?php echo $units['total']; ?></text>
+                    <text x="18" y="22" text-anchor="middle" style="font-size: 3px; fill: var(--rg-gray-500);">units</text>
                 </svg>
                 <div class="rg-donut-legend">
                     <div class="rg-legend-item">
@@ -391,6 +291,20 @@ $priority_colors = array(
     </div>
 </div>
 
+<!-- Revenue by Building (full-width, outside two-col) -->
+<?php if (!empty($financial_analytics['revenue_by_building'])): ?>
+<div class="rg-card rg-section-gap">
+    <div class="rg-card-header">
+        <h2 class="rg-card-title"><?php _e('Revenue by Building', 'rental-gates'); ?></h2>
+    </div>
+    <div class="rg-card-body">
+        <div class="rg-chart-container" style="min-height: 250px;">
+            <canvas id="revenueByBuildingChart"></canvas>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
 <!-- Three Column: Maintenance, Applications, Leases -->
 <div class="rg-three-col">
     <!-- Open Maintenance -->
@@ -399,7 +313,7 @@ $priority_colors = array(
             <h2 class="rg-card-title"><?php _e('Open Work Orders', 'rental-gates'); ?></h2>
             <a href="<?php echo home_url('/rental-gates/dashboard/maintenance'); ?>" class="rg-card-link"><?php _e('View All', 'rental-gates'); ?></a>
         </div>
-        <div class="rg-card-body">
+        <div class="rg-card-body flush">
             <?php if (empty($open_maintenance)): ?>
                 <div class="rg-empty-state">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -436,7 +350,7 @@ $priority_colors = array(
             <h2 class="rg-card-title"><?php _e('Pending Applications', 'rental-gates'); ?></h2>
             <a href="<?php echo home_url('/rental-gates/dashboard/applications'); ?>" class="rg-card-link"><?php _e('View All', 'rental-gates'); ?></a>
         </div>
-        <div class="rg-card-body">
+        <div class="rg-card-body flush">
             <?php if (empty($recent_applications['items'])): ?>
                 <div class="rg-empty-state">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -471,7 +385,7 @@ $priority_colors = array(
             <h2 class="rg-card-title"><?php _e('Expiring Soon', 'rental-gates'); ?></h2>
             <a href="<?php echo home_url('/rental-gates/dashboard/leases'); ?>" class="rg-card-link"><?php _e('View All', 'rental-gates'); ?></a>
         </div>
-        <div class="rg-card-body">
+        <div class="rg-card-body flush">
             <?php if (empty($expiring_leases['items'])): ?>
                 <div class="rg-empty-state">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -506,7 +420,7 @@ $priority_colors = array(
 </div>
 
 <!-- Quick Actions -->
-<div class="rg-card">
+<div class="rg-card rg-section-gap">
     <div class="rg-card-header">
         <h2 class="rg-card-title"><?php _e('Quick Actions', 'rental-gates'); ?></h2>
     </div>
@@ -546,31 +460,31 @@ $priority_colors = array(
 
 <!-- Portfolio Summary (if multiple buildings) -->
 <?php if ($org_stats['buildings'] > 0): ?>
-<div class="rg-card" style="margin-top: 20px;">
+<div class="rg-card" style="margin-top: var(--rg-space-6);">
     <div class="rg-card-header">
         <h2 class="rg-card-title"><?php _e('Portfolio Summary', 'rental-gates'); ?></h2>
     </div>
     <div class="rg-card-body">
-        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; text-align: center;">
+        <div class="rg-portfolio-stats">
             <div>
-                <div style="font-size: 28px; font-weight: 700; color: var(--gray-900);"><?php echo $org_stats['buildings']; ?></div>
-                <div style="font-size: 13px; color: var(--gray-500);"><?php _e('Buildings', 'rental-gates'); ?></div>
+                <div class="rg-portfolio-stat-value"><?php echo $org_stats['buildings']; ?></div>
+                <div class="rg-portfolio-stat-label"><?php _e('Buildings', 'rental-gates'); ?></div>
             </div>
             <div>
-                <div style="font-size: 28px; font-weight: 700; color: var(--gray-900);"><?php echo $units['total']; ?></div>
-                <div style="font-size: 13px; color: var(--gray-500);"><?php _e('Units', 'rental-gates'); ?></div>
+                <div class="rg-portfolio-stat-value"><?php echo $units['total']; ?></div>
+                <div class="rg-portfolio-stat-label"><?php _e('Units', 'rental-gates'); ?></div>
             </div>
             <div>
-                <div style="font-size: 28px; font-weight: 700; color: var(--gray-900);"><?php echo $org_stats['tenants']; ?></div>
-                <div style="font-size: 13px; color: var(--gray-500);"><?php _e('Tenants', 'rental-gates'); ?></div>
+                <div class="rg-portfolio-stat-value"><?php echo $org_stats['tenants']; ?></div>
+                <div class="rg-portfolio-stat-label"><?php _e('Tenants', 'rental-gates'); ?></div>
             </div>
             <div>
-                <div style="font-size: 28px; font-weight: 700; color: var(--gray-900);"><?php echo $lease_stats['active']; ?></div>
-                <div style="font-size: 13px; color: var(--gray-500);"><?php _e('Active Leases', 'rental-gates'); ?></div>
+                <div class="rg-portfolio-stat-value"><?php echo $lease_stats['active']; ?></div>
+                <div class="rg-portfolio-stat-label"><?php _e('Active Leases', 'rental-gates'); ?></div>
             </div>
             <div>
-                <div style="font-size: 28px; font-weight: 700; color: #059669;">$<?php echo number_format($lease_stats['monthly_revenue'], 0); ?></div>
-                <div style="font-size: 13px; color: var(--gray-500);"><?php _e('Monthly Revenue', 'rental-gates'); ?></div>
+                <div class="rg-portfolio-stat-value success">$<?php echo number_format($lease_stats['monthly_revenue'], 0); ?></div>
+                <div class="rg-portfolio-stat-label"><?php _e('Monthly Revenue', 'rental-gates'); ?></div>
             </div>
         </div>
     </div>

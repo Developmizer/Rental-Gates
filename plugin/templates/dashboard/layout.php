@@ -286,6 +286,14 @@ if (function_exists('rg_get_unread_notification_count')) {
             overlay.classList.remove('active');
         });
     }
+
+    // Escape key closes mobile menu.
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+    });
 })();
 </script>
 

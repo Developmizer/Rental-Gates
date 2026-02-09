@@ -74,48 +74,6 @@ $defaults = array(
 $settings = $settings_json ? array_merge($defaults, json_decode($settings_json, true) ?: array()) : $defaults;
 ?>
 
-<style>
-    .rg-automation-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-    .rg-automation-header h1 { font-size: 24px; font-weight: 700; color: var(--gray-900); margin: 0; }
-    .rg-success-message { background: #d1fae5; border: 1px solid #10b981; color: #065f46; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-    .rg-settings-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
-    .rg-settings-card-header { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); display: flex; justify-content: space-between; align-items: center; }
-    .rg-settings-card-title { font-size: 16px; font-weight: 600; color: var(--gray-900); margin: 0; display: flex; align-items: center; gap: 10px; }
-    .rg-settings-card-title svg { width: 20px; height: 20px; color: var(--gray-500); }
-    .rg-settings-card-body { padding: 20px; }
-    .rg-setting-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--gray-100); }
-    .rg-setting-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .rg-setting-row:first-child { padding-top: 0; }
-    .rg-setting-info { flex: 1; }
-    .rg-setting-label { font-size: 14px; font-weight: 500; color: var(--gray-900); margin-bottom: 4px; }
-    .rg-setting-desc { font-size: 13px; color: var(--gray-500); }
-    .rg-setting-control { flex-shrink: 0; margin-left: 24px; }
-    .rg-toggle { position: relative; width: 48px; height: 28px; display: inline-block; }
-    .rg-toggle input { opacity: 0; width: 0; height: 0; }
-    .rg-toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--gray-300); transition: 0.3s; border-radius: 28px; }
-    .rg-toggle-slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 3px; bottom: 3px; background-color: white; transition: 0.3s; border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-    .rg-toggle input:checked + .rg-toggle-slider { background-color: #10b981; }
-    .rg-toggle input:checked + .rg-toggle-slider:before { transform: translateX(20px); }
-    .rg-setting-inline { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
-    .rg-setting-inline input, .rg-setting-inline select { padding: 8px 12px; border: 1px solid var(--gray-300); border-radius: 6px; font-size: 14px; }
-    .rg-setting-inline input[type="number"] { width: 80px; }
-    .rg-setting-inline label { font-size: 13px; color: var(--gray-600); }
-    .rg-conditional-settings { margin-top: 16px; padding: 16px; background: var(--gray-50); border-radius: 8px; display: none; }
-    .rg-conditional-settings.active { display: block; }
-    .rg-conditional-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
-    .rg-conditional-row:last-child { margin-bottom: 0; }
-    .rg-conditional-row label { font-size: 13px; color: var(--gray-700); min-width: 120px; }
-    .rg-conditional-row input, .rg-conditional-row select { padding: 8px 12px; border: 1px solid var(--gray-300); border-radius: 6px; font-size: 14px; }
-    .rg-master-toggle { padding: 20px; background: linear-gradient(135deg, #eff6ff 0%, #fff 100%); border-bottom: 1px solid var(--gray-200); }
-    .rg-master-toggle-content { display: flex; align-items: center; justify-content: space-between; }
-    .rg-master-toggle-info h3 { font-size: 16px; font-weight: 600; color: var(--gray-900); margin: 0 0 4px 0; }
-    .rg-master-toggle-info p { font-size: 13px; color: var(--gray-500); margin: 0; }
-    .rg-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; text-decoration: none; transition: all 0.2s; }
-    .rg-btn-primary { background: var(--primary); color: #fff; }
-    .rg-btn-primary:hover { background: var(--primary-dark); }
-    .rg-btn svg { width: 16px; height: 16px; }
-</style>
-
 <div class="rg-automation-header">
     <h1><?php _e('Automation Settings', 'rental-gates'); ?></h1>
 </div>
