@@ -52,7 +52,7 @@ class Rental_Gates_Enqueue {
         // Google Fonts
         wp_enqueue_style(
             'rental-gates-fonts',
-            'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap',
+            'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap',
             array(),
             RENTAL_GATES_VERSION
         );
