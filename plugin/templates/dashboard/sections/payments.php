@@ -683,9 +683,9 @@ $method_labels = array(
 
 <script>
 // Payment data cache
-const paymentsData = <?php echo wp_json_encode(array_column($payments, null, 'id')); ?>;
-const statusConfig = <?php echo wp_json_encode($status_config); ?>;
-const methodLabels = <?php echo wp_json_encode($method_labels); ?>;
+const paymentsData = <?php echo Rental_Gates_Security::json_for_script(array_column($payments, null, 'id')); ?>;
+const statusConfig = <?php echo Rental_Gates_Security::json_for_script($status_config); ?>;
+const methodLabels = <?php echo Rental_Gates_Security::json_for_script($method_labels); ?>;
 function openRecordPaymentModal() {
     document.getElementById('record-payment-modal').classList.add('active');
     document.getElementById('record-payment-form').reset();

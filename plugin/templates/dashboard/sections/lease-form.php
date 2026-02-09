@@ -330,8 +330,8 @@ $page_title = $is_edit ? __('Edit Lease', 'rental-gates') : __('New Lease', 'ren
 
 <script>
 // Units data
-const unitsByBuilding = <?php echo wp_json_encode($units_by_building); ?>;
-const existingTenants = <?php echo wp_json_encode($is_edit && !empty($lease['tenants']) ? $lease['tenants'] : []); ?>;
+const unitsByBuilding = <?php echo Rental_Gates_Security::json_for_script($units_by_building); ?>;
+const existingTenants = <?php echo Rental_Gates_Security::json_for_script($is_edit && !empty($lease['tenants']) ? $lease['tenants'] : []); ?>;
 let selectedTenants = [];
 
 // Initialize
@@ -513,7 +513,11 @@ document.getElementById('lease-form').addEventListener('submit', function(e) {
             if (data.success) {
                 window.location.href = '<?php echo home_url('/rental-gates/dashboard/leases/'); ?>' + data.data.id;
             } else {
-                alertContainer.innerHTML = `<div class="rg-alert rg-alert-error">${data.data || '<?php _e('Error saving lease', 'rental-gates'); ?>'}</div>`;
+                alertContainer.textContent = '';
+                var alertDiv = document.createElement('div');
+                alertDiv.className = 'rg-alert rg-alert-error';
+                alertDiv.textContent = (data.data || '<?php _e('Error saving lease', 'rental-gates'); ?>');
+                alertContainer.appendChild(alertDiv);
                 alertContainer.scrollIntoView({ behavior: 'smooth' });
                 submitBtn.disabled = false;
                 submitBtn.textContent = '<?php echo $is_edit ? __('Update Lease', 'rental-gates') : __('Create Lease', 'rental-gates'); ?>';

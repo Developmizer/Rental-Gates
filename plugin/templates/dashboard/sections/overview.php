@@ -583,10 +583,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!ctx || typeof Chart === 'undefined') return;
     
     const chartData = {
-        labels: <?php echo wp_json_encode($chart_labels); ?>,
+        labels: <?php echo Rental_Gates_Security::json_for_script($chart_labels); ?>,
         datasets: [{
             label: '<?php echo esc_js(__('Revenue', 'rental-gates')); ?>',
-            data: <?php echo wp_json_encode($chart_data); ?>,
+            data: <?php echo Rental_Gates_Security::json_for_script($chart_data); ?>,
             backgroundColor: 'rgba(37, 99, 235, 0.1)',
             borderColor: 'rgb(37, 99, 235)',
             borderWidth: 2,
@@ -660,7 +660,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <?php if (!empty($financial_analytics['revenue_by_building'])): ?>
     const buildingCtx = document.getElementById('revenueByBuildingChart');
     if (buildingCtx) {
-        const buildingData = <?php echo wp_json_encode($financial_analytics['revenue_by_building']); ?>;
+        const buildingData = <?php echo Rental_Gates_Security::json_for_script($financial_analytics['revenue_by_building']); ?>;
         new Chart(buildingCtx, {
             type: 'bar',
             data: {

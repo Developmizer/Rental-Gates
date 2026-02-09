@@ -354,8 +354,8 @@ if (!is_array($work_orders)) $work_orders = array();
 <script>
 // Entity data for dynamic selects
 const entityData = {
-    building: <?php echo wp_json_encode(array_map(function($b) { 
-        return array('id' => $b['id'], 'name' => $b['name']); 
+    building: <?php echo Rental_Gates_Security::json_for_script(array_map(function($b) {
+        return array('id' => $b['id'], 'name' => $b['name']);
     }, $buildings)); ?>,
     unit: <?php 
         $units = array();
@@ -367,22 +367,22 @@ const entityData = {
                 }
             }
         }
-        echo wp_json_encode($units);
+        echo Rental_Gates_Security::json_for_script($units);
     ?>,
-    tenant: <?php echo wp_json_encode(array_map(function($t) { 
-        return array('id' => $t['id'], 'name' => $t['first_name'] . ' ' . $t['last_name']); 
+    tenant: <?php echo Rental_Gates_Security::json_for_script(array_map(function($t) {
+        return array('id' => $t['id'], 'name' => $t['first_name'] . ' ' . $t['last_name']);
     }, $tenants)); ?>,
-    lease: <?php echo wp_json_encode(array_map(function($l) { 
-        return array('id' => $l['id'], 'name' => 'Lease #' . $l['id'] . ' - ' . ($l['tenant_name'] ?? $l['unit_name'] ?? 'Unknown')); 
+    lease: <?php echo Rental_Gates_Security::json_for_script(array_map(function($l) {
+        return array('id' => $l['id'], 'name' => 'Lease #' . $l['id'] . ' - ' . ($l['tenant_name'] ?? $l['unit_name'] ?? 'Unknown'));
     }, $leases)); ?>,
-    vendor: <?php echo wp_json_encode(array_map(function($v) { 
-        return array('id' => $v['id'], 'name' => $v['company_name']); 
+    vendor: <?php echo Rental_Gates_Security::json_for_script(array_map(function($v) {
+        return array('id' => $v['id'], 'name' => $v['company_name']);
     }, $vendors)); ?>,
-    application: <?php echo wp_json_encode(array_map(function($a) { 
-        return array('id' => $a['id'], 'name' => 'App #' . $a['id'] . ' - ' . ($a['first_name'] ?? '') . ' ' . ($a['last_name'] ?? '')); 
+    application: <?php echo Rental_Gates_Security::json_for_script(array_map(function($a) {
+        return array('id' => $a['id'], 'name' => 'App #' . $a['id'] . ' - ' . ($a['first_name'] ?? '') . ' ' . ($a['last_name'] ?? ''));
     }, $applications)); ?>,
-    work_order: <?php echo wp_json_encode(array_map(function($w) { 
-        return array('id' => $w['id'], 'name' => 'WO #' . $w['id'] . ' - ' . ($w['title'] ?? 'Untitled')); 
+    work_order: <?php echo Rental_Gates_Security::json_for_script(array_map(function($w) {
+        return array('id' => $w['id'], 'name' => 'WO #' . $w['id'] . ' - ' . ($w['title'] ?? 'Untitled'));
     }, $work_orders)); ?>
 };
 

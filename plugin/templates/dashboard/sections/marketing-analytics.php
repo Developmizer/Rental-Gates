@@ -346,9 +346,9 @@ $conversion_rates = $analytics['conversion_rates'] ?? array();
 
 <script>
 // Chart.js data
-const leadsBySourceData = <?php echo wp_json_encode($analytics['leads_by_source'] ?? array()); ?>;
-const leadsByStageData = <?php echo wp_json_encode($analytics['leads_by_stage'] ?? array()); ?>;
-const dailyLeadsData = <?php echo wp_json_encode($analytics['daily_leads'] ?? array()); ?>;
+const leadsBySourceData = <?php echo Rental_Gates_Security::json_for_script($analytics['leads_by_source'] ?? array()); ?>;
+const leadsByStageData = <?php echo Rental_Gates_Security::json_for_script($analytics['leads_by_stage'] ?? array()); ?>;
+const dailyLeadsData = <?php echo Rental_Gates_Security::json_for_script($analytics['daily_leads'] ?? array()); ?>;
 
 // Initialize charts when Chart.js is loaded
 document.addEventListener('DOMContentLoaded', function() {

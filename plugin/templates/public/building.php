@@ -586,7 +586,7 @@ $max_rent = !empty($rents) ? max($rents) : 0;
     const ajaxUrl = '<?php echo admin_url('admin-ajax.php'); ?>';
     
     // Gallery
-    const galleryImages = <?php echo wp_json_encode(array_map('rg_public_get_gallery_url', $gallery)); ?>;
+    const galleryImages = <?php echo Rental_Gates_Security::json_for_script(array_map('rg_public_get_gallery_url', $gallery)); ?>;
     let currentImageIndex = 0;
     
     function openGallery(index = 0) {

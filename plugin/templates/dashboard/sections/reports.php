@@ -965,7 +965,7 @@ $wo_status_labels = array(
             if (typeof Chart === 'undefined') return;
             
             // Revenue Trend Chart (12 months)
-            const revenueTrend = <?php echo wp_json_encode(Rental_Gates_Analytics::get_revenue_trend($org_id, 12)); ?>;
+            const revenueTrend = <?php echo Rental_Gates_Security::json_for_script(Rental_Gates_Analytics::get_revenue_trend($org_id, 12)); ?>;
             const trendLabels = revenueTrend.map(d => d.label);
             const trendValues = revenueTrend.map(d => d.revenue);
 
@@ -1026,7 +1026,7 @@ $wo_status_labels = array(
             });
             
             // Revenue by Type (Donut Chart)
-            const revenueByType = <?php echo wp_json_encode($financial_analytics['revenue_by_type']); ?>;
+            const revenueByType = <?php echo Rental_Gates_Security::json_for_script($financial_analytics['revenue_by_type']); ?>;
             const typeLabels = revenueByType.map(t => t.payment_type.charAt(0).toUpperCase() + t.payment_type.slice(1));
             const typeValues = revenueByType.map(t => parseFloat(t.collected));
             const typeColors = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#6366f1', '#14b8a6', '#f97316'];
@@ -1071,7 +1071,7 @@ $wo_status_labels = array(
             
             // Revenue by Building Chart
             <?php if (!empty($financial_analytics['revenue_by_building'])): ?>
-            const revenueByBuilding = <?php echo wp_json_encode($financial_analytics['revenue_by_building']); ?>;
+            const revenueByBuilding = <?php echo Rental_Gates_Security::json_for_script($financial_analytics['revenue_by_building']); ?>;
             const buildingLabels = revenueByBuilding.map(b => b.building_name || '<?php _e('Unnamed Building', 'rental-gates'); ?>');
             const buildingValues = revenueByBuilding.map(b => parseFloat(b.collected));
             
@@ -1520,8 +1520,8 @@ $wo_status_labels = array(
             if (typeof Chart === 'undefined') return;
             
             // Category Chart
-            const categoryData = <?php echo wp_json_encode($wo_by_category); ?>;
-            const categoryLabels = <?php echo wp_json_encode($category_labels); ?>;
+            const categoryData = <?php echo Rental_Gates_Security::json_for_script($wo_by_category); ?>;
+            const categoryLabels = <?php echo Rental_Gates_Security::json_for_script($category_labels); ?>;
 
             new Chart(document.getElementById('categoryChart'), {
                 type: 'bar',
@@ -1557,8 +1557,8 @@ $wo_status_labels = array(
             });
             
             // Work Orders by Status Chart
-            const woByStatus = <?php echo wp_json_encode($maintenance_analytics['by_status']); ?>;
-            const woStatusLabels = <?php echo wp_json_encode($wo_status_labels); ?>;
+            const woByStatus = <?php echo Rental_Gates_Security::json_for_script($maintenance_analytics['by_status']); ?>;
+            const woStatusLabels = <?php echo Rental_Gates_Security::json_for_script($wo_status_labels); ?>;
             const woStatusColors = {
                 'open': '#3b82f6',
                 'assigned': '#8b5cf6',
