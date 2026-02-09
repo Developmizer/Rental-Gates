@@ -149,7 +149,7 @@ $settings = $settings_json ? array_merge($defaults, json_decode($settings_json, 
                         <div class="rg-conditional-row">
                             <label><?php _e('Grace period:', 'rental-gates'); ?></label>
                             <input type="number" name="late_fee_grace_days" value="<?php echo esc_attr($settings['late_fee_grace_days']); ?>" min="0" max="30">
-                            <span style="color: var(--rg-gray-500); font-size: 13px;"><?php _e('days after due date', 'rental-gates'); ?></span>
+                            <span class="rg-conditional-hint"><?php _e('days after due date', 'rental-gates'); ?></span>
                         </div>
                         <div class="rg-conditional-row">
                             <label><?php _e('Fee type:', 'rental-gates'); ?></label>
@@ -161,11 +161,11 @@ $settings = $settings_json ? array_merge($defaults, json_decode($settings_json, 
                         <div class="rg-conditional-row" id="lateFeeFixed" style="<?php echo $settings['late_fee_type'] === 'percent' ? 'display:none;' : ''; ?>">
                             <label><?php _e('Fee amount:', 'rental-gates'); ?></label>
                             <span>$</span>
-                            <input type="number" name="late_fee_amount" value="<?php echo esc_attr($settings['late_fee_amount']); ?>" min="0" step="0.01" style="width: 100px;">
+                            <input type="number" name="late_fee_amount" value="<?php echo esc_attr($settings['late_fee_amount']); ?>" min="0" step="0.01" class="rg-input-sm">
                         </div>
                         <div class="rg-conditional-row" id="lateFeePercent" style="<?php echo $settings['late_fee_type'] === 'fixed' ? 'display:none;' : ''; ?>">
                             <label><?php _e('Fee percentage:', 'rental-gates'); ?></label>
-                            <input type="number" name="late_fee_percent" value="<?php echo esc_attr($settings['late_fee_percent']); ?>" min="0" max="25" step="0.1" style="width: 80px;">
+                            <input type="number" name="late_fee_percent" value="<?php echo esc_attr($settings['late_fee_percent']); ?>" min="0" max="25" step="0.1" class="rg-input-xs">
                             <span>%</span>
                         </div>
                     </div>
@@ -216,19 +216,19 @@ $settings = $settings_json ? array_merge($defaults, json_decode($settings_json, 
         </div>
     </div>
     
-    <div class="rg-settings-card" style="border-color: #93c5fd; background: #eff6ff;">
-        <div class="rg-settings-card-body" style="display: flex; gap: 16px; align-items: flex-start;">
-            <svg width="24" height="24" fill="none" stroke="#2563eb" viewBox="0 0 24 24" style="flex-shrink: 0;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <div class="rg-settings-card rg-info-card">
+        <div class="rg-settings-card-body">
+            <svg width="24" height="24" fill="none" stroke="#2563eb" viewBox="0 0 24 24" class="rg-info-card-icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <div>
-                <div style="font-weight: 600; color: #1e40af; margin-bottom: 4px;"><?php _e('How Automation Works', 'rental-gates'); ?></div>
-                <div style="font-size: 14px; color: #3b82f6; line-height: 1.6;">
+                <div class="rg-info-card-title"><?php _e('How Automation Works', 'rental-gates'); ?></div>
+                <div class="rg-info-card-text">
                     <?php _e('Automated tasks run daily at 8:00 AM. Notifications are sent both in-app and via email based on each user\'s notification preferences. Tenants can manage their notification settings from their portal.', 'rental-gates'); ?>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div style="margin-top: 24px;">
+
+    <div class="rg-settings-submit">
         <button type="submit" class="rg-btn rg-btn-primary">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
             <?php _e('Save Settings', 'rental-gates'); ?>

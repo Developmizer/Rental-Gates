@@ -259,17 +259,17 @@ $method_labels = array(
                         <td>
                             <div class="pm-method">
                                 <?php if (strpos($payment['method'] ?? '', 'stripe') !== false): ?>
-                                    <i class="fab fa-cc-stripe" style="color: #635bff;" aria-hidden="true"></i>
+                                    <i class="fab fa-cc-stripe pm-icon-stripe" aria-hidden="true"></i>
                                 <?php elseif ($payment['method'] === 'cash'): ?>
-                                    <i class="fas fa-money-bill-wave" style="color: #10b981;" aria-hidden="true"></i>
+                                    <i class="fas fa-money-bill-wave pm-icon-cash" aria-hidden="true"></i>
                                 <?php elseif ($payment['method'] === 'check'): ?>
-                                    <i class="fas fa-money-check" style="color: #3b82f6;" aria-hidden="true"></i>
+                                    <i class="fas fa-money-check pm-icon-check" aria-hidden="true"></i>
                                 <?php else: ?>
-                                    <i class="fas fa-credit-card" style="color: var(--rg-gray-400);" aria-hidden="true"></i>
+                                    <i class="fas fa-credit-card pm-icon-default" aria-hidden="true"></i>
                                 <?php endif; ?>
                                 <?php echo esc_html($method_label); ?>
                                 <?php if ($card_last4): ?>
-                                    <span style="color: var(--rg-gray-400);">•••• <?php echo esc_html($card_last4); ?></span>
+                                    <span class="rg-text-muted">•••• <?php echo esc_html($card_last4); ?></span>
                                 <?php endif; ?>
                             </div>
                         </td>
@@ -531,7 +531,7 @@ $method_labels = array(
 
 <!-- Generate Monthly Rent Modal -->
 <div class="pm-modal-overlay" id="generate-rent-modal" role="dialog" aria-modal="true" aria-labelledby="generate-rent-title">
-    <div class="pm-modal" style="max-width: 420px;">
+    <div class="pm-modal narrow">
         <div class="pm-modal-header">
             <h2 id="generate-rent-title"><?php _e('Generate Monthly Rent Charges', 'rental-gates'); ?></h2>
             <button type="button" class="pm-modal-close" onclick="closeModal('generate-rent-modal')" aria-label="<?php esc_attr_e('Close', 'rental-gates'); ?>">&times;</button>
@@ -653,22 +653,22 @@ function openPaymentDetail(paymentId) {
         
         html += `
             <div class="pm-fee-breakdown">
-                <h4 style="margin: 0 0 12px; font-size: 14px; font-weight: 600;"><?php _e('Fee Breakdown', 'rental-gates'); ?></h4>
+                <h4 class="pm-fee-heading"><?php _e('Fee Breakdown', 'rental-gates'); ?></h4>
                 <div class="pm-fee-row">
                     <span><?php _e('Gross Amount', 'rental-gates'); ?></span>
                     <span>$${amount.toFixed(2)}</span>
                 </div>
                 <div class="pm-fee-row">
                     <span><?php _e('Stripe Fee', 'rental-gates'); ?></span>
-                    <span style="color: #ef4444;">-$${stripeFee.toFixed(2)}</span>
+                    <span class="pm-fee-deduction">-$${stripeFee.toFixed(2)}</span>
                 </div>
                 <div class="pm-fee-row">
                     <span><?php _e('Platform Fee (2.5%)', 'rental-gates'); ?></span>
-                    <span style="color: #ef4444;">-$${platformFee.toFixed(2)}</span>
+                    <span class="pm-fee-deduction">-$${platformFee.toFixed(2)}</span>
                 </div>
                 <div class="pm-fee-row total">
                     <span><?php _e('Net Amount', 'rental-gates'); ?></span>
-                    <span style="color: #10b981;">$${netAmount.toFixed(2)}</span>
+                    <span class="pm-fee-net">$${netAmount.toFixed(2)}</span>
                 </div>
             </div>
         `;
@@ -676,19 +676,19 @@ function openPaymentDetail(paymentId) {
     
     // Transaction IDs
     if (payment.stripe_payment_intent_id || payment.stripe_charge_id) {
-        html += `<div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--rg-gray-200);">
-            <h4 style="margin: 0 0 12px; font-size: 14px; font-weight: 600;"><?php _e('Transaction IDs', 'rental-gates'); ?></h4>`;
+        html += `<div class="pm-transaction-section">
+            <h4 class="pm-fee-heading"><?php _e('Transaction IDs', 'rental-gates'); ?></h4>`;
         
         if (payment.stripe_payment_intent_id) {
             html += `<div class="pm-detail-row">
                 <span class="pm-detail-label"><?php _e('Payment Intent', 'rental-gates'); ?></span>
-                <span class="pm-detail-value" style="font-family: monospace; font-size: 12px;">${payment.stripe_payment_intent_id}</span>
+                <span class="pm-detail-value pm-mono">${payment.stripe_payment_intent_id}</span>
             </div>`;
         }
         if (payment.stripe_charge_id) {
             html += `<div class="pm-detail-row">
                 <span class="pm-detail-label"><?php _e('Charge ID', 'rental-gates'); ?></span>
-                <span class="pm-detail-value" style="font-family: monospace; font-size: 12px;">${payment.stripe_charge_id}</span>
+                <span class="pm-detail-value pm-mono">${payment.stripe_charge_id}</span>
             </div>`;
         }
         html += `</div>`;
@@ -696,8 +696,8 @@ function openPaymentDetail(paymentId) {
     
     // Receipt link
     if (stripeDetails.receipt_url) {
-        html += `<div style="margin-top: 20px; text-align: center;">
-            <a href="${stripeDetails.receipt_url}" target="_blank" class="rg-btn rg-btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+        html += `<div class="pm-receipt-actions">
+            <a href="${stripeDetails.receipt_url}" target="_blank" class="rg-btn rg-btn-secondary">
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                     <polyline points="14 2 14 8 20 8"/>
@@ -709,9 +709,9 @@ function openPaymentDetail(paymentId) {
     
     // Notes
     if (payment.notes) {
-        html += `<div style="margin-top: 20px; padding: 12px; background: var(--rg-gray-50); border-radius: 8px;">
-            <strong style="font-size: 13px; color: var(--rg-gray-600);"><?php _e('Notes:', 'rental-gates'); ?></strong>
-            <p style="margin: 8px 0 0; font-size: 14px; color: var(--rg-gray-700);">${payment.notes}</p>
+        html += `<div class="pm-notes-box">
+            <strong class="pm-notes-label"><?php _e('Notes:', 'rental-gates'); ?></strong>
+            <p class="pm-notes-text">${payment.notes}</p>
         </div>`;
     }
     

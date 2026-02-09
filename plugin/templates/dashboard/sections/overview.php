@@ -62,14 +62,14 @@ $priority_colors = array(
 
 <!-- Getting Started (show if no buildings) -->
 <?php if ($org_stats['buildings'] === 0): ?>
-<div class="rg-alert-banner" style="background: linear-gradient(135deg, hsl(215 50% 23%) 0%, var(--rg-primary) 100%); color: #fff; border: none; padding: var(--rg-space-6); flex-direction: column; align-items: flex-start; gap: var(--rg-space-4);">
+<div class="rg-alert-banner rg-welcome-banner">
     <div>
-        <h2 style="margin: 0 0 8px; font-size: var(--rg-font-xl); font-weight: 700; color: #fff;"><?php _e('Welcome to Rental Gates!', 'rental-gates'); ?></h2>
-        <p style="opacity: 0.9; margin: 0; font-size: var(--rg-font-base); line-height: 1.6; color: #fff;">
+        <h2 class="rg-welcome-title"><?php _e('Welcome to Rental Gates!', 'rental-gates'); ?></h2>
+        <p class="rg-welcome-text">
             <?php _e('Get started by adding your first building. Simply click on the map to drop a pin and set your property location.', 'rental-gates'); ?>
         </p>
     </div>
-    <a href="<?php echo home_url('/rental-gates/dashboard/buildings/add'); ?>" class="rg-btn" style="background: #fff; color: hsl(215 50% 23%); font-weight: 600;">
+    <a href="<?php echo home_url('/rental-gates/dashboard/buildings/add'); ?>" class="rg-btn rg-welcome-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -115,7 +115,7 @@ $priority_colors = array(
                 </svg>
             </div>
             <?php if ($financial_analytics['revenue_growth'] != 0): ?>
-            <div class="rg-metric-trend <?php echo $financial_analytics['revenue_growth'] > 0 ? 'up' : 'down'; ?>" style="margin: 0;">
+            <div class="rg-metric-trend <?php echo $financial_analytics['revenue_growth'] > 0 ? 'up' : 'down'; ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <?php if ($financial_analytics['revenue_growth'] > 0): ?>
                     <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
@@ -145,7 +145,7 @@ $priority_colors = array(
         </div>
         <div class="rg-metric-value"><?php echo number_format($occupancy_analytics['occupancy_rate'], 1); ?>%</div>
         <div class="rg-metric-label"><?php _e('Occupancy Rate', 'rental-gates'); ?></div>
-        <div class="rg-metric-trend" style="margin-top: 4px; font-size: 12px; color: var(--rg-gray-500);">
+        <div class="rg-metric-sub-info">
             <?php printf(__('%d of %d units', 'rental-gates'), $occupancy_analytics['occupied'], $occupancy_analytics['total_units']); ?>
         </div>
     </div>
@@ -195,8 +195,8 @@ $priority_colors = array(
     <div class="rg-card">
         <div class="rg-card-header">
             <h2 class="rg-card-title"><?php _e('Revenue Trend', 'rental-gates'); ?></h2>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <select id="periodSelector" class="rg-form-select" style="padding: 6px 12px; font-size: 13px; min-width: auto; width: auto;">
+            <div class="rg-card-header-actions">
+                <select id="periodSelector" class="rg-form-select compact">
                     <option value="last_7_days" <?php selected($period, 'last_7_days'); ?>><?php _e('Last 7 Days', 'rental-gates'); ?></option>
                     <option value="last_30_days" <?php selected($period, 'last_30_days'); ?>><?php _e('Last 30 Days', 'rental-gates'); ?></option>
                     <option value="month" <?php selected($period, 'month'); ?>><?php _e('This Month', 'rental-gates'); ?></option>
@@ -289,7 +289,7 @@ $priority_colors = array(
         <h2 class="rg-card-title"><?php _e('Revenue by Building', 'rental-gates'); ?></h2>
     </div>
     <div class="rg-card-body">
-        <div class="rg-chart-container" style="min-height: 250px;">
+        <div class="rg-chart-container h-250">
             <canvas id="revenueByBuildingChart" aria-label="<?php esc_attr_e('Revenue by building chart', 'rental-gates'); ?>" role="img"></canvas>
         </div>
     </div>
@@ -451,7 +451,7 @@ $priority_colors = array(
 
 <!-- Portfolio Summary (if multiple buildings) -->
 <?php if ($org_stats['buildings'] > 0): ?>
-<div class="rg-card" style="margin-top: var(--rg-space-6);">
+<div class="rg-card rg-mt-6">
     <div class="rg-card-header">
         <h2 class="rg-card-title"><?php _e('Portfolio Summary', 'rental-gates'); ?></h2>
     </div>

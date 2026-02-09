@@ -204,7 +204,7 @@ $page_title = $is_edit ? __('Edit Lease', 'rental-gates') : __('New Lease', 'ren
         <!-- Tenants -->
         <div class="rg-form-section">
             <h3 class="rg-form-section-title"><?php _e('Tenants', 'rental-gates'); ?></h3>
-            <p style="color: var(--rg-gray-500); font-size: 14px; margin-bottom: 16px;">
+            <p class="rg-form-desc">
                 <?php _e('Add tenants who will be on this lease. At least one tenant is required to activate the lease.', 'rental-gates'); ?>
             </p>
             

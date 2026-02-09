@@ -4053,3 +4053,336 @@
     flex-wrap: wrap;
   }
 }
+
+/* ==========================================================================
+   41. REPORTS
+   ========================================================================== */
+
+/* ── Chart Card Header (title + export button in flex row) ── */
+.rg-chart-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--rg-space-4);
+}
+
+.rg-chart-card-header .rg-chart-title {
+  margin: 0;
+}
+
+/* ── Small export button variant ── */
+.rg-btn-export.sm {
+  padding: 6px 12px;
+  font-size: var(--rg-font-xs);
+}
+
+/* ── Chart height variants ── */
+.rg-chart-container.h-280 {
+  height: 280px;
+}
+
+.rg-chart-container.h-300 {
+  height: 300px;
+}
+
+.rg-chart-container.h-250 {
+  min-height: 250px;
+}
+
+/* ── Progress bar row (bar + percentage label inline) ── */
+.rg-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rg-progress-row .rg-progress-bar {
+  flex: 1;
+}
+
+.rg-progress-label {
+  font-size: var(--rg-font-sm);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ── Metric growth indicator (arrow + percentage) ── */
+.rg-metric-growth {
+  font-size: var(--rg-font-xs);
+  font-weight: 600;
+}
+
+.rg-metric-growth.up {
+  color: var(--rg-success);
+}
+
+.rg-metric-growth.down {
+  color: var(--rg-danger);
+}
+
+/* ── Metric card header (flex between) ── */
+.rg-metric-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--rg-space-2);
+}
+
+/* ── Table column width helpers ── */
+.rg-col-sm {
+  width: 180px;
+}
+
+.rg-col-md {
+  width: 200px;
+}
+
+/* ── Button group ── */
+.rg-btn-group {
+  display: flex;
+  gap: var(--rg-space-2);
+}
+
+/* ── View link (inline text link with arrow) ── */
+.rg-view-link {
+  color: var(--rg-primary);
+  font-size: var(--rg-font-sm);
+  text-decoration: none;
+}
+
+.rg-view-link:hover {
+  text-decoration: underline;
+}
+
+/* ── Muted text / em-dash placeholder ── */
+.rg-text-muted {
+  color: var(--rg-gray-400);
+}
+
+/* ── Metrics grid spacing override ── */
+.rg-metrics-grid + .rg-metrics-grid {
+  margin-bottom: var(--rg-space-6);
+}
+
+/* ==========================================================================
+   42. AUTOMATION SETTINGS
+   ========================================================================== */
+
+/* ── Info callout card (blue info box) ── */
+.rg-info-card {
+  border-color: #93c5fd;
+  background: var(--rg-info-light);
+}
+
+.rg-info-card .rg-settings-card-body {
+  display: flex;
+  gap: var(--rg-space-4);
+  align-items: flex-start;
+}
+
+.rg-info-card-icon {
+  flex-shrink: 0;
+}
+
+.rg-info-card-title {
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 4px;
+}
+
+.rg-info-card-text {
+  font-size: var(--rg-font-base);
+  color: #3b82f6;
+  line-height: 1.6;
+}
+
+/* ── Settings submit area ── */
+.rg-settings-submit {
+  margin-top: var(--rg-space-6);
+}
+
+/* ── Conditional row helper text ── */
+.rg-conditional-hint {
+  color: var(--rg-gray-500);
+  font-size: var(--rg-font-sm);
+}
+
+/* ── Fee input width constraint ── */
+.rg-input-sm {
+  width: 100px;
+}
+
+.rg-input-xs {
+  width: 80px;
+}
+
+/* ==========================================================================
+   43. PAYMENT DETAIL (JS-rendered modal content)
+   ========================================================================== */
+
+/* ── Fee breakdown heading ── */
+.pm-fee-heading {
+  margin: 0 0 var(--rg-space-3);
+  font-size: var(--rg-font-base);
+  font-weight: 600;
+}
+
+/* ── Fee deduction / net colors ── */
+.pm-fee-deduction {
+  color: var(--rg-danger);
+}
+
+.pm-fee-net {
+  color: var(--rg-success);
+}
+
+/* ── Transaction IDs section ── */
+.pm-transaction-section {
+  margin-top: var(--rg-space-5);
+  padding-top: var(--rg-space-4);
+  border-top: 1px solid var(--rg-gray-200);
+}
+
+/* ── Monospace value (payment intents, charge IDs) ── */
+.pm-mono {
+  font-family: monospace;
+  font-size: var(--rg-font-xs);
+}
+
+/* ── Receipt link container ── */
+.pm-receipt-actions {
+  margin-top: var(--rg-space-5);
+  text-align: center;
+}
+
+/* ── Notes box ── */
+.pm-notes-box {
+  margin-top: var(--rg-space-5);
+  padding: var(--rg-space-3);
+  background: var(--rg-gray-50);
+  border-radius: var(--rg-radius);
+}
+
+.pm-notes-label {
+  font-size: var(--rg-font-sm);
+  color: var(--rg-gray-600);
+}
+
+.pm-notes-text {
+  margin: var(--rg-space-2) 0 0;
+  font-size: var(--rg-font-base);
+  color: var(--rg-gray-700);
+}
+
+/* ── Payment method icon colors ── */
+.pm-icon-stripe {
+  color: #635bff;
+}
+
+.pm-icon-cash {
+  color: #10b981;
+}
+
+.pm-icon-check {
+  color: #3b82f6;
+}
+
+.pm-icon-default {
+  color: var(--rg-gray-400);
+}
+
+/* ── Modal width variant ── */
+.pm-modal.narrow {
+  max-width: 420px;
+}
+
+/* ==========================================================================
+   44. OVERVIEW
+   ========================================================================== */
+
+/* ── Welcome banner (gradient hero for new users) ── */
+.rg-welcome-banner {
+  background: linear-gradient(135deg, hsl(215 50% 23%) 0%, var(--rg-primary) 100%);
+  color: #fff;
+  border: none;
+  padding: var(--rg-space-6);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--rg-space-4);
+}
+
+.rg-welcome-title {
+  margin: 0 0 var(--rg-space-2);
+  font-size: var(--rg-font-xl);
+  font-weight: 700;
+  color: #fff;
+}
+
+.rg-welcome-text {
+  opacity: 0.9;
+  margin: 0;
+  font-size: var(--rg-font-base);
+  line-height: 1.6;
+  color: #fff;
+}
+
+.rg-welcome-btn {
+  background: #fff;
+  color: hsl(215 50% 23%);
+  font-weight: 600;
+}
+
+.rg-welcome-btn:hover {
+  background: hsl(0 0% 95%);
+}
+
+/* ── Card header actions row ── */
+.rg-card-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--rg-space-2);
+}
+
+/* ── Compact select (period selector in cards) ── */
+.rg-form-select.compact {
+  padding: 6px 12px;
+  font-size: var(--rg-font-sm);
+  min-width: auto;
+  width: auto;
+}
+
+/* ── Metric sub info (units count under occupancy) ── */
+.rg-metric-sub-info {
+  margin-top: 4px;
+  font-size: var(--rg-font-xs);
+  color: var(--rg-gray-500);
+}
+
+/* ── Section gap utility ── */
+.rg-mt-6 {
+  margin-top: var(--rg-space-6);
+}
+
+/* ── Page header title/subtitle ── */
+.rg-page-title {
+  margin: 0 0 4px;
+  font-size: var(--rg-font-2xl);
+  font-weight: 700;
+}
+
+.rg-page-subtitle {
+  margin: 0;
+  color: var(--rg-gray-500);
+}
+
+/* ── Full-width chart card in grid ── */
+.mkt-chart-full {
+  grid-column: 1 / -1;
+}
+
+/* ── Form helper/description text ── */
+.rg-form-desc {
+  color: var(--rg-gray-500);
+  font-size: var(--rg-font-base);
+  margin-bottom: var(--rg-space-4);
+}

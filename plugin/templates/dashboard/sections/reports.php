@@ -454,10 +454,10 @@ $wo_status_labels = array(
     <!-- Key Metrics -->
     <div class="rg-metrics-grid">
         <div class="rg-metric-card success">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+            <div class="rg-metric-card-top">
                 <div class="rg-metric-label"><?php _e('Revenue Collected', 'rental-gates'); ?></div>
                 <?php if ($financial_analytics['revenue_growth'] != 0): ?>
-                <div style="font-size: 12px; color: <?php echo $financial_analytics['revenue_growth'] > 0 ? '#059669' : '#dc2626'; ?>; font-weight: 600;">
+                <div class="rg-metric-growth <?php echo $financial_analytics['revenue_growth'] > 0 ? 'up' : 'down'; ?>">
                     <?php echo $financial_analytics['revenue_growth'] > 0 ? '↑' : '↓'; ?> <?php echo abs($financial_analytics['revenue_growth']); ?>%
                 </div>
                 <?php endif; ?>
@@ -494,9 +494,9 @@ $wo_status_labels = array(
     <!-- Charts Row -->
     <div class="rg-charts-row">
         <div class="rg-chart-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                <h3 class="rg-chart-title" style="margin: 0;"><?php _e('Revenue Trend (12 Months)', 'rental-gates'); ?></h3>
-                <button onclick="exportChart('revenueTrendChart', 'revenue-trend')" class="rg-btn-export" style="padding: 6px 12px; font-size: 12px;">
+            <div class="rg-chart-card-header">
+                <h3 class="rg-chart-title"><?php _e('Revenue Trend (12 Months)', 'rental-gates'); ?></h3>
+                <button onclick="exportChart('revenueTrendChart', 'revenue-trend')" class="rg-btn-export sm">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
@@ -505,15 +505,15 @@ $wo_status_labels = array(
                     <?php _e('Export', 'rental-gates'); ?>
                 </button>
             </div>
-            <div class="rg-chart-container" style="height: 280px;">
+            <div class="rg-chart-container h-280">
                 <canvas id="revenueTrendChart"></canvas>
             </div>
         </div>
 
         <div class="rg-chart-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                <h3 class="rg-chart-title" style="margin: 0;"><?php _e('Revenue by Type', 'rental-gates'); ?></h3>
-                <button onclick="exportChart('revenueByTypeChart', 'revenue-by-type')" class="rg-btn-export" style="padding: 6px 12px; font-size: 12px;">
+            <div class="rg-chart-card-header">
+                <h3 class="rg-chart-title"><?php _e('Revenue by Type', 'rental-gates'); ?></h3>
+                <button onclick="exportChart('revenueByTypeChart', 'revenue-by-type')" class="rg-btn-export sm">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
@@ -522,7 +522,7 @@ $wo_status_labels = array(
                     <?php _e('Export', 'rental-gates'); ?>
                 </button>
             </div>
-            <div class="rg-chart-container" style="height: 280px;">
+            <div class="rg-chart-container h-280">
                 <canvas id="revenueByTypeChart"></canvas>
             </div>
         </div>
@@ -530,10 +530,10 @@ $wo_status_labels = array(
 
     <!-- Revenue by Building -->
     <div class="rg-chart-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h3 class="rg-chart-title" style="margin: 0;"><?php _e('Revenue by Building', 'rental-gates'); ?></h3>
-            <div style="display: flex; gap: 8px;">
-                <button onclick="exportTable('revenueByBuildingTable')" class="rg-btn-export" style="padding: 6px 12px; font-size: 12px;">
+        <div class="rg-chart-card-header">
+            <h3 class="rg-chart-title"><?php _e('Revenue by Building', 'rental-gates'); ?></h3>
+            <div class="rg-btn-group">
+                <button onclick="exportTable('revenueByBuildingTable')" class="rg-btn-export sm">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
@@ -544,7 +544,7 @@ $wo_status_labels = array(
             </div>
         </div>
         <?php if (!empty($financial_analytics['revenue_by_building'])): ?>
-        <div class="rg-chart-container" style="height: 300px; margin-bottom: 20px;">
+        <div class="rg-chart-container h-300" style="margin-bottom: 20px;">
             <canvas id="revenueByBuildingChart"></canvas>
         </div>
         <?php endif; ?>
@@ -554,7 +554,7 @@ $wo_status_labels = array(
                     <th><?php _e('Building', 'rental-gates'); ?></th>
                     <th class="text-right"><?php _e('Billed', 'rental-gates'); ?></th>
                     <th class="text-right"><?php _e('Collected', 'rental-gates'); ?></th>
-                    <th style="width: 200px;"><?php _e('Collection Rate', 'rental-gates'); ?></th>
+                    <th class="rg-col-md"><?php _e('Collection Rate', 'rental-gates'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -566,12 +566,12 @@ $wo_status_labels = array(
                         <td class="text-right">$<?php echo number_format($building['billed'], 2); ?></td>
                         <td class="text-right">$<?php echo number_format($building['collected'], 2); ?></td>
                         <td>
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <div class="rg-progress-bar" style="flex: 1;">
+                            <div class="rg-progress-row">
+                                <div class="rg-progress-bar">
                                     <div class="rg-progress-fill <?php echo $rate >= 90 ? 'green' : ($rate >= 70 ? 'yellow' : 'red'); ?>"
                                         style="width: <?php echo min(100, $rate); ?>%;"></div>
                                 </div>
-                                <span style="font-size: 13px; font-weight: 500;"><?php echo number_format($rate, 0); ?>%</span>
+                                <span class="rg-progress-label"><?php echo number_format($rate, 0); ?>%</span>
                             </div>
                         </td>
                     </tr>
@@ -844,7 +844,7 @@ $wo_status_labels = array(
                         <th class="text-center"><?php _e('Total', 'rental-gates'); ?></th>
                         <th class="text-center"><?php _e('Occupied', 'rental-gates'); ?></th>
                         <th class="text-center"><?php _e('Vacant', 'rental-gates'); ?></th>
-                        <th style="width: 180px;"><?php _e('Occupancy', 'rental-gates'); ?></th>
+                        <th class="rg-col-sm"><?php _e('Occupancy', 'rental-gates'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -858,13 +858,12 @@ $wo_status_labels = array(
                             <td class="text-center"><?php echo $building['occupied_units']; ?></td>
                             <td class="text-center"><?php echo $vacant; ?></td>
                             <td>
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <div class="rg-progress-bar" style="flex: 1;">
+                                <div class="rg-progress-row">
+                                    <div class="rg-progress-bar">
                                         <div class="rg-progress-fill <?php echo $occ_rate >= 90 ? 'green' : ($occ_rate >= 70 ? 'blue' : 'yellow'); ?>"
                                             style="width: <?php echo $occ_rate; ?>%;"></div>
                                     </div>
-                                    <span
-                                        style="font-size: 13px; font-weight: 500;"><?php echo number_format($occ_rate, 0); ?>%</span>
+                                    <span class="rg-progress-label"><?php echo number_format($occ_rate, 0); ?>%</span>
                                 </div>
                             </td>
                         </tr>
@@ -874,9 +873,9 @@ $wo_status_labels = array(
         </div>
 
         <div class="rg-chart-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                <h3 class="rg-chart-title" style="margin: 0;"><?php _e('Units by Status', 'rental-gates'); ?></h3>
-                <button onclick="exportChart('unitsByStatusChart', 'units-by-status')" class="rg-btn-export" style="padding: 6px 12px; font-size: 12px;">
+            <div class="rg-chart-card-header">
+                <h3 class="rg-chart-title"><?php _e('Units by Status', 'rental-gates'); ?></h3>
+                <button onclick="exportChart('unitsByStatusChart', 'units-by-status')" class="rg-btn-export sm">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
@@ -885,7 +884,7 @@ $wo_status_labels = array(
                     <?php _e('Export', 'rental-gates'); ?>
                 </button>
             </div>
-            <div class="rg-chart-container" style="height: 280px;">
+            <div class="rg-chart-container h-280">
                 <canvas id="unitsByStatusChart"></canvas>
             </div>
         </div>
@@ -980,8 +979,7 @@ $wo_status_labels = array(
                                 <?php endif; ?>
                             </td>
                             <td class="text-right">
-                                <a href="<?php echo home_url('/rental-gates/dashboard/leases/' . $lease['id']); ?>"
-                                    style="color: #3b82f6; font-size: 13px;">
+                                <a href="<?php echo home_url('/rental-gates/dashboard/leases/' . $lease['id']); ?>" class="rg-view-link">
                                     <?php _e('View', 'rental-gates'); ?> →
                                 </a>
                             </td>
@@ -1054,7 +1052,7 @@ $wo_status_labels = array(
     </div>
 
     <!-- Additional Metrics -->
-    <div class="rg-metrics-grid" style="margin-bottom: 24px;">
+    <div class="rg-metrics-grid">
         <div class="rg-metric-card">
             <div class="rg-metric-label"><?php _e('Avg. Resolution Time', 'rental-gates'); ?></div>
             <div class="rg-metric-value"><?php echo $avg_resolution_time ? number_format($avg_resolution_time, 1) : '—'; ?>
@@ -1079,9 +1077,9 @@ $wo_status_labels = array(
         </div>
 
         <div class="rg-chart-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                <h3 class="rg-chart-title" style="margin: 0;"><?php _e('By Status', 'rental-gates'); ?></h3>
-                <button onclick="exportChart('woStatusChart', 'work-orders-by-status')" class="rg-btn-export" style="padding: 6px 12px; font-size: 12px;">
+            <div class="rg-chart-card-header">
+                <h3 class="rg-chart-title"><?php _e('By Status', 'rental-gates'); ?></h3>
+                <button onclick="exportChart('woStatusChart', 'work-orders-by-status')" class="rg-btn-export sm">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
@@ -1090,7 +1088,7 @@ $wo_status_labels = array(
                     <?php _e('Export', 'rental-gates'); ?>
                 </button>
             </div>
-            <div class="rg-chart-container" style="height: 280px;">
+            <div class="rg-chart-container h-280">
                 <canvas id="woStatusChart"></canvas>
             </div>
         </div>
@@ -1105,7 +1103,7 @@ $wo_status_labels = array(
                     <th><?php _e('Building', 'rental-gates'); ?></th>
                     <th class="text-center"><?php _e('Total', 'rental-gates'); ?></th>
                     <th class="text-center"><?php _e('Completed', 'rental-gates'); ?></th>
-                    <th style="width: 180px;"><?php _e('Completion Rate', 'rental-gates'); ?></th>
+                    <th class="rg-col-sm"><?php _e('Completion Rate', 'rental-gates'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -1118,15 +1116,14 @@ $wo_status_labels = array(
                         <td class="text-center"><?php echo $building['completed']; ?></td>
                         <td>
                             <?php if ($building['total_orders'] > 0): ?>
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <div class="rg-progress-bar" style="flex: 1;">
+                                <div class="rg-progress-row">
+                                    <div class="rg-progress-bar">
                                         <div class="rg-progress-fill green" style="width: <?php echo $comp_rate; ?>%;"></div>
                                     </div>
-                                    <span
-                                        style="font-size: 13px; font-weight: 500;"><?php echo number_format($comp_rate, 0); ?>%</span>
+                                    <span class="rg-progress-label"><?php echo number_format($comp_rate, 0); ?>%</span>
                                 </div>
                             <?php else: ?>
-                                <span style="color: #9ca3af;">—</span>
+                                <span class="rg-text-muted">—</span>
                             <?php endif; ?>
                         </td>
                     </tr>
