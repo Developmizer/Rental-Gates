@@ -84,7 +84,9 @@
     RG.init = function() {
         this.initModal();
         this.initToast();
-        this.initMediaLibrary();
+        if (typeof this.initMediaLibrary === 'function') {
+            this.initMediaLibrary();
+        }
         this.bindEvents();
     };
 

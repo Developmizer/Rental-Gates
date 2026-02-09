@@ -23,7 +23,7 @@ class Rental_Gates_Enqueue {
     public function enqueue_public_assets()
     {
         // Only load on Rental Gates pages
-        if (!get_query_var('rental_gates_page')) {
+        if (!$this->is_rental_gates_page()) {
             return;
         }
 
@@ -175,7 +175,7 @@ class Rental_Gates_Enqueue {
      */
     public function output_preconnect_hints()
     {
-        if (!get_query_var('rental_gates_page')) {
+        if (!$this->is_rental_gates_page()) {
             return;
         }
         echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
@@ -187,19 +187,14 @@ class Rental_Gates_Enqueue {
      */
     public function output_rental_gates_data_early()
     {
-        // Check both query var and direct URL
-        $is_rental_gates_page = get_query_var('rental_gates_page');
-
-        // Also check URL directly for cases where rewrite rules might not match
-        if (!$is_rental_gates_page) {
-            $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
-            if (strpos($request_uri, '/rental-gates/') !== false) {
-                $is_rental_gates_page = true;
-            }
+        if (!$this->is_rental_gates_page()) {
+            return;
         }
 
-        if (!$is_rental_gates_page) {
-            return;
+        $pwa_enabled = false;
+        if (function_exists('rental_gates_pwa')) {
+            $pwa = rental_gates_pwa();
+            $pwa_enabled = $pwa ? $pwa->is_enabled() : false;
         }
 
         $data = array(
@@ -212,7 +207,7 @@ class Rental_Gates_Enqueue {
             'pluginUrl' => RENTAL_GATES_PLUGIN_URL,
             'isLoggedIn' => is_user_logged_in(),
             'mapProvider' => get_option('rental_gates_map_provider', 'google'),
-            'pwaEnabled' => rental_gates_pwa()->is_enabled(),
+            'pwaEnabled' => $pwa_enabled,
             'debug' => defined('WP_DEBUG') && WP_DEBUG,
         );
 
@@ -324,6 +319,28 @@ class Rental_Gates_Enqueue {
             'saveSuccess' => __('Changes saved successfully', 'rental-gates'),
             'saveFailed' => __('Failed to save changes', 'rental-gates'),
         );
+    }
+
+    // --------------------------------------------------
+    // Page detection helper
+    // --------------------------------------------------
+
+    /**
+     * Check if the current request is a Rental Gates page.
+     *
+     * Uses the query var first (set by rewrite rules), then falls back
+     * to direct URL matching for cases where rewrite rules don't fire
+     * before wp_enqueue_scripts.
+     *
+     * @return bool
+     */
+    private function is_rental_gates_page() {
+        if (get_query_var('rental_gates_page')) {
+            return true;
+        }
+
+        $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+        return strpos($request_uri, '/rental-gates/') !== false;
     }
 
     // --------------------------------------------------
