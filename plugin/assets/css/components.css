@@ -1,0 +1,1920 @@
+/**
+ * Rental Gates - Reusable Component Styles
+ *
+ * Consolidated dashboard component library using the .rg- prefix.
+ * Replaces inline <style> blocks duplicated across 10+ template files.
+ *
+ * @package RentalGates
+ * @since   2.42.0
+ */
+
+/* ==========================================================================
+   1. Cards
+   ========================================================================== */
+
+.rg-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.rg-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.rg-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.rg-card-body {
+    padding: 16px 20px;
+}
+
+.rg-card-link {
+    font-size: 13px;
+    color: #3b82f6;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.rg-card-link:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   2. Metric Cards
+   ========================================================================== */
+
+.rg-metric-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+}
+
+.rg-metric-card.highlight {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    border: none;
+    color: #fff;
+}
+
+.rg-metric-card.success {
+    border-left: 4px solid #10b981;
+}
+
+.rg-metric-card.warning {
+    border-left: 4px solid #f59e0b;
+}
+
+.rg-metric-card.danger {
+    border-left: 4px solid #ef4444;
+}
+
+.rg-metric-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.rg-metric-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rg-metric-icon.blue {
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+.rg-metric-icon.green {
+    background: #ecfdf5;
+    color: #10b981;
+}
+
+.rg-metric-icon.yellow {
+    background: #fffbeb;
+    color: #f59e0b;
+}
+
+.rg-metric-icon.red {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+.rg-metric-icon.purple {
+    background: #f5f3ff;
+    color: #8b5cf6;
+}
+
+.rg-metric-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.2;
+}
+
+.rg-metric-value.lg {
+    font-size: 32px;
+}
+
+.rg-metric-value.blue {
+    color: #3b82f6;
+}
+
+.rg-metric-value.green {
+    color: #10b981;
+}
+
+.rg-metric-value.red {
+    color: #ef4444;
+}
+
+.rg-metric-value.yellow {
+    color: #f59e0b;
+}
+
+.rg-metric-card.highlight .rg-metric-value {
+    color: #fff;
+}
+
+.rg-metric-label {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.rg-metric-label.lg {
+    font-size: 14px;
+}
+
+.rg-metric-card.highlight .rg-metric-label {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.rg-metric-trend {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.rg-metric-trend.up {
+    color: #10b981;
+}
+
+.rg-metric-trend.down {
+    color: #ef4444;
+}
+
+.rg-metric-sub {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 4px;
+}
+
+/* ==========================================================================
+   3. Stat Cards
+   ========================================================================== */
+
+.rg-stat-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.rg-stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.2;
+}
+
+.rg-stat-label {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.rg-stat-count {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 8px;
+}
+
+/* ==========================================================================
+   4. Badges
+   ========================================================================== */
+
+.rg-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.rg-badge.red,
+.rg-badge-red {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.rg-badge.yellow,
+.rg-badge-yellow {
+    background: #fffbeb;
+    color: #d97706;
+}
+
+.rg-badge.blue,
+.rg-badge-blue {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.rg-badge.green,
+.rg-badge-green {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.rg-badge.purple,
+.rg-badge-purple {
+    background: #f5f3ff;
+    color: #7c3aed;
+}
+
+.rg-badge.gray,
+.rg-badge-gray {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.rg-priority-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+/* ==========================================================================
+   5. Buttons
+   ========================================================================== */
+
+.rg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s ease;
+}
+
+.rg-btn-primary {
+    background: #3b82f6;
+    color: #fff;
+}
+
+.rg-btn-primary:hover {
+    background: #2563eb;
+    color: #fff;
+}
+
+.rg-btn-secondary {
+    background: #fff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.rg-btn-secondary:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.rg-btn-danger {
+    background: #ef4444;
+    color: #fff;
+}
+
+.rg-btn-danger:hover {
+    background: #dc2626;
+    color: #fff;
+}
+
+.rg-btn-export {
+    background: #fff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    padding: 8px 14px;
+    font-size: 13px;
+}
+
+.rg-btn-export:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.rg-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.rg-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ==========================================================================
+   6. Forms
+   ========================================================================== */
+
+.rg-form-container {
+    max-width: 900px;
+}
+
+.rg-form-header {
+    margin-bottom: 24px;
+}
+
+.rg-form-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 4px 0;
+}
+
+.rg-form-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+}
+
+.rg-form-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.rg-form-section {
+    padding: 24px;
+}
+
+.rg-form-section + .rg-form-section {
+    border-top: 1px solid #e5e7eb;
+}
+
+.rg-section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 4px 0;
+}
+
+.rg-section-description {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0 0 20px 0;
+}
+
+.rg-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.rg-form-row.full {
+    grid-template-columns: 1fr;
+}
+
+.rg-form-row.two-col {
+    grid-template-columns: 1fr 1fr;
+}
+
+.rg-form-row.three-col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.rg-form-row-half {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.rg-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.rg-form-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+.rg-form-label .required {
+    color: #ef4444;
+}
+
+.rg-form-input,
+.rg-form-select,
+.rg-form-textarea {
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #111827;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.rg-form-input:focus,
+.rg-form-select:focus,
+.rg-form-textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.rg-form-input.readonly {
+    background: #f9fafb;
+    cursor: not-allowed;
+}
+
+.rg-form-textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.rg-form-help,
+.rg-form-hint {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.rg-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 20px 24px;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    border-radius: 0 0 12px 12px;
+}
+
+/* ==========================================================================
+   7. Tables
+   ========================================================================== */
+
+.rg-table-container {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.rg-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.rg-table th {
+    text-align: left;
+    padding: 12px 16px;
+    background: #f9fafb;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.rg-table td {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #374151;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.rg-table tr:last-child td {
+    border-bottom: none;
+}
+
+.rg-table tr:hover {
+    background: #f9fafb;
+    cursor: pointer;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* ==========================================================================
+   8. Modals
+   ========================================================================== */
+
+.rg-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.rg-modal-overlay.active {
+    display: flex;
+}
+
+.rg-modal {
+    background: #fff;
+    border-radius: 16px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: auto;
+    margin: 20px;
+}
+
+.rg-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.rg-modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.rg-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #9ca3af;
+    padding: 0;
+    line-height: 1;
+}
+
+.rg-modal-close:hover {
+    color: #4b5563;
+}
+
+.rg-modal-body {
+    padding: 24px;
+}
+
+.rg-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* ==========================================================================
+   9. Alerts & Banners
+   ========================================================================== */
+
+.rg-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.rg-alert-error {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.rg-alert-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #92400e;
+}
+
+.rg-alert-banner.danger {
+    background: #fee2e2;
+    border-color: #fca5a5;
+    color: #991b1b;
+}
+
+.rg-success-message {
+    background: #d1fae5;
+    border: 1px solid #10b981;
+    color: #065f46;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   10. List Items
+   ========================================================================== */
+
+.rg-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.rg-list-item:last-child {
+    border-bottom: none;
+}
+
+.rg-list-item-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.rg-list-item-title {
+    font-weight: 500;
+    color: #111827;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rg-list-item-meta {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.rg-list-item-badge {
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+
+/* ==========================================================================
+   11. Empty States
+   ========================================================================== */
+
+.rg-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.rg-empty-state svg {
+    color: #d1d5db;
+    margin-bottom: 16px;
+}
+
+.rg-empty-state h3 {
+    font-size: 18px;
+    color: #374151;
+    margin: 0 0 8px 0;
+}
+
+.rg-empty-state p {
+    color: #6b7280;
+    margin: 0 0 20px 0;
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   12. Gallery
+   ========================================================================== */
+
+.rg-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.rg-gallery-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f3f4f6;
+}
+
+.rg-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rg-gallery-item-remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.rg-gallery-item-remove:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.rg-gallery-add {
+    border: 2px dashed #d1d5db;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: #9ca3af;
+    cursor: pointer;
+    aspect-ratio: 1;
+    transition: all 0.15s ease;
+}
+
+.rg-gallery-add:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+    background: #eff6ff;
+}
+
+/* ==========================================================================
+   13. Amenities
+   ========================================================================== */
+
+.rg-amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+}
+
+.rg-amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.rg-amenity-item:hover {
+    border-color: #93c5fd;
+    background: #f0f7ff;
+}
+
+.rg-amenity-item.selected {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.rg-amenity-check {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+
+.rg-amenity-item.selected .rg-amenity-check {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: #fff;
+}
+
+.rg-amenity-label {
+    font-size: 14px;
+    color: #374151;
+}
+
+/* ==========================================================================
+   14. Toggle Switch
+   ========================================================================== */
+
+.rg-toggle {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 28px;
+}
+
+.rg-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.rg-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #d1d5db;
+    border-radius: 28px;
+    transition: background 0.2s ease;
+}
+
+.rg-toggle-slider:before {
+    content: "";
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+}
+
+.rg-toggle input:checked + .rg-toggle-slider {
+    background: #10b981;
+}
+
+.rg-toggle input:checked + .rg-toggle-slider:before {
+    transform: translateX(20px);
+}
+
+/* ==========================================================================
+   15. Charts
+   ========================================================================== */
+
+.rg-chart-container {
+    position: relative;
+    height: 250px;
+}
+
+.rg-chart-container.sm {
+    height: 220px;
+}
+
+.rg-chart-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.rg-chart-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 16px 0;
+}
+
+/* ==========================================================================
+   16. Donut Charts
+   ========================================================================== */
+
+.rg-donut-chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.rg-donut-svg {
+    width: 140px;
+    height: 140px;
+    flex-shrink: 0;
+}
+
+.rg-donut-svg.sm {
+    width: 120px;
+    height: 120px;
+}
+
+.rg-donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.rg-legend-item,
+.rg-donut-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #374151;
+}
+
+.rg-legend-dot,
+.rg-donut-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.rg-legend-value,
+.rg-donut-legend-value {
+    font-weight: 600;
+    margin-left: auto;
+}
+
+/* ==========================================================================
+   17. Progress Bars
+   ========================================================================== */
+
+.rg-progress-bar {
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.rg-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.rg-progress-fill.blue {
+    background: #3b82f6;
+}
+
+.rg-progress-fill.green {
+    background: #10b981;
+}
+
+.rg-progress-fill.yellow {
+    background: #f59e0b;
+}
+
+.rg-progress-fill.red {
+    background: #ef4444;
+}
+
+/* ==========================================================================
+   18. Upload Zone
+   ========================================================================== */
+
+.rg-upload-zone {
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: #6b7280;
+}
+
+.rg-upload-zone:hover,
+.rg-upload-zone.dragover {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+.rg-file-preview {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+
+.rg-file-preview-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: #3b82f6;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.rg-file-preview-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rg-file-preview-size {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.rg-file-preview-remove {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.rg-file-preview-remove:hover {
+    color: #ef4444;
+}
+
+/* ==========================================================================
+   19. Tabs
+   ========================================================================== */
+
+.rg-tabs,
+.rg-report-tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 20px;
+}
+
+.rg-tab,
+.rg-report-tab {
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6b7280;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.rg-tab:hover,
+.rg-report-tab:hover {
+    color: #374151;
+}
+
+.rg-tab.active,
+.rg-report-tab.active {
+    color: #3b82f6;
+    border-bottom-color: #3b82f6;
+}
+
+/* ==========================================================================
+   20. Quick Actions
+   ========================================================================== */
+
+.rg-quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.rg-quick-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+}
+
+.rg-quick-action:hover {
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+/* ==========================================================================
+   21. Breadcrumbs
+   ========================================================================== */
+
+.rg-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.rg-breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+.rg-breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rg-breadcrumb a,
+.rg-breadcrumb-item a {
+    color: #6b7280;
+    text-decoration: none;
+}
+
+.rg-breadcrumb a:hover,
+.rg-breadcrumb-item a:hover {
+    color: #3b82f6;
+}
+
+.rg-breadcrumb-separator {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.rg-breadcrumb-current {
+    color: #111827;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   22. Avatar
+   ========================================================================== */
+
+.rg-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.rg-avatar-sm {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+}
+
+.rg-avatar-lg {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+}
+
+/* ==========================================================================
+   23. Filters
+   ========================================================================== */
+
+.rg-filters-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.rg-search-box {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+}
+
+.rg-search-box input {
+    width: 100%;
+    padding: 10px 14px 10px 40px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #111827;
+    box-sizing: border-box;
+}
+
+.rg-search-box input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.rg-search-box svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}
+
+.rg-filter-select {
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #374151;
+    background: #fff;
+    min-width: 140px;
+    cursor: pointer;
+}
+
+.rg-filter-select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ==========================================================================
+   24. Settings Components
+   ========================================================================== */
+
+.rg-settings-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.rg-settings-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.rg-settings-card-header .rg-card-title {
+    flex: 1;
+}
+
+.rg-settings-card-body {
+    padding: 20px;
+}
+
+.rg-setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.rg-setting-row:last-child {
+    border-bottom: none;
+}
+
+.rg-setting-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.rg-setting-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+}
+
+.rg-setting-desc {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+.rg-setting-control {
+    flex-shrink: 0;
+    margin-left: 16px;
+}
+
+.rg-conditional-settings {
+    margin-top: 16px;
+    padding: 16px;
+    background: #f9fafb;
+    border-radius: 8px;
+    display: none;
+}
+
+.rg-conditional-settings.active {
+    display: block;
+}
+
+/* ==========================================================================
+   25. Document Cards
+   ========================================================================== */
+
+.rg-documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.rg-doc-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.15s ease;
+}
+
+.rg-doc-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.rg-doc-preview {
+    height: 140px;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 40px;
+}
+
+.rg-doc-preview.pdf {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #dc2626;
+}
+
+.rg-doc-preview.doc {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    color: #2563eb;
+}
+
+.rg-doc-preview.xls {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #059669;
+}
+
+.rg-doc-ext {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.rg-doc-info {
+    padding: 14px 16px;
+}
+
+.rg-doc-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rg-doc-meta {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+.rg-doc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.rg-doc-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    background: #f3f4f6;
+    color: #6b7280;
+    border-radius: 4px;
+}
+
+.rg-doc-actions {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid #f3f4f6;
+}
+
+.rg-doc-action {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px;
+    font-size: 13px;
+    color: #6b7280;
+    background: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.rg-doc-action:hover {
+    background: #f9fafb;
+    color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+/* ==========================================================================
+   26. Page Header
+   ========================================================================== */
+
+.rg-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.rg-page-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.rg-page-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ==========================================================================
+   27. Spinner / Loading
+   ========================================================================== */
+
+.rg-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #e5e7eb;
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: rg-spin 0.6s linear infinite;
+}
+
+.rg-loading {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.rg-loading.active {
+    display: flex;
+}
+
+@keyframes rg-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================================================
+   28. Map Components
+   ========================================================================== */
+
+.rg-map-container {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.rg-map-search {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    z-index: 1000;
+    display: flex;
+    gap: 8px;
+}
+
+.rg-map-search-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rg-map-search-btn {
+    padding: 10px 16px;
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rg-map-search-btn:hover {
+    background: #2563eb;
+}
+
+.rg-map-instructions {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.rg-derived-address {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #f9fafb;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #374151;
+}
+
+/* ==========================================================================
+   29. Priority Options
+   ========================================================================== */
+
+.rg-priority-options {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.rg-priority-option {
+    flex: 1;
+    min-width: 120px;
+}
+
+.rg-priority-option input[type="radio"] {
+    display: none;
+}
+
+.rg-priority-option label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    transition: all 0.15s ease;
+}
+
+.rg-priority-option input[type="radio"]:checked + label {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.rg-priority-option.low input[type="radio"]:checked + label {
+    border-color: #10b981;
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.rg-priority-option.medium input[type="radio"]:checked + label {
+    border-color: #f59e0b;
+    background: #fffbeb;
+    color: #d97706;
+}
+
+.rg-priority-option.high input[type="radio"]:checked + label {
+    border-color: #f97316;
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.rg-priority-option.urgent input[type="radio"]:checked + label {
+    border-color: #ef4444;
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+/* ==========================================================================
+   30. Availability Options
+   ========================================================================== */
+
+.rg-availability-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.rg-availability-option {
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rg-availability-option:hover {
+    border-color: #93c5fd;
+}
+
+.rg-availability-option.selected {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.rg-availability-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.rg-availability-dot.available {
+    background: #10b981;
+}
+
+.rg-availability-dot.occupied {
+    background: #ef4444;
+}
+
+.rg-availability-dot.maintenance {
+    background: #f59e0b;
+}
+
+.rg-availability-dot.reserved {
+    background: #8b5cf6;
+}
+
+/* ==========================================================================
+   31. Room Counts
+   ========================================================================== */
+
+.rg-room-counts {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.rg-room-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.rg-room-count-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    text-align: center;
+}
+
+.rg-room-count-input {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.rg-room-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #6b7280;
+    transition: all 0.15s ease;
+}
+
+.rg-room-btn:hover {
+    background: #eff6ff;
+    color: #3b82f6;
+}
+
+.rg-room-value {
+    width: 40px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+/* ==========================================================================
+   32. Back Link
+   ========================================================================== */
+
+.rg-back-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 16px;
+    transition: color 0.15s ease;
+}
+
+.rg-back-link:hover {
+    color: #3b82f6;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+    .rg-quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rg-chart-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .rg-room-counts {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .rg-form-row,
+    .rg-form-row.two-col,
+    .rg-form-row.three-col,
+    .rg-form-row-half {
+        grid-template-columns: 1fr;
+    }
+
+    .rg-table-container {
+        overflow-x: auto;
+    }
+
+    .rg-table {
+        min-width: 600px;
+    }
+
+    .rg-quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rg-room-counts {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .rg-documents-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rg-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rg-page-header-actions {
+        width: 100%;
+    }
+
+    .rg-filters-row {
+        flex-direction: column;
+    }
+
+    .rg-search-box {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .rg-filter-select {
+        width: 100%;
+    }
+
+    .rg-donut-chart {
+        flex-direction: column;
+    }
+
+    .rg-availability-options {
+        grid-template-columns: 1fr;
+    }
+
+    .rg-priority-options {
+        flex-direction: column;
+    }
+
+    .rg-priority-option {
+        min-width: unset;
+    }
+
+    .rg-modal {
+        margin: 12px;
+        max-width: 100%;
+    }
+
+    .rg-metric-value {
+        font-size: 24px;
+    }
+
+    .rg-metric-value.lg {
+        font-size: 28px;
+    }
+
+    .rg-amenities-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
