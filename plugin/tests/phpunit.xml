@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<phpunit
+    bootstrap="bootstrap.php"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    beStrictAboutTestsThatDoNotTestAnything="true">
+
+    <testsuites>
+        <testsuite name="unit">
+            <directory suffix="Test.php">./unit</directory>
+        </testsuite>
+        <testsuite name="integration">
+            <directory suffix="Test.php">./integration</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../includes</directory>
+            <exclude>
+                <directory suffix=".php">../includes/admin</directory>
+                <directory suffix=".php">../includes/dashboard</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
