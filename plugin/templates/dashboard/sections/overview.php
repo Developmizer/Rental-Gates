@@ -62,15 +62,15 @@ $priority_colors = array(
 
 <!-- Getting Started (show if no buildings) -->
 <?php if ($org_stats['buildings'] === 0): ?>
-<div class="rg-alert-banner" style="background: linear-gradient(135deg, hsl(215 50% 23%) 0%, var(--rg-primary) 100%); color: #fff; border: none; padding: var(--rg-space-6); flex-direction: column; align-items: flex-start; gap: var(--rg-space-4);">
+<div class="rg-alert-banner rg-welcome-banner">
     <div>
-        <h2 style="margin: 0 0 8px; font-size: var(--rg-font-xl); font-weight: 700; color: #fff;"><?php _e('Welcome to Rental Gates!', 'rental-gates'); ?></h2>
-        <p style="opacity: 0.9; margin: 0; font-size: var(--rg-font-base); line-height: 1.6; color: #fff;">
+        <h2 class="rg-welcome-title"><?php _e('Welcome to Rental Gates!', 'rental-gates'); ?></h2>
+        <p class="rg-welcome-text">
             <?php _e('Get started by adding your first building. Simply click on the map to drop a pin and set your property location.', 'rental-gates'); ?>
         </p>
     </div>
-    <a href="<?php echo home_url('/rental-gates/dashboard/buildings/add'); ?>" class="rg-btn" style="background: #fff; color: hsl(215 50% 23%); font-weight: 600;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <a href="<?php echo home_url('/rental-gates/dashboard/buildings/add'); ?>" class="rg-btn rg-welcome-btn">
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
         </svg>
@@ -82,7 +82,7 @@ $priority_colors = array(
 <!-- Alert Banners -->
 <?php if (!empty($overdue_payments)): ?>
 <div class="rg-alert-banner danger">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <circle cx="12" cy="12" r="10"></circle>
         <line x1="12" y1="8" x2="12" y2="12"></line>
         <line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -94,7 +94,7 @@ $priority_colors = array(
 
 <?php if ($lease_stats['expiring_soon'] > 0): ?>
 <div class="rg-alert-banner">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #d97706;">
+    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="rg-text-warning">
         <circle cx="12" cy="12" r="10"></circle>
         <polyline points="12 6 12 12 16 14"></polyline>
     </svg>
@@ -109,14 +109,14 @@ $priority_colors = array(
     <div class="rg-metric-card success">
         <div class="rg-metric-header">
             <div class="rg-metric-icon green">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <line x1="12" y1="1" x2="12" y2="23"></line>
                     <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                 </svg>
             </div>
             <?php if ($financial_analytics['revenue_growth'] != 0): ?>
-            <div class="rg-metric-trend <?php echo $financial_analytics['revenue_growth'] > 0 ? 'up' : 'down'; ?>" style="margin: 0;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <div class="rg-metric-trend <?php echo $financial_analytics['revenue_growth'] > 0 ? 'up' : 'down'; ?>">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <?php if ($financial_analytics['revenue_growth'] > 0): ?>
                     <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
                     <polyline points="17 6 23 6 23 12"></polyline>
@@ -137,7 +137,7 @@ $priority_colors = array(
     <div class="rg-metric-card <?php echo ($occupancy_analytics['occupancy_rate'] >= 90) ? 'success' : (($occupancy_analytics['occupancy_rate'] >= 70) ? '' : 'warning'); ?>">
         <div class="rg-metric-header">
             <div class="rg-metric-icon <?php echo ($occupancy_analytics['occupancy_rate'] >= 90) ? 'green' : (($occupancy_analytics['occupancy_rate'] >= 70) ? 'blue' : 'yellow'); ?>">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
@@ -145,7 +145,7 @@ $priority_colors = array(
         </div>
         <div class="rg-metric-value"><?php echo number_format($occupancy_analytics['occupancy_rate'], 1); ?>%</div>
         <div class="rg-metric-label"><?php _e('Occupancy Rate', 'rental-gates'); ?></div>
-        <div class="rg-metric-trend" style="margin-top: 4px; font-size: 12px; color: var(--rg-gray-500);">
+        <div class="rg-metric-sub-info">
             <?php printf(__('%d of %d units', 'rental-gates'), $occupancy_analytics['occupied'], $occupancy_analytics['total_units']); ?>
         </div>
     </div>
@@ -154,7 +154,7 @@ $priority_colors = array(
     <div class="rg-metric-card <?php echo ($maintenance_stats['open'] + $maintenance_stats['in_progress'] > 10) ? 'warning' : ''; ?>">
         <div class="rg-metric-header">
             <div class="rg-metric-icon <?php echo ($maintenance_stats['emergency'] > 0) ? 'red' : 'yellow'; ?>">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
                 </svg>
             </div>
@@ -163,7 +163,7 @@ $priority_colors = array(
         <div class="rg-metric-label"><?php _e('Open Work Orders', 'rental-gates'); ?></div>
         <?php if ($maintenance_stats['emergency'] > 0): ?>
             <div class="rg-metric-trend down">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                 <?php printf(__('%d emergency', 'rental-gates'), $maintenance_stats['emergency']); ?>
             </div>
         <?php endif; ?>
@@ -173,7 +173,7 @@ $priority_colors = array(
     <div class="rg-metric-card <?php echo ($payment_stats['count_overdue'] > 0) ? 'danger' : ''; ?>">
         <div class="rg-metric-header">
             <div class="rg-metric-icon <?php echo ($payment_stats['count_overdue'] > 0) ? 'red' : 'purple'; ?>">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                     <line x1="1" y1="10" x2="23" y2="10"></line>
                 </svg>
@@ -195,8 +195,8 @@ $priority_colors = array(
     <div class="rg-card">
         <div class="rg-card-header">
             <h2 class="rg-card-title"><?php _e('Revenue Trend', 'rental-gates'); ?></h2>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <select id="periodSelector" class="rg-form-select" style="padding: 6px 12px; font-size: 13px; min-width: auto; width: auto;">
+            <div class="rg-card-header-actions">
+                <select id="periodSelector" class="rg-form-select compact">
                     <option value="last_7_days" <?php selected($period, 'last_7_days'); ?>><?php _e('Last 7 Days', 'rental-gates'); ?></option>
                     <option value="last_30_days" <?php selected($period, 'last_30_days'); ?>><?php _e('Last 30 Days', 'rental-gates'); ?></option>
                     <option value="month" <?php selected($period, 'month'); ?>><?php _e('This Month', 'rental-gates'); ?></option>
@@ -212,7 +212,7 @@ $priority_colors = array(
         </div>
         <div class="rg-card-footer start">
             <button onclick="exportChart('revenueChart', 'revenue-trend')" class="rg-btn rg-btn-outline rg-btn-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -257,22 +257,22 @@ $priority_colors = array(
                 </svg>
                 <div class="rg-donut-legend">
                     <div class="rg-legend-item">
-                        <span class="rg-legend-dot" style="background: #2563eb;"></span>
+                        <span class="rg-legend-dot occupied"></span>
                         <span><?php _e('Occupied', 'rental-gates'); ?></span>
                         <span class="rg-legend-value"><?php echo $units['occupied']; ?></span>
                     </div>
                     <div class="rg-legend-item">
-                        <span class="rg-legend-dot" style="background: #10b981;"></span>
+                        <span class="rg-legend-dot available"></span>
                         <span><?php _e('Available', 'rental-gates'); ?></span>
                         <span class="rg-legend-value"><?php echo $units['available']; ?></span>
                     </div>
                     <div class="rg-legend-item">
-                        <span class="rg-legend-dot" style="background: #f59e0b;"></span>
+                        <span class="rg-legend-dot coming-soon"></span>
                         <span><?php _e('Coming Soon', 'rental-gates'); ?></span>
                         <span class="rg-legend-value"><?php echo $units['coming_soon']; ?></span>
                     </div>
                     <div class="rg-legend-item">
-                        <span class="rg-legend-dot" style="background: #6b7280;"></span>
+                        <span class="rg-legend-dot unlisted"></span>
                         <span><?php _e('Unlisted', 'rental-gates'); ?></span>
                         <span class="rg-legend-value"><?php echo $units['unlisted']; ?></span>
                     </div>
@@ -289,7 +289,7 @@ $priority_colors = array(
         <h2 class="rg-card-title"><?php _e('Revenue by Building', 'rental-gates'); ?></h2>
     </div>
     <div class="rg-card-body">
-        <div class="rg-chart-container" style="min-height: 250px;">
+        <div class="rg-chart-container h-250">
             <canvas id="revenueByBuildingChart" aria-label="<?php esc_attr_e('Revenue by building chart', 'rental-gates'); ?>" role="img"></canvas>
         </div>
     </div>
@@ -307,7 +307,7 @@ $priority_colors = array(
         <div class="rg-card-body flush">
             <?php if (empty($open_maintenance)): ?>
                 <div class="rg-empty-state">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                         <polyline points="22 4 12 14.01 9 11.01"></polyline>
                     </svg>
@@ -344,7 +344,7 @@ $priority_colors = array(
         <div class="rg-card-body flush">
             <?php if (empty($recent_applications['items'])): ?>
                 <div class="rg-empty-state">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                         <polyline points="14 2 14 8 20 8"></polyline>
                         <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -379,7 +379,7 @@ $priority_colors = array(
         <div class="rg-card-body flush">
             <?php if (empty($expiring_leases['items'])): ?>
                 <div class="rg-empty-state">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                         <line x1="16" y1="2" x2="16" y2="6"></line>
                         <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -418,13 +418,13 @@ $priority_colors = array(
     <div class="rg-card-body">
         <div class="rg-quick-actions">
             <a href="<?php echo home_url('/rental-gates/dashboard/buildings/add'); ?>" class="rg-quick-action">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                 </svg>
                 <span><?php _e('Add Building', 'rental-gates'); ?></span>
             </a>
             <a href="<?php echo home_url('/rental-gates/dashboard/tenants/add'); ?>" class="rg-quick-action">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                     <circle cx="8.5" cy="7" r="4"></circle>
                     <line x1="20" y1="8" x2="20" y2="14"></line>
@@ -433,13 +433,13 @@ $priority_colors = array(
                 <span><?php _e('Add Tenant', 'rental-gates'); ?></span>
             </a>
             <a href="<?php echo home_url('/rental-gates/dashboard/maintenance/add'); ?>" class="rg-quick-action">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
                 </svg>
                 <span><?php _e('Work Order', 'rental-gates'); ?></span>
             </a>
             <a href="<?php echo home_url('/rental-gates/dashboard/payments/add'); ?>" class="rg-quick-action">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <line x1="12" y1="1" x2="12" y2="23"></line>
                     <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                 </svg>
@@ -451,7 +451,7 @@ $priority_colors = array(
 
 <!-- Portfolio Summary (if multiple buildings) -->
 <?php if ($org_stats['buildings'] > 0): ?>
-<div class="rg-card" style="margin-top: var(--rg-space-6);">
+<div class="rg-card rg-mt-6">
     <div class="rg-card-header">
         <h2 class="rg-card-title"><?php _e('Portfolio Summary', 'rental-gates'); ?></h2>
     </div>

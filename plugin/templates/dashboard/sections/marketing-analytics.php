@@ -36,8 +36,8 @@ $conversion_rates = $analytics['conversion_rates'] ?? array();
 
 <div class="mkt-analytics-header">
     <div>
-        <h2 style="margin: 0 0 4px; font-size: 24px; font-weight: 700;"><?php _e('Marketing Analytics', 'rental-gates'); ?></h2>
-        <p style="margin: 0; color: var(--rg-gray-500);"><?php _e('Track your marketing performance and conversions', 'rental-gates'); ?></p>
+        <h2 class="rg-page-title"><?php _e('Marketing Analytics', 'rental-gates'); ?></h2>
+        <p class="rg-page-subtitle"><?php _e('Track your marketing performance and conversions', 'rental-gates'); ?></p>
     </div>
     
     <div class="mkt-period-selector">
@@ -141,7 +141,7 @@ $conversion_rates = $analytics['conversion_rates'] ?? array();
     </div>
     
     <!-- Daily Trend -->
-    <div class="mkt-chart-card" style="grid-column: 1 / -1;">
+    <div class="mkt-chart-card mkt-chart-full">
         <h4 class="mkt-chart-title"><?php _e('Daily Lead Trend', 'rental-gates'); ?></h4>
         <div class="mkt-chart-container" style="height: 250px;">
             <canvas id="dailyLeadsChart"></canvas>

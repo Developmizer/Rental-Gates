@@ -61,7 +61,7 @@ $page_title = $is_edit ? __('Edit Work Order', 'rental-gates') : __('New Work Or
 ?>
 
 <a href="<?php echo home_url('/rental-gates/dashboard/maintenance'); ?>" class="rg-back-link">
-    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    <svg aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/></svg>
     <?php _e('Back to Maintenance', 'rental-gates'); ?>
 </a>
 
@@ -81,8 +81,8 @@ $page_title = $is_edit ? __('Edit Work Order', 'rental-gates') : __('New Work Or
             
             <div class="rg-form-row">
                 <div class="rg-form-group">
-                    <label class="rg-form-label" for="building_id"><?php _e('Building', 'rental-gates'); ?> <span class="required">*</span></label>
-                    <select id="building_id" name="building_id" class="rg-form-select" required onchange="updateUnits()">
+                    <label class="rg-form-label" for="building_id"><?php _e('Building', 'rental-gates'); ?> <span class="required" aria-hidden="true">*</span></label>
+                    <select id="building_id" name="building_id" class="rg-form-select" required aria-required="true" onchange="updateUnits()">
                         <option value=""><?php _e('Select building...', 'rental-gates'); ?></option>
                         <?php foreach ($buildings as $building): ?>
                         <option value="<?php echo $building['id']; ?>" <?php selected($preselect_building, $building['id']); ?>>
@@ -122,8 +122,8 @@ $page_title = $is_edit ? __('Edit Work Order', 'rental-gates') : __('New Work Or
             
             <div class="rg-form-row full">
                 <div class="rg-form-group">
-                    <label class="rg-form-label" for="title"><?php _e('Title', 'rental-gates'); ?> <span class="required">*</span></label>
-                    <input type="text" id="title" name="title" class="rg-form-input" required
+                    <label class="rg-form-label" for="title"><?php _e('Title', 'rental-gates'); ?> <span class="required" aria-hidden="true">*</span></label>
+                    <input type="text" id="title" name="title" class="rg-form-input" required aria-required="true"
                            value="<?php echo esc_attr($wo['title'] ?? ''); ?>"
                            placeholder="<?php _e('e.g., Leaky faucet in bathroom', 'rental-gates'); ?>">
                 </div>
@@ -131,8 +131,8 @@ $page_title = $is_edit ? __('Edit Work Order', 'rental-gates') : __('New Work Or
             
             <div class="rg-form-row full">
                 <div class="rg-form-group">
-                    <label class="rg-form-label" for="description"><?php _e('Description', 'rental-gates'); ?> <span class="required">*</span></label>
-                    <textarea id="description" name="description" class="rg-form-textarea" required
+                    <label class="rg-form-label" for="description"><?php _e('Description', 'rental-gates'); ?> <span class="required" aria-hidden="true">*</span></label>
+                    <textarea id="description" name="description" class="rg-form-textarea" required aria-required="true"
                               placeholder="<?php _e('Describe the issue in detail...', 'rental-gates'); ?>"><?php echo esc_textarea($wo['description'] ?? ''); ?></textarea>
                 </div>
             </div>
@@ -166,21 +166,21 @@ $page_title = $is_edit ? __('Edit Work Order', 'rental-gates') : __('New Work Or
             <h3 class="rg-form-section-title"><?php _e('Priority', 'rental-gates'); ?></h3>
             
             <div class="rg-priority-options">
-                <div class="rg-priority-option">
+                <div class="rg-priority-option low">
                     <input type="radio" id="priority-low" name="priority" value="low" <?php checked($wo['priority'] ?? '', 'low'); ?>>
-                    <label for="priority-low"><span style="color: #6b7280;">Low</span><small>Can wait</small></label>
+                    <label for="priority-low"><span class="rg-priority-label low">Low</span><small>Can wait</small></label>
                 </div>
-                <div class="rg-priority-option">
+                <div class="rg-priority-option medium">
                     <input type="radio" id="priority-medium" name="priority" value="medium" <?php checked($wo['priority'] ?? 'medium', 'medium'); ?>>
-                    <label for="priority-medium"><span style="color: #3b82f6;">Medium</span><small>Within a week</small></label>
+                    <label for="priority-medium"><span class="rg-priority-label medium">Medium</span><small>Within a week</small></label>
                 </div>
                 <div class="rg-priority-option high">
                     <input type="radio" id="priority-high" name="priority" value="high" <?php checked($wo['priority'] ?? '', 'high'); ?>>
-                    <label for="priority-high"><span style="color: #f59e0b;">High</span><small>Within 48 hours</small></label>
+                    <label for="priority-high"><span class="rg-priority-label high">High</span><small>Within 48 hours</small></label>
                 </div>
                 <div class="rg-priority-option emergency">
                     <input type="radio" id="priority-emergency" name="priority" value="emergency" <?php checked($wo['priority'] ?? '', 'emergency'); ?>>
-                    <label for="priority-emergency"><span style="color: #dc2626;">Emergency</span><small>Immediate</small></label>
+                    <label for="priority-emergency"><span class="rg-priority-label emergency">Emergency</span><small>Immediate</small></label>
                 </div>
             </div>
         </div>
@@ -201,7 +201,7 @@ $page_title = $is_edit ? __('Edit Work Order', 'rental-gates') : __('New Work Or
             <div class="rg-form-row full">
                 <div class="rg-form-group">
                     <label class="rg-form-label" for="access_instructions"><?php _e('Access Instructions', 'rental-gates'); ?></label>
-                    <textarea id="access_instructions" name="access_instructions" class="rg-form-textarea" style="min-height: 60px;"
+                    <textarea id="access_instructions" name="access_instructions" class="rg-form-textarea rg-textarea-sm"
                               placeholder="<?php _e('e.g., Key under mat, call ahead, etc.', 'rental-gates'); ?>"><?php echo esc_textarea($wo['access_instructions'] ?? ''); ?></textarea>
                 </div>
             </div>
