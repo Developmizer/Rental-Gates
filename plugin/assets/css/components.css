@@ -1918,3 +1918,41 @@
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 }
+
+/* === 33. Additional Component Variants ==================================== */
+
+/* Outline button */
+.rg-btn-outline {
+  border: 1px solid var(--rg-gray-300);
+  background: #fff;
+  color: var(--rg-gray-700);
+}
+.rg-btn-outline:hover {
+  background: var(--rg-gray-50);
+  border-color: var(--rg-gray-400);
+}
+
+/* Button loading state */
+.rg-btn-text {}
+.rg-btn-loading { display: inline-flex; align-items: center; gap: var(--rg-space-2); }
+
+/* Error / success messages */
+.rg-error-message {
+  background: #fef2f2;
+  color: var(--rg-danger);
+  border: 1px solid #fecaca;
+  padding: var(--rg-space-4);
+  border-radius: var(--rg-radius);
+  font-size: var(--rg-font-sm);
+}
+.rg-alert-success {
+  background: #ecfdf5;
+  color: var(--rg-success);
+  border: 1px solid #a7f3d0;
+  padding: var(--rg-space-4);
+  border-radius: var(--rg-radius);
+  font-size: var(--rg-font-sm);
+}
+
+/* Priority option hover */
+.rg-priority-option label:hover { border-color: var(--rg-gray-300); }
