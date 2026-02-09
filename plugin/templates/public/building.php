@@ -257,11 +257,11 @@ $max_rent = !empty($rents) ? max($rents) : 0;
                 </a>
                 <div class="header-cta">
                     <a href="tel:<?php echo esc_attr($organization['contact_phone'] ?? ''); ?>" class="btn btn-outline">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                         <span><?php _e('Call', 'rental-gates'); ?></span>
                     </a>
                     <button class="btn btn-primary" onclick="openContactModal()">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                         <span><?php _e('Inquire', 'rental-gates'); ?></span>
                     </button>
                 </div>
@@ -274,8 +274,8 @@ $max_rent = !empty($rents) ? max($rents) : 0;
             <?php if ($hero_img): ?>
                 <img src="<?php echo esc_url($hero_img); ?>" alt="<?php echo esc_attr($building['name']); ?>" id="heroMainImg">
             <?php else: ?>
-                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, var(--gray-200), var(--gray-300)); display: flex; align-items: center; justify-content: center;">
-                    <svg width="80" height="80" fill="none" stroke="var(--gray-400)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                <div class="rg-img-placeholder">
+                    <svg aria-hidden="true" width="80" height="80" fill="none" stroke="var(--gray-400)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                 </div>
             <?php endif; ?>
         </div>
@@ -293,7 +293,7 @@ $max_rent = !empty($rents) ? max($rents) : 0;
         
         <?php if (count($gallery) > 3): ?>
         <button class="gallery-count" onclick="openGallery(0)">
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: inline; vertical-align: middle; margin-right: 6px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="rg-icon-inline"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
             <?php printf(__('View all %d photos', 'rental-gates'), count($gallery)); ?>
         </button>
         <?php endif; ?>
@@ -302,7 +302,7 @@ $max_rent = !empty($rents) ? max($rents) : 0;
             <div class="container">
                 <?php if (count($available_units) > 0): ?>
                 <div class="hero-badge">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    <svg aria-hidden="true" width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                     <?php printf(_n('%d Unit Available', '%d Units Available', count($available_units), 'rental-gates'), count($available_units)); ?>
                 </div>
                 <?php endif; ?>
@@ -310,9 +310,9 @@ $max_rent = !empty($rents) ? max($rents) : 0;
                 <h1 class="hero-title"><?php echo esc_html($building['name']); ?></h1>
                 
                 <div class="hero-address">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <svg aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                     </svg>
                     <?php echo esc_html($building['derived_address']); ?>
                 </div>
@@ -341,7 +341,7 @@ $max_rent = !empty($rents) ? max($rents) : 0;
                     <div class="card">
                         <div class="card-header"><?php _e('About This Property', 'rental-gates'); ?></div>
                         <div class="card-body">
-                            <p style="font-size: 15px; color: var(--gray-700);"><?php echo nl2br(esc_html($building['description'])); ?></p>
+                            <p class="rg-text-body"><?php echo nl2br(esc_html($building['description'])); ?></p>
                         </div>
                     </div>
                     <?php endif; ?>
@@ -353,7 +353,7 @@ $max_rent = !empty($rents) ? max($rents) : 0;
                             <div class="amenities-grid">
                                 <?php foreach ($amenities as $amenity): ?>
                                 <span class="amenity-tag">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
                                     <?php echo esc_html($amenity); ?>
                                 </span>
                                 <?php endforeach; ?>
@@ -365,7 +365,7 @@ $max_rent = !empty($rents) ? max($rents) : 0;
                     <div class="card">
                         <div class="card-header">
                             <?php _e('Available Units', 'rental-gates'); ?>
-                            <span style="font-size: 14px; font-weight: 500; color: var(--gray-500);"><?php echo count($available_units); ?> <?php _e('available', 'rental-gates'); ?></span>
+                            <span class="rg-text-sm-muted"><?php echo count($available_units); ?> <?php _e('available', 'rental-gates'); ?></span>
                         </div>
                         <div class="card-body">
                             <?php if (!empty($available_units)): ?>
@@ -380,8 +380,8 @@ $max_rent = !empty($rents) ? max($rents) : 0;
                                         <?php if ($unit_thumb): ?>
                                             <img src="<?php echo esc_url($unit_thumb); ?>" alt="<?php echo esc_attr($unit['name']); ?>">
                                         <?php else: ?>
-                                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--gray-100);">
-                                                <svg width="32" height="32" fill="none" stroke="var(--gray-300)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                            <div class="rg-img-placeholder-light">
+                                                <svg aria-hidden="true" width="32" height="32" fill="none" stroke="var(--gray-300)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                                             </div>
                                         <?php endif; ?>
                                     </div>
@@ -389,7 +389,7 @@ $max_rent = !empty($rents) ? max($rents) : 0;
                                         <h3><?php echo esc_html($unit['name']); ?></h3>
                                         <div class="unit-details">
                                             <span>
-                                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                                <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                                                 <?php echo intval($unit['bedrooms']); ?> <?php _e('bed', 'rental-gates'); ?>
                                             </span>
                                             <span>
@@ -418,7 +418,7 @@ $max_rent = !empty($rents) ? max($rents) : 0;
                             </div>
                             <?php else: ?>
                             <div class="empty-state">
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                                <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                                 <h3><?php _e('No Units Currently Available', 'rental-gates'); ?></h3>
                                 <p><?php _e('Check back soon or contact us to get on the waitlist!', 'rental-gates'); ?></p>
                             </div>
@@ -448,13 +448,13 @@ $max_rent = !empty($rents) ? max($rents) : 0;
                                 <div class="contact-links">
                                     <?php if (!empty($organization['contact_phone'])): ?>
                                     <a href="tel:<?php echo esc_attr($organization['contact_phone']); ?>" class="contact-link">
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                                         <?php echo esc_html($organization['contact_phone']); ?>
                                     </a>
                                     <?php endif; ?>
                                     <?php if (!empty($organization['contact_email'])): ?>
                                     <a href="mailto:<?php echo esc_attr($organization['contact_email']); ?>?subject=<?php echo urlencode('Inquiry about ' . $building['name']); ?>" class="contact-link">
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                                         <?php echo esc_html($organization['contact_email']); ?>
                                     </a>
                                     <?php endif; ?>
@@ -469,7 +469,7 @@ $max_rent = !empty($rents) ? max($rents) : 0;
                                     <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=<?php echo ($building['longitude'] - 0.008); ?>%2C<?php echo ($building['latitude'] - 0.006); ?>%2C<?php echo ($building['longitude'] + 0.008); ?>%2C<?php echo ($building['latitude'] + 0.006); ?>&layer=mapnik&marker=<?php echo $building['latitude']; ?>%2C<?php echo $building['longitude']; ?>" loading="lazy"></iframe>
                                 </div>
                                 <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $building['latitude']; ?>,<?php echo $building['longitude']; ?>" target="_blank" class="directions-link">
-                                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                                    <svg aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
                                     <?php _e('Get Directions', 'rental-gates'); ?>
                                 </a>
                             </div>
@@ -493,13 +493,13 @@ $max_rent = !empty($rents) ? max($rents) : 0;
     <div class="modal-overlay" id="contactModal">
         <div class="modal">
             <button class="modal-close" onclick="closeContactModal()">
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                <svg aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
             
             <div id="contactForm">
                 <div class="modal-header">
                     <div class="modal-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                     </div>
                     <h3><?php _e('Request Information', 'rental-gates'); ?></h3>
                     <p><?php printf(__('About %s', 'rental-gates'), esc_html($building['name'])); ?></p>
@@ -537,7 +537,7 @@ $max_rent = !empty($rents) ? max($rents) : 0;
             <div id="contactSuccess" style="display: none;">
                 <div class="success-state">
                     <div class="success-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
                     </div>
                     <h3><?php _e('Thank You!', 'rental-gates'); ?></h3>
                     <p><?php _e('Your inquiry has been submitted. We\'ll get back to you as soon as possible.', 'rental-gates'); ?></p>
@@ -551,17 +551,17 @@ $max_rent = !empty($rents) ? max($rents) : 0;
     <?php if (count($gallery) > 0): ?>
     <div class="modal-overlay" id="galleryModal">
         <div class="modal gallery-modal">
-            <button class="modal-close" onclick="closeGallery()" style="z-index: 10;">
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            <button class="modal-close" onclick="closeGallery()">
+                <svg aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
             <div class="modal-body">
                 <div class="gallery-viewer">
                     <img id="galleryMainImg" src="<?php echo esc_url($hero_img); ?>" alt="">
                     <button class="gallery-nav prev" onclick="prevImage()">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                        <svg aria-hidden="true" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/></svg>
                     </button>
                     <button class="gallery-nav next" onclick="nextImage()">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        <svg aria-hidden="true" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
                     </button>
                 </div>
                 <div class="gallery-thumbs">

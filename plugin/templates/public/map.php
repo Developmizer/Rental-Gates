@@ -1547,7 +1547,7 @@ foreach ($buildings as $b) {
             <div class="sidebar-header">
                 <div class="sidebar-title">
                     <h2><?php _e('Rentals', 'rental-gates'); ?></h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="rg-map-header-flex">
                     <span class="results-count" id="resultsCount"><?php echo count($buildings); ?> <?php _e('properties', 'rental-gates'); ?></span>
                         <!-- Sort Dropdown -->
                         <div class="sort-dropdown">
@@ -1635,13 +1635,13 @@ foreach ($buildings as $b) {
                             <?php echo rg_map_render_icon('filters', 16); ?>
                             <?php _e('More', 'rental-gates'); ?>
                         </button>
-                        <div class="filter-menu" id="moreFilter" style="min-width: 280px;">
+                        <div class="filter-menu rg-filter-panel" id="moreFilter">
                             <label><?php _e('Square Footage', 'rental-gates'); ?></label>
                             <div class="filter-menu-row">
                                 <input type="number" id="sqftMin" placeholder="<?php esc_attr_e('Min', 'rental-gates'); ?>" value="">
                                 <input type="number" id="sqftMax" placeholder="<?php esc_attr_e('Max', 'rental-gates'); ?>" value="">
                             </div>
-                            <label style="margin-top: 12px;"><?php _e('Availability', 'rental-gates'); ?></label>
+                            <label class="rg-mt-3"><?php _e('Availability', 'rental-gates'); ?></label>
                             <select id="availabilitySelect">
                                 <option value=""><?php _e('Any', 'rental-gates'); ?></option>
                                 <option value="available"><?php _e('Available Now', 'rental-gates'); ?></option>
@@ -1660,10 +1660,10 @@ foreach ($buildings as $b) {
                 </div>
                 
                 <!-- Active Filters Display -->
-                <div id="activeFilters" style="display: none; margin-top: 12px; flex-wrap: wrap; gap: 8px;"></div>
+                <div id="activeFilters" class="rg-active-filters"></div>
                 
                 <!-- List View Toggle (only in list view) -->
-                <div class="list-view-toggle" id="listViewToggle" style="display: none; margin-top: 12px;">
+                <div class="list-view-toggle rg-mt-3" id="listViewToggle" style="display: none;">
                     <button class="list-view-toggle-btn active" onclick="setListViewMode('grid')" id="gridViewBtn">
                         <?php echo rg_map_render_icon('grid', 14); ?>
                         <?php _e('Grid', 'rental-gates'); ?>
@@ -2466,9 +2466,9 @@ foreach ($buildings as $b) {
         
         if (isLoadingListings) {
             container.innerHTML = `
-                <div style="padding: 20px; text-align: center;">
-                    <div class="loading-spinner" style="margin: 0 auto;"></div>
-                    <p style="margin-top: 12px; color: var(--gray-500);"><?php echo esc_js(__('Loading properties...', 'rental-gates')); ?></p>
+                <div class="rg-loading-state">
+                    <div class="loading-spinner rg-mx-auto"></div>
+                    <p class="rg-mt-3 rg-text-sm-muted"><?php echo esc_js(__('Loading properties...', 'rental-gates')); ?></p>
                 </div>
             `;
             return;
@@ -2798,7 +2798,7 @@ foreach ($buildings as $b) {
                     ${f.label}
                     <button onclick="removeFilter('${f.type}')" aria-label="<?php echo esc_js(__('Remove filter', 'rental-gates')); ?>">
                         <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </button>
                 </span>

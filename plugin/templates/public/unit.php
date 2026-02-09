@@ -222,8 +222,8 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
         <div class="container">
             <div class="header-content">
                 <a href="<?php echo home_url('/rental-gates/building/' . $building['slug']); ?>" class="back-link">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    <svg aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/>
                     </svg>
                     <?php _e('Back to', 'rental-gates'); ?> <?php echo esc_html($building['name']); ?>
                 </a>
@@ -252,8 +252,8 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
             <div class="gallery-count"><?php echo count($gallery); ?> <?php _e('photos', 'rental-gates'); ?></div>
             <?php endif; ?>
         <?php else: ?>
-            <div style="height: 100%; display: flex; align-items: center; justify-content: center; color: var(--gray-400);">
-                <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="rg-gallery-placeholder">
+                <svg aria-hidden="true" width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
             </div>
@@ -269,8 +269,8 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
                     <div class="unit-header">
                         <h1 class="unit-title"><?php echo esc_html($unit['name']); ?></h1>
                         <div class="unit-location">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <svg aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             </svg>
                             <a href="<?php echo home_url('/rental-gates/building/' . $building['slug']); ?>"><?php echo esc_html($building['name']); ?></a>
                             <span>•</span>
@@ -328,7 +328,7 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
                             <div class="amenities-grid">
                                 <?php foreach ($amenities as $amenity): ?>
                                 <span class="amenity-tag">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
                                     <?php echo esc_html($amenity); ?>
                                 </span>
                                 <?php endforeach; ?>
@@ -345,7 +345,7 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
                             <div class="amenities-grid">
                                 <?php foreach ($building_amenities as $amenity): ?>
                                 <span class="amenity-tag">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
                                     <?php echo esc_html($amenity); ?>
                                 </span>
                                 <?php endforeach; ?>
@@ -391,7 +391,7 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
                             <a href="<?php echo home_url('/rental-gates/apply/' . $building['slug'] . '/' . $unit['slug']); ?>" class="apply-btn">
                                 <?php _e('Apply Now', 'rental-gates'); ?>
                             </a>
-                            <button class="apply-btn" style="background: transparent; color: var(--primary); border: 2px solid var(--primary); margin-top: 12px;" onclick="openInquiryModal()">
+                            <button class="apply-btn rg-btn-outline-primary" onclick="openInquiryModal()">
                                 <?php _e('Ask a Question', 'rental-gates'); ?>
                             </button>
                             <p class="apply-note"><?php _e('Free to apply • Usually responds within 24 hours', 'rental-gates'); ?></p>
@@ -404,14 +404,14 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
                     </div>
                     
                     <!-- Contact Card -->
-                    <div class="card" style="margin-top: 20px;">
+                    <div class="card rg-mt-5">
                         <div class="card-header"><?php _e('Contact', 'rental-gates'); ?></div>
                         <div class="card-body">
                             <?php if (!empty($organization['contact_phone'])): ?>
                             <div class="contact-item">
                                 <div class="contact-icon">
-                                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                    <svg aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                     </svg>
                                 </div>
                                 <div>
@@ -426,8 +426,8 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
                             <?php if (!empty($organization['contact_email'])): ?>
                             <div class="contact-item">
                                 <div class="contact-icon">
-                                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    <svg aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                     </svg>
                                 </div>
                                 <div>
@@ -443,8 +443,8 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
                             <div class="map-container">
                                 <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=<?php echo ($building['longitude'] - 0.005); ?>%2C<?php echo ($building['latitude'] - 0.005); ?>%2C<?php echo ($building['longitude'] + 0.005); ?>%2C<?php echo ($building['latitude'] + 0.005); ?>&layer=mapnik&marker=<?php echo $building['latitude']; ?>%2C<?php echo $building['longitude']; ?>" loading="lazy"></iframe>
                             </div>
-                            <div style="padding-top: 12px;">
-                                <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $building['latitude']; ?>,<?php echo $building['longitude']; ?>" target="_blank" style="color: var(--primary); font-size: 14px; text-decoration: none;">
+                            <div class="rg-pt-3">
+                                <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $building['latitude']; ?>,<?php echo $building['longitude']; ?>" target="_blank" class="rg-link-primary">
                                     <?php _e('Get Directions', 'rental-gates'); ?> →
                                 </a>
                             </div>
@@ -515,13 +515,13 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
     <div class="inquiry-overlay" id="inquiryModal">
         <div class="inquiry-modal">
             <button class="inquiry-close" onclick="closeInquiryModal()">
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                <svg aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
             
             <div id="inquiryForm">
                 <div class="inquiry-header">
                     <div class="inquiry-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                     </div>
                     <h3><?php _e('Ask About This Unit', 'rental-gates'); ?></h3>
                     <p><?php echo esc_html($unit['name']); ?> - $<?php echo number_format($unit['rent_amount']); ?>/mo</p>
@@ -559,7 +559,7 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
             <div id="inquirySuccess" style="display: none;">
                 <div class="inquiry-success">
                     <div class="inquiry-success-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
                     </div>
                     <h3><?php _e('Thank You!', 'rental-gates'); ?></h3>
                     <p><?php _e('Your inquiry has been submitted. We\'ll get back to you as soon as possible.', 'rental-gates'); ?></p>

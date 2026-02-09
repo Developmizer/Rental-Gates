@@ -4573,3 +4573,110 @@
   text-align: center;
   padding: var(--rg-space-5);
 }
+
+
+/* ==========================================================================
+   48. PUBLIC TEMPLATE UTILITIES
+   ========================================================================== */
+
+/* ── Image placeholder (empty gallery state) ── */
+.rg-img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--rg-gray-200), var(--rg-gray-300));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rg-img-placeholder-light {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rg-gray-100);
+}
+
+.rg-gallery-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rg-gray-400);
+}
+
+/* ── Inline icon (next to text) ── */
+.rg-icon-inline {
+  display: inline;
+  vertical-align: middle;
+  margin-right: var(--rg-space-1);
+}
+
+/* ── Public page text styles ── */
+.rg-text-body {
+  font-size: 15px;
+  color: var(--rg-gray-700);
+}
+
+.rg-text-sm-muted {
+  font-size: var(--rg-font-base);
+  font-weight: 500;
+  color: var(--rg-gray-500);
+}
+
+/* ── Outline button variant ── */
+.rg-btn-outline-primary {
+  background: transparent;
+  color: var(--rg-primary);
+  border: 2px solid var(--rg-primary);
+  margin-top: var(--rg-space-3);
+}
+
+.rg-btn-outline-primary:hover {
+  background: var(--rg-primary-50);
+}
+
+/* ── Spacing utilities ── */
+.rg-mt-3  { margin-top: var(--rg-space-3); }
+.rg-mt-5  { margin-top: var(--rg-space-5); }
+.rg-pt-3  { padding-top: var(--rg-space-3); }
+
+/* ── Link styles ── */
+.rg-link-primary {
+  color: var(--rg-primary);
+  font-size: var(--rg-font-base);
+  text-decoration: none;
+}
+
+.rg-link-primary:hover {
+  text-decoration: underline;
+}
+
+/* ── Map inline styles ── */
+.rg-map-header-flex {
+  display: flex;
+  align-items: center;
+  gap: var(--rg-space-3);
+}
+
+.rg-filter-panel {
+  min-width: 280px;
+}
+
+.rg-active-filters {
+  display: none;
+  margin-top: var(--rg-space-3);
+  flex-wrap: wrap;
+  gap: var(--rg-space-2);
+}
+
+.rg-loading-state {
+  padding: var(--rg-space-5);
+  text-align: center;
+}
+
+.rg-mx-auto { margin-left: auto; margin-right: auto; }
+
+/* ── Gallery modal close button layer ── */
+.gallery-modal .modal-close { z-index: var(--rg-z-base); }
