@@ -428,7 +428,7 @@ class Rental_Gates_Ajax_Stripe {
         $result = Rental_Gates_Stripe::handle_webhook($payload, $signature);
 
         if (is_wp_error($result)) {
-            error_log('Rental Gates Stripe Webhook Error: ' . $result->get_error_message());
+            Rental_Gates_Logger::error('stripe', 'Webhook handling failed', array('error' => $result->get_error_message()));
             status_header(400);
             exit($result->get_error_message());
         }
@@ -573,7 +573,7 @@ class Rental_Gates_Ajax_Stripe {
         if (!empty($subscription->stripe_subscription_id) && Rental_Gates_Stripe::is_configured()) {
             $resume_result = Rental_Gates_Stripe::resume_subscription($subscription->stripe_subscription_id);
             if (is_wp_error($resume_result)) {
-                error_log('Rental Gates - Resume Subscription Error: ' . $resume_result->get_error_message());
+                Rental_Gates_Logger::error('stripe', 'Resume subscription failed', array('stripe_subscription_id' => $subscription->stripe_subscription_id, 'error' => $resume_result->get_error_message()));
                 wp_send_json_error(array('message' => $resume_result->get_error_message()));
             }
         }

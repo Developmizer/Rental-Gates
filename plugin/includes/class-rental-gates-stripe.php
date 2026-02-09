@@ -164,7 +164,7 @@ class Rental_Gates_Stripe
         $response = wp_remote_request($url, $args);
 
         if (is_wp_error($response)) {
-            error_log('Rental Gates Stripe API Error: ' . $response->get_error_message());
+            Rental_Gates_Logger::error('stripe', 'API request failed', array('error' => $response->get_error_message()));
             return $response;
         }
 
@@ -176,7 +176,7 @@ class Rental_Gates_Stripe
             $error_code = isset($body['error']['code']) ? $body['error']['code'] : 'api_error';
             // Log error without sensitive endpoint data (strip query params)
             $safe_endpoint = explode('?', $endpoint, 2)[0];
-            error_log('Rental Gates Stripe API Error [' . $code . ']: ' . $error_message . ' (endpoint: ' . $safe_endpoint . ')');
+            Rental_Gates_Logger::error('stripe', 'API error response', array('http_code' => $code, 'error' => $error_message, 'endpoint' => $safe_endpoint));
             return new WP_Error($error_code, $error_message, $body);
         }
 
@@ -340,9 +340,9 @@ class Rental_Gates_Stripe
         $connected_account = self::get_connected_account($payment['organization_id']);
 
         // Log for debugging
-        error_log('Rental Gates - Creating checkout session for payment ' . $payment_id);
-        error_log('Rental Gates - Platform fee: ' . $platform_fee_cents . ' cents');
-        error_log('Rental Gates - Connected account: ' . ($connected_account ? json_encode($connected_account) : 'none'));
+        Rental_Gates_Logger::debug('stripe', 'Creating checkout session', array('payment_id' => $payment_id));
+        Rental_Gates_Logger::debug('stripe', 'Platform fee calculated', array('platform_fee_cents' => $platform_fee_cents));
+        Rental_Gates_Logger::debug('stripe', 'Connected account lookup', array('connected_account' => $connected_account ? $connected_account : 'none'));
 
         if ($connected_account && !empty($connected_account['stripe_account_id']) && $connected_account['charges_enabled']) {
             // Use Stripe Connect - funds go to connected account, we collect fee
@@ -350,12 +350,12 @@ class Rental_Gates_Stripe
                 'destination' => $connected_account['stripe_account_id'],
             );
             $session_data['payment_intent_data']['application_fee_amount'] = $platform_fee_cents;
-            error_log('Rental Gates - Using Connect with destination: ' . $connected_account['stripe_account_id']);
+            Rental_Gates_Logger::debug('stripe', 'Using Connect destination', array('stripe_account_id' => $connected_account['stripe_account_id']));
         } else {
             // No Connect - store fee info in metadata for manual reconciliation
             $session_data['payment_intent_data']['metadata']['platform_fee_cents'] = $platform_fee_cents;
             $session_data['payment_intent_data']['metadata']['platform_fee_percent'] = self::PLATFORM_FEE_PERCENT;
-            error_log('Rental Gates - No Connect account, fee stored in metadata only');
+            Rental_Gates_Logger::debug('stripe', 'No Connect account, fee stored in metadata only');
         }
 
         // Determine correct return path based on user type
@@ -442,7 +442,7 @@ class Rental_Gates_Stripe
         $session = self::get_checkout_session($session_id, array('payment_intent', 'payment_intent.latest_charge'));
 
         if (is_wp_error($session)) {
-            error_log('Rental Gates: Failed to get session ' . $session_id . ': ' . $session->get_error_message());
+            Rental_Gates_Logger::error('stripe', 'Failed to get session', array('session_id' => $session_id, 'error' => $session->get_error_message()));
             return $session;
         }
 
@@ -450,7 +450,7 @@ class Rental_Gates_Stripe
         $payment_id = $session['metadata']['payment_id'] ?? null;
 
         if (!$payment_id) {
-            error_log('Rental Gates: No payment_id in session metadata for ' . $session_id);
+            Rental_Gates_Logger::warning('stripe', 'No payment_id in session metadata', array('session_id' => $session_id));
             return new WP_Error('no_payment_id', __('Payment ID not found in session', 'rental-gates'));
         }
 
@@ -490,7 +490,7 @@ class Rental_Gates_Stripe
 
         // Validate amount - must be greater than 0
         if ($amount_paid <= 0) {
-            error_log('Rental Gates: Invalid amount_paid calculated, using payment amount: ' . $payment['amount']);
+            Rental_Gates_Logger::warning('stripe', 'Invalid amount_paid calculated, using payment amount', array('payment_id' => $payment_id, 'fallback_amount' => $payment['amount']));
             $amount_paid = $payment['amount'];
         }
 
@@ -587,7 +587,7 @@ class Rental_Gates_Stripe
         );
 
         if ($result === false) {
-            error_log('Rental Gates: Failed to update payment ' . $payment_id . ': ' . $wpdb->last_error);
+            Rental_Gates_Logger::error('stripe', 'Failed to update payment', array('payment_id' => $payment_id, 'db_error' => $wpdb->last_error));
             return new WP_Error('db_error', __('Failed to update payment', 'rental-gates'));
         }
 
@@ -608,7 +608,7 @@ class Rental_Gates_Stripe
             try {
                 Rental_Gates_Invoice::create_from_payment($payment_id, 'receipt');
             } catch (Exception $e) {
-                error_log('Rental Gates: Failed to create receipt: ' . $e->getMessage());
+                Rental_Gates_Logger::error('stripe', 'Failed to create receipt', array('payment_id' => $payment_id, 'error' => $e->getMessage()));
             }
         }
 
@@ -616,7 +616,7 @@ class Rental_Gates_Stripe
         try {
             Rental_Gates_Email::send_payment_receipt($payment_id);
         } catch (Exception $e) {
-            error_log('Rental Gates: Failed to send receipt email: ' . $e->getMessage());
+            Rental_Gates_Logger::error('stripe', 'Failed to send receipt email', array('payment_id' => $payment_id, 'error' => $e->getMessage()));
         }
 
         // Create notification - update to use tenant portal URL
@@ -824,7 +824,7 @@ class Rental_Gates_Stripe
         $detach_result = self::detach_payment_method($method['stripe_payment_method_id']);
         if (is_wp_error($detach_result)) {
             // Log but don't fail - payment method might already be detached
-            error_log('Rental Gates: Failed to detach payment method: ' . $detach_result->get_error_message());
+            Rental_Gates_Logger::error('stripe', 'Failed to detach payment method', array('payment_method_id' => $method['stripe_payment_method_id'], 'error' => $detach_result->get_error_message()));
         }
 
         // Delete from database
@@ -1258,7 +1258,7 @@ class Rental_Gates_Stripe
         $result = $credits_manager->complete_purchase($org_id, $credits, $session['payment_intent']);
 
         if ($result) {
-            error_log("Rental Gates: AI credit purchase completed - {$credits} credits for org {$org_id}, session {$session_id}");
+            Rental_Gates_Logger::info('stripe', 'AI credit purchase completed', array('credits' => $credits, 'organization_id' => $org_id, 'session_id' => $session_id));
         }
 
         return $result;
@@ -1365,7 +1365,7 @@ class Rental_Gates_Stripe
 
             default:
                 // Log unhandled events
-                error_log('Rental Gates: Unhandled Stripe webhook event: ' . $event['type']);
+                Rental_Gates_Logger::warning('stripe', 'Unhandled webhook event', array('event_type' => $event['type']));
                 return true;
         }
     }
@@ -1386,7 +1386,7 @@ class Rental_Gates_Stripe
         ));
 
         if (!$local_subscription) {
-            error_log('Rental Gates: Subscription not found for Stripe ID: ' . $stripe_subscription_id);
+            Rental_Gates_Logger::warning('stripe', 'Subscription not found for webhook', array('stripe_subscription_id' => $stripe_subscription_id));
             return true;
         }
 
@@ -1425,7 +1425,7 @@ class Rental_Gates_Stripe
             array('%d')
         );
 
-        error_log('Rental Gates: Subscription updated via webhook: ' . $local_subscription->id . ' -> ' . $new_status);
+        Rental_Gates_Logger::info('stripe', 'Subscription updated via webhook', array('subscription_id' => $local_subscription->id, 'new_status' => $new_status));
 
         return true;
     }
@@ -1471,7 +1471,7 @@ class Rental_Gates_Stripe
             array('%d')
         );
 
-        error_log('Rental Gates: Subscription deleted via webhook, org ' . $local_subscription->organization_id . ' downgraded to free');
+        Rental_Gates_Logger::info('stripe', 'Subscription deleted via webhook, org downgraded to free', array('organization_id' => $local_subscription->organization_id));
 
         return true;
     }
@@ -1530,7 +1530,7 @@ class Rental_Gates_Stripe
                     $credits_manager = rg_ai_credits();
                     $cycle_end = date('Y-m-d H:i:s', $period['end']);
                     $credits_manager->refresh_subscription($local_subscription->organization_id, $plan_credits, $cycle_end);
-                    error_log("Rental Gates: Granted {$plan_credits} AI credits on renewal for org {$local_subscription->organization_id}");
+                    Rental_Gates_Logger::info('stripe', 'Granted AI credits on renewal', array('credits' => $plan_credits, 'organization_id' => $local_subscription->organization_id));
                 }
 
                 // Fire renewal action
@@ -1560,7 +1560,7 @@ class Rental_Gates_Stripe
             );
         }
 
-        error_log('Rental Gates: Invoice paid via webhook for subscription: ' . $local_subscription->id);
+        Rental_Gates_Logger::info('stripe', 'Invoice paid via webhook', array('subscription_id' => $local_subscription->id));
 
         return true;
     }
@@ -1601,7 +1601,7 @@ class Rental_Gates_Stripe
             array('%d')
         );
 
-        error_log('Rental Gates: Invoice payment failed via webhook for subscription: ' . $local_subscription->id);
+        Rental_Gates_Logger::warning('stripe', 'Invoice payment failed via webhook', array('subscription_id' => $local_subscription->id));
 
         // TODO: Send email notification to organization owner
 
@@ -1625,7 +1625,7 @@ class Rental_Gates_Stripe
         $payment_id = $session['metadata']['payment_id'] ?? null;
 
         if (!$payment_id) {
-            error_log('Rental Gates: No payment_id in checkout session ' . $session['id']);
+            Rental_Gates_Logger::warning('stripe', 'No payment_id in checkout session', array('session_id' => $session['id']));
             return false;
         }
 
@@ -1636,13 +1636,13 @@ class Rental_Gates_Stripe
         ), ARRAY_A);
 
         if (!$payment) {
-            error_log('Rental Gates: Payment not found: ' . $payment_id);
+            Rental_Gates_Logger::error('stripe', 'Payment not found', array('payment_id' => $payment_id));
             return false;
         }
 
         // Skip if already succeeded (avoid duplicate processing)
         if ($payment['status'] === 'succeeded') {
-            error_log('Rental Gates: Payment already succeeded: ' . $payment_id);
+            Rental_Gates_Logger::debug('stripe', 'Payment already succeeded, skipping', array('payment_id' => $payment_id));
             return true;
         }
 
@@ -1754,7 +1754,7 @@ class Rental_Gates_Stripe
                 }
             }
 
-            error_log('Rental Gates: Payment ' . $payment_id . ' marked as succeeded via webhook');
+            Rental_Gates_Logger::info('stripe', 'Payment marked as succeeded via webhook', array('payment_id' => $payment_id));
         } elseif ($session['payment_status'] === 'unpaid') {
             // Payment is pending (async payment method like ACH)
             $wpdb->update(

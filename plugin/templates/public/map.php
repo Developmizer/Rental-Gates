@@ -1764,7 +1764,7 @@ foreach ($buildings as $b) {
             // Continue without clustering - markers will be added directly
         }
     // Data
-    const buildings = <?php echo wp_json_encode($buildings_data); ?>;
+    const buildings = <?php echo Rental_Gates_Security::json_for_script($buildings_data); ?>;
     let filteredBuildings = [...buildings];
     let markers = {};
     let activeMarkerId = null;

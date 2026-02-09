@@ -467,7 +467,7 @@ $can_apply = in_array($unit['availability'], array('available', 'coming_soon'));
     
     <?php if (count($gallery) > 1): ?>
     <script>
-    const images = <?php echo wp_json_encode($gallery); ?>;
+    const images = <?php echo Rental_Gates_Security::json_for_script($gallery); ?>;
     let currentIndex = 0;
     
     function showImage(index) {

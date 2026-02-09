@@ -949,7 +949,7 @@ document.querySelectorAll('.rg-amenity-item').forEach(function(item) {
 });
 
 // Gallery handling - uses WordPress media library
-let galleryData = <?php echo wp_json_encode($normalized_gallery); ?>;
+let galleryData = <?php echo Rental_Gates_Security::json_for_script($normalized_gallery); ?>;
 
 // Initialize Media Library gallery button
 document.getElementById('add-gallery-images').addEventListener('click', function() {
@@ -981,14 +981,16 @@ function updateGalleryDisplay() {
         const item = document.createElement('div');
         item.className = 'rg-gallery-item';
         item.setAttribute('data-index', index);
-        item.innerHTML = `
-            <img src="${url}" alt="">
-            <button type="button" class="rg-gallery-item-remove" onclick="removeGalleryImage(${index})">
-                <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                </svg>
-            </button>
-        `;
+        var img = document.createElement('img');
+        img.setAttribute('src', url);
+        img.setAttribute('alt', '');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'rg-gallery-item-remove';
+        btn.setAttribute('onclick', 'removeGalleryImage(' + parseInt(index, 10) + ')');
+        btn.innerHTML = '<svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>';
+        item.appendChild(img);
+        item.appendChild(btn);
         grid.insertBefore(item, addButton);
     });
     

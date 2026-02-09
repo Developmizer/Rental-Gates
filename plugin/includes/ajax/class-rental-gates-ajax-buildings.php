@@ -58,7 +58,7 @@ class Rental_Gates_Ajax_Buildings {
         if (class_exists('Rental_Gates_Image_Optimizer')) {
             $optimized = Rental_Gates_Image_Optimizer::optimize_attachment($attachment_id);
             if (is_wp_error($optimized)) {
-                error_log('Rental Gates: Image optimization failed: ' . $optimized->get_error_message());
+                Rental_Gates_Logger::warning('buildings', 'Image optimization failed', array('attachment_id' => $attachment_id, 'error' => $optimized->get_error_message()));
             }
         }
 

@@ -9,7 +9,23 @@ if (!defined('ABSPATH')) {
 }
 
 class Rental_Gates_Security {
-    
+
+    /**
+     * JSON-encode data for safe embedding inside &lt;script&gt; tags.
+     *
+     * Applies JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+     * to prevent </script> breakout and other injection vectors.
+     *
+     * Usage in templates:
+     *   const data = <?php echo Rental_Gates_Security::json_for_script($data); ?>;
+     *
+     * @param mixed $data  Value to encode.
+     * @return string|false JSON string safe for script blocks.
+     */
+    public static function json_for_script($data) {
+        return wp_json_encode($data, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+    }
+
     /**
      * Verify REST API nonce
      */
@@ -472,6 +488,7 @@ class Rental_Gates_Security {
             try {
                 $org_id = Rental_Gates_Roles::get_organization_id();
             } catch (Exception $e) {
+                Rental_Gates_Logger::warning('security', 'Failed to get organization ID', array('error' => $e->getMessage()));
                 $org_id = null;
             }
         }

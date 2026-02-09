@@ -310,11 +310,10 @@ class Rental_Gates_Webhook_Handler
         );
 
         // Log for debugging
-        error_log(sprintf(
-            'Rental Gates Webhook - Subscription updated: stripe_id=%s, status=%s, billing_cycle=%s',
-            $subscription->id,
-            $subscription->status,
-            $billing_cycle ?? 'not_determined'
+        Rental_Gates_Logger::info('webhook', 'Subscription updated', array(
+            'stripe_subscription_id' => $subscription->id,
+            'status' => $subscription->status,
+            'billing_cycle' => $billing_cycle ?? 'not_determined',
         ));
     }
 

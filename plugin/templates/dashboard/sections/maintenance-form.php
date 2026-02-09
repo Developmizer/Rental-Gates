@@ -300,7 +300,7 @@ $page_title = $is_edit ? __('Edit Work Order', 'rental-gates') : __('New Work Or
 </div>
 
 <script>
-const unitsByBuilding = <?php echo wp_json_encode($units_by_building); ?>;
+const unitsByBuilding = <?php echo Rental_Gates_Security::json_for_script($units_by_building); ?>;
 const preselectUnit = <?php echo $preselect_unit; ?>;
 
 document.addEventListener('DOMContentLoaded', function() {

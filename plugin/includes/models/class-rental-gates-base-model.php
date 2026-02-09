@@ -293,6 +293,10 @@ abstract class Rental_Gates_Base_Model {
             return $result;
         } catch (Exception $e) {
             $wpdb->query('ROLLBACK');
+            Rental_Gates_Logger::error('model', 'Transaction failed', array(
+                'error' => $e->getMessage(),
+                'class' => static::class,
+            ));
             return new WP_Error('transaction_failed', $e->getMessage());
         }
     }

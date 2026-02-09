@@ -56,6 +56,9 @@ class Rental_Gates_REST_API
         $this->register_ai_routes();
         $this->register_test_routes();
         $this->register_webhook_routes();
+
+        // Health check (self-contained registration)
+        Rental_Gates_Health::register_routes();
     }
 
     // ==========================================

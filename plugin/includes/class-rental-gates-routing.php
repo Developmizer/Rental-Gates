@@ -251,7 +251,7 @@ class Rental_Gates_Routing {
                         $organization = Rental_Gates_Organization::get($org_id);
                     }
                 } catch (Exception $e) {
-                    error_log('Rental Gates: Error getting organization: ' . $e->getMessage());
+                    Rental_Gates_Logger::error('routing', 'Failed to get organization', array('exception' => $e->getMessage()));
                     $organization = null;
                 }
             }
@@ -266,12 +266,12 @@ class Rental_Gates_Routing {
                 ob_end_flush();
             } catch (Exception $e) {
                 ob_end_clean();
-                error_log('Rental Gates: Template error: ' . $e->getMessage());
+                Rental_Gates_Logger::error('routing', 'Template rendering failed', array('template' => $template, 'exception' => $e->getMessage()));
                 wp_die('Error loading template: ' . esc_html($e->getMessage()));
             }
             exit;
         } else {
-            error_log('Rental Gates: Template not found: ' . $template . ' (tried: ' . $template_path . ')');
+            Rental_Gates_Logger::error('routing', 'Template not found', array('template' => $template, 'path' => $template_path));
             wp_die(__('Template not found: ', 'rental-gates') . esc_html($template));
         }
     }

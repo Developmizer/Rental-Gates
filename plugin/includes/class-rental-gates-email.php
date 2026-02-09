@@ -88,7 +88,7 @@ class Rental_Gates_Email {
     public static function send($to, $template, $data = array(), $attachments = array()) {
         // Validate email address
         if (empty($to) || !is_email($to)) {
-            error_log('Rental Gates Email: Invalid email address: ' . $to);
+            Rental_Gates_Logger::warning('email', 'Invalid email address', array('to' => $to));
             return new WP_Error('invalid_email', __('Invalid email address', 'rental-gates'));
         }
         
@@ -96,7 +96,7 @@ class Rental_Gates_Email {
         $content = self::render_template($template, $data);
         
         if (!$content) {
-            error_log('Rental Gates Email: Template not found or empty: ' . $template);
+            Rental_Gates_Logger::error('email', 'Template not found or empty', array('template' => $template));
             return new WP_Error('template_not_found', __('Email template not found', 'rental-gates'));
         }
         
@@ -105,7 +105,7 @@ class Rental_Gates_Email {
         
         // Validate from email
         if (empty($from_email) || !is_email($from_email)) {
-            error_log('Rental Gates Email: Invalid from email address: ' . $from_email);
+            Rental_Gates_Logger::warning('email', 'Invalid from email address', array('email' => $from_email));
             $from_email = get_option('admin_email');
         }
         
@@ -118,7 +118,7 @@ class Rental_Gates_Email {
             $headers[] = "Reply-To: {$data['reply_to']}";
         }
         
-        error_log('Rental Gates Email: Sending email to: ' . $to . ', template: ' . $template . ', subject: ' . $subject);
+        Rental_Gates_Logger::debug('email', 'Sending email', array('to' => $to, 'template' => $template, 'subject' => $subject));
         
         $sent = wp_mail($to, $subject, $content, $headers, $attachments);
         
@@ -126,11 +126,11 @@ class Rental_Gates_Email {
         try {
             self::log_email($to, $template, $subject, $sent);
         } catch (Exception $e) {
-            error_log('Rental Gates Email: Failed to log email: ' . $e->getMessage());
+            Rental_Gates_Logger::warning('email', 'Failed to log email', array('error' => $e->getMessage()));
         }
         
         if (!$sent) {
-            error_log('Rental Gates Email: wp_mail returned false for: ' . $to);
+            Rental_Gates_Logger::error('email', 'wp_mail returned false', array('to' => $to));
         }
         
         return $sent;
@@ -1037,7 +1037,7 @@ class Rental_Gates_Email {
         ), ARRAY_A);
         
         if (!$org) {
-            error_log('Rental Gates Email: Organization not found for org_id: ' . $org_id);
+            Rental_Gates_Logger::error('email', 'Organization not found', array('organization_id' => $org_id));
             return false;
         }
         
@@ -1068,7 +1068,7 @@ class Rental_Gates_Email {
         }
         
         if (empty($user_email)) {
-            error_log('Rental Gates Email: No email found for org_id: ' . $org_id . ', owner_id: ' . ($org['owner_id'] ?? 'NULL'));
+            Rental_Gates_Logger::error('email', 'No email found for subscription confirmation', array('organization_id' => $org_id, 'owner_id' => $org['owner_id'] ?? null));
             return false;
         }
         
@@ -1105,11 +1105,11 @@ class Rental_Gates_Email {
         ));
         
         if (is_wp_error($result)) {
-            error_log('Rental Gates Email: Failed to send subscription confirmation: ' . $result->get_error_message());
+            Rental_Gates_Logger::error('email', 'Failed to send subscription confirmation', array('error' => $result->get_error_message()));
         } elseif ($result === false) {
-            error_log('Rental Gates Email: Subscription confirmation email returned false for: ' . $user_email);
+            Rental_Gates_Logger::error('email', 'Subscription confirmation email returned false', array('email' => $user_email));
         } else {
-            error_log('Rental Gates Email: Subscription confirmation email sent successfully to: ' . $user_email);
+            Rental_Gates_Logger::info('email', 'Subscription confirmation email sent', array('email' => $user_email));
         }
         
         return $result;
