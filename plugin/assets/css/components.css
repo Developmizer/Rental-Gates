@@ -45,6 +45,24 @@
   padding: var(--rg-space-5) var(--rg-space-6);
 }
 
+.rg-card-body.flush {
+  padding: 0;
+}
+
+.rg-card-body.flush .rg-list-item:first-child {
+  padding-top: var(--rg-space-3);
+}
+
+.rg-card-body.flush .rg-list-item:last-child {
+  padding-bottom: var(--rg-space-3);
+}
+
+.rg-card-body.flush .rg-empty-state {
+  margin: var(--rg-space-5) var(--rg-space-6);
+  border: none;
+  background: transparent;
+}
+
 .rg-card-footer {
   display: flex;
   align-items: center;
@@ -941,22 +959,79 @@
 
 .rg-alert-banner {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--rg-space-3);
   padding: var(--rg-space-3) var(--rg-space-4);
-  border-radius: var(--rg-radius);
+  border-radius: var(--rg-radius-lg);
   font-size: var(--rg-font-sm);
   font-weight: 500;
   background: var(--rg-warning-light);
-  color: var(--rg-warning);
+  color: hsl(32 81% 29%);
   border: 1px solid hsl(38 92% 50% / 0.2);
-  margin-bottom: var(--rg-space-5);
+  margin-bottom: var(--rg-space-4);
 }
 
 .rg-alert-banner.danger {
   background: var(--rg-danger-light);
-  color: var(--rg-danger);
+  color: hsl(0 72% 38%);
   border-color: hsl(0 72% 51% / 0.2);
+}
+
+.rg-alert-banner.info {
+  background: var(--rg-info-light);
+  color: hsl(199 89% 30%);
+  border-color: hsl(199 89% 48% / 0.2);
+}
+
+.rg-alert-banner.success {
+  background: var(--rg-success-light);
+  color: hsl(160 84% 25%);
+  border-color: hsl(160 84% 39% / 0.2);
+}
+
+.rg-alert-banner svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.rg-alert-banner span {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.rg-alert-banner strong {
+  font-weight: 700;
+}
+
+.rg-alert-banner a {
+  flex-shrink: 0;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
+  padding: 2px var(--rg-space-2);
+  border-radius: var(--rg-radius-sm);
+  transition: all var(--rg-transition);
+}
+
+.rg-alert-banner a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  background: hsl(38 92% 50% / 0.1);
+}
+
+.rg-alert-banner.danger a:hover {
+  background: hsl(0 72% 51% / 0.1);
+}
+
+.rg-alert-banner.info a:hover {
+  background: hsl(199 89% 48% / 0.1);
+}
+
+.rg-alert-banner.success a:hover {
+  background: hsl(160 84% 39% / 0.1);
 }
 
 
@@ -991,9 +1066,16 @@
 }
 
 .rg-list-item-title {
+  display: flex;
+  align-items: center;
+  gap: var(--rg-space-2);
   font-size: var(--rg-font-sm);
   font-weight: 500;
   color: var(--rg-gray-900);
+  min-width: 0;
+}
+
+.rg-list-item-title a {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2943,4 +3025,67 @@
     flex-direction: column;
     align-items: stretch;
   }
+
+  .rg-portfolio-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* ==========================================================================
+   36. PORTFOLIO SUMMARY
+   ========================================================================== */
+
+.rg-portfolio-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--rg-space-6);
+  text-align: center;
+}
+
+.rg-portfolio-stat-value {
+  font-size: var(--rg-font-2xl);
+  font-weight: 700;
+  color: var(--rg-gray-900);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+}
+
+.rg-portfolio-stat-value.success {
+  color: var(--rg-success);
+}
+
+.rg-portfolio-stat-label {
+  font-size: var(--rg-font-sm);
+  color: var(--rg-muted-fg);
+  font-weight: 500;
+  margin-top: var(--rg-space-1);
+}
+
+
+/* ==========================================================================
+   37. CHART EMPTY STATE
+   ========================================================================== */
+
+.rg-chart-container:empty::after,
+.rg-chart-container canvas:only-child[width="0"]::after {
+  content: '';
+}
+
+.rg-chart-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--rg-gray-300);
+  font-size: var(--rg-font-sm);
+  gap: var(--rg-space-2);
+}
+
+.rg-chart-placeholder svg {
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
 }

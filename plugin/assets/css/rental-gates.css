@@ -473,6 +473,7 @@
 .rg-mb-6 { margin-bottom: var(--rg-space-6); }
 .rg-gap-4 { gap: var(--rg-space-4); }
 .rg-gap-6 { gap: var(--rg-space-6); }
+.rg-section-gap { margin-bottom: var(--rg-space-6); }
 
 /* === 6. Responsive ======================================================== */
 @media (max-width: 1280px) {
