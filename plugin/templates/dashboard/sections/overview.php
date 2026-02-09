@@ -60,96 +60,11 @@ $priority_colors = array(
 );
 ?>
 
+<!-- Section spacing -->
 <style>
-    .rg-dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 24px; }
-    
-    .rg-metric-card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid var(--gray-200); position: relative; overflow: hidden; }
-    .rg-metric-card.highlight { border-color: #3b82f6; background: linear-gradient(135deg, #eff6ff 0%, #fff 100%); }
-    .rg-metric-card.success { border-color: #10b981; background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%); }
-    .rg-metric-card.warning { border-color: #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #fff 100%); }
-    .rg-metric-card.danger { border-color: #ef4444; background: linear-gradient(135deg, #fef2f2 0%, #fff 100%); }
-    
-    .rg-metric-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-    .rg-metric-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-    .rg-metric-icon.blue { background: #dbeafe; color: #2563eb; }
-    .rg-metric-icon.green { background: #d1fae5; color: #059669; }
-    .rg-metric-icon.yellow { background: #fef3c7; color: #d97706; }
-    .rg-metric-icon.red { background: #fee2e2; color: #dc2626; }
-    .rg-metric-icon.purple { background: #ede9fe; color: #7c3aed; }
-    
-    .rg-metric-value { font-size: 32px; font-weight: 700; color: var(--gray-900); line-height: 1; }
-    .rg-metric-value.success { color: #059669; }
-    .rg-metric-value.warning { color: #d97706; }
-    .rg-metric-value.danger { color: #dc2626; }
-    .rg-metric-label { font-size: 14px; color: var(--gray-500); margin-top: 4px; }
-    .rg-metric-trend { font-size: 12px; margin-top: 8px; display: flex; align-items: center; gap: 4px; }
-    .rg-metric-trend.up { color: #059669; }
-    .rg-metric-trend.down { color: #dc2626; }
-    
-    .rg-two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px; }
-    .rg-three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px; }
-    
-    .rg-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; }
-    .rg-card-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--gray-100); }
-    .rg-card-title { font-size: 16px; font-weight: 600; color: var(--gray-900); margin: 0; }
-    .rg-card-link { font-size: 13px; color: #3b82f6; text-decoration: none; font-weight: 500; }
-    .rg-card-link:hover { text-decoration: underline; }
-    .rg-card-body { padding: 16px 20px; }
-    
-    .rg-chart-container { height: 220px; position: relative; }
-    
-    .rg-list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
-    .rg-list-item:last-child { border-bottom: none; }
-    .rg-list-item-main { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
-    .rg-list-item-title { font-weight: 500; color: var(--gray-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .rg-list-item-title a { color: inherit; text-decoration: none; }
-    .rg-list-item-title a:hover { color: #3b82f6; }
-    .rg-list-item-meta { font-size: 13px; color: var(--gray-500); }
-    .rg-list-item-badge { flex-shrink: 0; margin-left: 12px; }
-    
-    .rg-badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
-    .rg-badge.red { background: #fee2e2; color: #dc2626; }
-    .rg-badge.yellow { background: #fef3c7; color: #d97706; }
-    .rg-badge.blue { background: #dbeafe; color: #2563eb; }
-    .rg-badge.green { background: #d1fae5; color: #059669; }
-    .rg-badge.purple { background: #ede9fe; color: #7c3aed; }
-    .rg-badge.gray { background: #f3f4f6; color: #6b7280; }
-    
-    .rg-priority-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-    
-    .rg-quick-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .rg-quick-action { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px; background: var(--gray-50); border-radius: 10px; text-decoration: none; color: var(--gray-700); transition: all 0.2s; }
-    .rg-quick-action:hover { background: #eff6ff; color: #2563eb; }
-    .rg-quick-action svg { width: 24px; height: 24px; }
-    .rg-quick-action span { font-size: 13px; font-weight: 500; }
-    
-    .rg-empty-state { text-align: center; padding: 30px 20px; color: var(--gray-400); }
-    .rg-empty-state svg { width: 40px; height: 40px; margin-bottom: 8px; opacity: 0.5; }
-    
-    .rg-donut-chart { display: flex; align-items: center; gap: 20px; }
-    .rg-donut-svg { width: 120px; height: 120px; }
-    .rg-donut-legend { display: flex; flex-direction: column; gap: 8px; }
-    .rg-legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
-    .rg-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .rg-legend-value { font-weight: 600; color: var(--gray-900); margin-left: auto; }
-    
-    .rg-alert-banner { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-    .rg-alert-banner.danger { background: #fee2e2; border-color: #fca5a5; }
-    .rg-alert-banner svg { width: 20px; height: 20px; flex-shrink: 0; }
-    .rg-alert-banner.danger svg { color: #dc2626; }
-    .rg-alert-banner span { font-size: 14px; color: var(--gray-700); }
-    .rg-alert-banner a { color: #2563eb; font-weight: 500; text-decoration: none; margin-left: auto; }
-    
-    @media (max-width: 1200px) {
-        .rg-dashboard-grid { grid-template-columns: repeat(2, 1fr); }
-        .rg-two-col { grid-template-columns: 1fr; }
-        .rg-three-col { grid-template-columns: 1fr; }
-    }
-    
-    @media (max-width: 768px) {
-        .rg-dashboard-grid { grid-template-columns: 1fr; }
-        .rg-quick-actions { grid-template-columns: repeat(2, 1fr); }
-    }
+    .rg-dashboard-grid { margin-bottom: var(--rg-space-6); }
+    .rg-two-col { margin-bottom: var(--rg-space-6); }
+    .rg-three-col { margin-bottom: var(--rg-space-6); }
 </style>
 
 <!-- Getting Started (show if no buildings) - at the top -->

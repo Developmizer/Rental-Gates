@@ -293,7 +293,7 @@
   border-radius: var(--rg-radius-sm);
   text-decoration: none;
   transition: all var(--rg-transition);
-  white-space: nowrap; overflow: hidden;
+  white-space: nowrap;
   position: relative;
 }
 .rg-nav-link:hover {

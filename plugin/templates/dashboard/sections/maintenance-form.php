@@ -60,66 +60,6 @@ foreach ($buildings as $building) {
 $page_title = $is_edit ? __('Edit Work Order', 'rental-gates') : __('New Work Order', 'rental-gates');
 ?>
 
-<style>
-    .rg-form-container { max-width: 700px; }
-    .rg-back-link { display: flex; align-items: center; gap: 6px; color: var(--gray-500); text-decoration: none; font-size: 14px; margin-bottom: 16px; }
-    .rg-back-link:hover { color: var(--primary); }
-    .rg-form-header { margin-bottom: 24px; }
-    .rg-form-header h1 { font-size: 24px; font-weight: 700; margin: 0; }
-    
-    .rg-form-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; margin-bottom: 24px; }
-    .rg-form-section { padding: 24px; border-bottom: 1px solid var(--gray-100); }
-    .rg-form-section:last-child { border-bottom: none; }
-    .rg-form-section-title { font-size: 16px; font-weight: 600; margin-bottom: 20px; color: var(--gray-900); }
-    
-    .rg-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-    .rg-form-row:last-child { margin-bottom: 0; }
-    .rg-form-row.full { grid-template-columns: 1fr; }
-    
-    .rg-form-group { display: flex; flex-direction: column; gap: 6px; }
-    .rg-form-label { font-size: 14px; font-weight: 500; color: var(--gray-700); }
-    .rg-form-label .required { color: #ef4444; }
-    
-    .rg-form-input, .rg-form-select, .rg-form-textarea { 
-        width: 100%; padding: 10px 14px; border: 1px solid var(--gray-300); border-radius: 8px; 
-        font-size: 14px; font-family: inherit; transition: border-color 0.2s, box-shadow 0.2s;
-        background-color: #fff;
-    }
-    .rg-form-input:focus, .rg-form-select:focus, .rg-form-textarea:focus { 
-        outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); 
-    }
-    .rg-form-textarea { min-height: 100px; resize: vertical; }
-    .rg-form-hint { font-size: 12px; color: var(--gray-500); }
-    
-    .rg-form-actions { 
-        display: flex; justify-content: flex-end; gap: 12px; padding: 20px 24px; 
-        background: var(--gray-50); border-top: 1px solid var(--gray-100); border-radius: 0 0 12px 12px; 
-    }
-    
-    .rg-priority-options { display: flex; gap: 12px; flex-wrap: wrap; }
-    .rg-priority-option { flex: 1; min-width: 120px; }
-    .rg-priority-option input { display: none; }
-    .rg-priority-option label { 
-        display: flex; flex-direction: column; align-items: center; padding: 16px; 
-        border: 2px solid var(--gray-200); border-radius: 10px; cursor: pointer; 
-        transition: all 0.2s; text-align: center;
-    }
-    .rg-priority-option label:hover { border-color: var(--gray-300); }
-    .rg-priority-option input:checked + label { border-color: var(--primary); background: rgba(99, 102, 241, 0.05); }
-    .rg-priority-option label span { font-weight: 600; margin-bottom: 4px; }
-    .rg-priority-option label small { font-size: 11px; color: var(--gray-500); }
-    .rg-priority-option.emergency input:checked + label { border-color: #dc2626; background: #fef2f2; }
-    .rg-priority-option.high input:checked + label { border-color: #f59e0b; background: #fffbeb; }
-    
-    .rg-alert { padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-    .rg-alert-error { background: #fee2e2; color: #991b1b; }
-    
-    .rg-checkbox-label { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-    .rg-checkbox-label input { width: 18px; height: 18px; }
-    
-    @media (max-width: 768px) { .rg-form-row { grid-template-columns: 1fr; } .rg-priority-options { flex-direction: column; } }
-</style>
-
 <a href="<?php echo home_url('/rental-gates/dashboard/maintenance'); ?>" class="rg-back-link">
     <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
     <?php _e('Back to Maintenance', 'rental-gates'); ?>
