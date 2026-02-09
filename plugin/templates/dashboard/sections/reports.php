@@ -411,7 +411,7 @@ $wo_status_labels = array(
 
         <div class="rg-export-actions">
             <button onclick="exportReport('csv')" class="rg-btn-export">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                     <polyline points="7 10 12 15 17 10" />
                     <line x1="12" y1="15" x2="12" y2="3" />
@@ -419,7 +419,7 @@ $wo_status_labels = array(
                 CSV
             </button>
             <button onclick="exportReport('pdf')" class="rg-btn-export">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                     <polyline points="14 2 14 8 20 8" />
                     <line x1="16" y1="13" x2="8" y2="13" />
@@ -433,16 +433,16 @@ $wo_status_labels = array(
 </div>
 
 <!-- Report Tabs -->
-<div class="rg-report-tabs">
-    <a href="<?php echo add_query_arg('tab', 'financial'); ?>"
+<div class="rg-report-tabs" role="tablist" aria-label="<?php esc_attr_e('Report sections', 'rental-gates'); ?>">
+    <a href="<?php echo add_query_arg('tab', 'financial'); ?>" role="tab" aria-selected="<?php echo $report_tab === 'financial' ? 'true' : 'false'; ?>"
         class="rg-report-tab <?php echo $report_tab === 'financial' ? 'active' : ''; ?>">
         <?php _e('Financial', 'rental-gates'); ?>
     </a>
-    <a href="<?php echo add_query_arg('tab', 'occupancy'); ?>"
+    <a href="<?php echo add_query_arg('tab', 'occupancy'); ?>" role="tab" aria-selected="<?php echo $report_tab === 'occupancy' ? 'true' : 'false'; ?>"
         class="rg-report-tab <?php echo $report_tab === 'occupancy' ? 'active' : ''; ?>">
         <?php _e('Occupancy', 'rental-gates'); ?>
     </a>
-    <a href="<?php echo add_query_arg('tab', 'maintenance'); ?>"
+    <a href="<?php echo add_query_arg('tab', 'maintenance'); ?>" role="tab" aria-selected="<?php echo $report_tab === 'maintenance' ? 'true' : 'false'; ?>"
         class="rg-report-tab <?php echo $report_tab === 'maintenance' ? 'active' : ''; ?>">
         <?php _e('Maintenance', 'rental-gates'); ?>
     </a>
@@ -497,7 +497,7 @@ $wo_status_labels = array(
             <div class="rg-chart-card-header">
                 <h3 class="rg-chart-title"><?php _e('Revenue Trend (12 Months)', 'rental-gates'); ?></h3>
                 <button onclick="exportChart('revenueTrendChart', 'revenue-trend')" class="rg-btn-export sm">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
                         <line x1="12" y1="15" x2="12" y2="3" />
@@ -514,7 +514,7 @@ $wo_status_labels = array(
             <div class="rg-chart-card-header">
                 <h3 class="rg-chart-title"><?php _e('Revenue by Type', 'rental-gates'); ?></h3>
                 <button onclick="exportChart('revenueByTypeChart', 'revenue-by-type')" class="rg-btn-export sm">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
                         <line x1="12" y1="15" x2="12" y2="3" />
@@ -534,7 +534,7 @@ $wo_status_labels = array(
             <h3 class="rg-chart-title"><?php _e('Revenue by Building', 'rental-gates'); ?></h3>
             <div class="rg-btn-group">
                 <button onclick="exportTable('revenueByBuildingTable')" class="rg-btn-export sm">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
                         <line x1="12" y1="15" x2="12" y2="3" />
@@ -544,7 +544,7 @@ $wo_status_labels = array(
             </div>
         </div>
         <?php if (!empty($financial_analytics['revenue_by_building'])): ?>
-        <div class="rg-chart-container h-300" style="margin-bottom: 20px;">
+        <div class="rg-chart-container h-300 rg-mb-5">
             <canvas id="revenueByBuildingChart"></canvas>
         </div>
         <?php endif; ?>
@@ -876,7 +876,7 @@ $wo_status_labels = array(
             <div class="rg-chart-card-header">
                 <h3 class="rg-chart-title"><?php _e('Units by Status', 'rental-gates'); ?></h3>
                 <button onclick="exportChart('unitsByStatusChart', 'units-by-status')" class="rg-btn-export sm">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
                         <line x1="12" y1="15" x2="12" y2="3" />
@@ -1080,7 +1080,7 @@ $wo_status_labels = array(
             <div class="rg-chart-card-header">
                 <h3 class="rg-chart-title"><?php _e('By Status', 'rental-gates'); ?></h3>
                 <button onclick="exportChart('woStatusChart', 'work-orders-by-status')" class="rg-btn-export sm">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
                         <line x1="12" y1="15" x2="12" y2="3" />

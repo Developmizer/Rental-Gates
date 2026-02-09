@@ -124,20 +124,20 @@ $method_labels = array(
     <h1><?php _e('Payments', 'rental-gates'); ?></h1>
     <div class="pm-header-actions">
         <button type="button" class="rg-btn rg-btn-primary" onclick="openRecordPaymentModal()">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path d="M12 5v14M5 12h14"/>
             </svg>
             <?php _e('Record Payment', 'rental-gates'); ?>
         </button>
         <button type="button" class="rg-btn rg-btn-secondary" onclick="openCreatePendingModal()">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
                 <line x1="1" y1="10" x2="23" y2="10"/>
             </svg>
             <?php _e('Create Charge', 'rental-gates'); ?>
         </button>
         <button type="button" class="rg-btn rg-btn-outline" onclick="openGenerateRentModal()">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
             </svg>
             <?php _e('Generate Rent', 'rental-gates'); ?>
@@ -172,18 +172,18 @@ $method_labels = array(
 <form method="get" class="pm-filters">
     <input type="hidden" name="section" value="payments">
     <div class="pm-search">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
         </svg>
         <input type="text" name="search" placeholder="<?php _e('Search tenant, unit, or payment #...', 'rental-gates'); ?>" value="<?php echo esc_attr($search); ?>">
     </div>
-    <select name="status" class="pm-select" onchange="this.form.submit()">
+    <select name="status" class="pm-select" aria-label="<?php esc_attr_e('Filter by status', 'rental-gates'); ?>" onchange="this.form.submit()">
         <option value=""><?php _e('All Status', 'rental-gates'); ?></option>
         <?php foreach ($status_config as $key => $cfg): ?>
             <option value="<?php echo $key; ?>" <?php selected($status_filter, $key); ?>><?php echo $cfg['label']; ?></option>
         <?php endforeach; ?>
     </select>
-    <select name="type" class="pm-select" onchange="this.form.submit()">
+    <select name="type" class="pm-select" aria-label="<?php esc_attr_e('Filter by type', 'rental-gates'); ?>" onchange="this.form.submit()">
         <option value=""><?php _e('All Types', 'rental-gates'); ?></option>
         <option value="rent" <?php selected($type_filter, 'rent'); ?>><?php _e('Rent', 'rental-gates'); ?></option>
         <option value="deposit" <?php selected($type_filter, 'deposit'); ?>><?php _e('Deposit', 'rental-gates'); ?></option>
@@ -198,7 +198,7 @@ $method_labels = array(
 <div class="pm-table-container">
     <?php if (empty($payments)): ?>
         <div class="pm-empty">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
                 <line x1="1" y1="10" x2="23" y2="10"/>
             </svg>
@@ -301,27 +301,27 @@ $method_labels = array(
                                 $internal_invoice = Rental_Gates_Invoice::get_by_payment($payment['id']);
                                 if ($internal_invoice): ?>
                                     <a href="<?php echo home_url('/rental-gates/dashboard/invoice?id=' . $internal_invoice['id']); ?>" title="<?php _e('View Receipt', 'rental-gates'); ?>">
-                                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                                             <polyline points="14 2 14 8 20 8"/>
                                         </svg>
                                     </a>
                                 <?php elseif ($receipt_url): ?>
                                     <a href="<?php echo esc_url($receipt_url); ?>" target="_blank" title="<?php _e('View Stripe Receipt', 'rental-gates'); ?>">
-                                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                                             <polyline points="14 2 14 8 20 8"/>
                                         </svg>
                                     </a>
                                 <?php elseif ($payment['status'] === 'succeeded'): ?>
                                     <button type="button" onclick="generateInvoice(<?php echo $payment['id']; ?>)" title="<?php _e('Generate Receipt', 'rental-gates'); ?>">
-                                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                             <path d="M12 5v14M5 12h14"/>
                                         </svg>
                                     </button>
                                 <?php endif; ?>
                                 <button type="button" onclick="openPaymentDetail(<?php echo $payment['id']; ?>)" title="<?php _e('View Details', 'rental-gates'); ?>">
-                                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                                         <circle cx="12" cy="12" r="3"/>
                                     </svg>
@@ -698,7 +698,7 @@ function openPaymentDetail(paymentId) {
     if (stripeDetails.receipt_url) {
         html += `<div class="pm-receipt-actions">
             <a href="${stripeDetails.receipt_url}" target="_blank" class="rg-btn rg-btn-secondary">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <svg aria-hidden="true" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                     <polyline points="14 2 14 8 20 8"/>
                 </svg>
@@ -740,16 +740,16 @@ document.getElementById('record-payment-form').addEventListener('submit', async 
         const result = await response.json();
         
         if (result.success) {
-            alert('<?php _e('Payment recorded successfully!', 'rental-gates'); ?>');
-            window.location.reload();
+            RentalGates.toast('<?php echo esc_js(__('Payment recorded successfully!', 'rental-gates')); ?>', 'success');
+            setTimeout(function() { window.location.reload(); }, 800);
         } else {
-            alert(result.data?.message || '<?php _e('Failed to record payment', 'rental-gates'); ?>');
+            RentalGates.toast(result.data?.message || '<?php echo esc_js(__('Failed to record payment', 'rental-gates')); ?>', 'error');
             btn.disabled = false;
             btn.innerHTML = originalText;
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('<?php _e('An error occurred', 'rental-gates'); ?>');
+        RentalGates.toast('<?php echo esc_js(__('An error occurred', 'rental-gates')); ?>', 'error');
         btn.disabled = false;
         btn.innerHTML = originalText;
     }
@@ -776,16 +776,16 @@ document.getElementById('create-pending-form').addEventListener('submit', async 
         const result = await response.json();
         
         if (result.success) {
-            alert('<?php _e('Pending charge created successfully! Tenant will see it in their portal.', 'rental-gates'); ?>');
-            window.location.reload();
+            RentalGates.toast('<?php echo esc_js(__('Pending charge created successfully!', 'rental-gates')); ?>', 'success');
+            setTimeout(function() { window.location.reload(); }, 800);
         } else {
-            alert(result.data?.message || '<?php _e('Failed to create charge', 'rental-gates'); ?>');
+            RentalGates.toast(result.data?.message || '<?php echo esc_js(__('Failed to create charge', 'rental-gates')); ?>', 'error');
             btn.disabled = false;
             btn.innerHTML = originalText;
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('<?php _e('An error occurred', 'rental-gates'); ?>');
+        RentalGates.toast('<?php echo esc_js(__('An error occurred', 'rental-gates')); ?>', 'error');
         btn.disabled = false;
         btn.innerHTML = originalText;
     }
@@ -812,16 +812,16 @@ document.getElementById('generate-rent-form').addEventListener('submit', async f
         const result = await response.json();
         
         if (result.success) {
-            alert(result.data?.message || '<?php _e('Rent charges generated!', 'rental-gates'); ?>');
-            window.location.reload();
+            RentalGates.toast(result.data?.message || '<?php echo esc_js(__('Rent charges generated!', 'rental-gates')); ?>', 'success');
+            setTimeout(function() { window.location.reload(); }, 800);
         } else {
-            alert(result.data?.message || '<?php _e('Failed to generate charges', 'rental-gates'); ?>');
+            RentalGates.toast(result.data?.message || '<?php echo esc_js(__('Failed to generate charges', 'rental-gates')); ?>', 'error');
             btn.disabled = false;
             btn.innerHTML = originalText;
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('<?php _e('An error occurred', 'rental-gates'); ?>');
+        RentalGates.toast('<?php echo esc_js(__('An error occurred', 'rental-gates')); ?>', 'error');
         btn.disabled = false;
         btn.innerHTML = originalText;
     }
@@ -923,6 +923,18 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
+// Focus trap for all payment modals
+document.querySelectorAll('.pm-modal-overlay').forEach(function(modal) {
+    modal.addEventListener('keydown', function(e) {
+        if (e.key !== 'Tab') return;
+        var focusable = this.querySelectorAll('button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (!focusable.length) return;
+        var first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+});
+
 // Generate Invoice/Receipt for a payment
 async function generateInvoice(paymentId) {
     if (!confirm('<?php _e('Generate a receipt for this payment?', 'rental-gates'); ?>')) {
@@ -947,11 +959,11 @@ async function generateInvoice(paymentId) {
             // Redirect to view the invoice
             window.location.href = '<?php echo home_url('/rental-gates/dashboard/invoice?id='); ?>' + result.data.invoice.id;
         } else {
-            alert(result.data?.message || '<?php _e('Failed to generate receipt', 'rental-gates'); ?>');
+            RentalGates.toast(result.data?.message || '<?php echo esc_js(__('Failed to generate receipt', 'rental-gates')); ?>', 'error');
         }
     } catch (error) {
         console.error('Error generating invoice:', error);
-        alert('<?php _e('An error occurred', 'rental-gates'); ?>');
+        RentalGates.toast('<?php echo esc_js(__('An error occurred', 'rental-gates')); ?>', 'error');
     }
 }
 </script>

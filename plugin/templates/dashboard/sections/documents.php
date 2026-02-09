@@ -59,7 +59,7 @@ if (!is_array($work_orders)) $work_orders = array();
 <div class="rg-documents-header">
     <h1><?php _e('Documents', 'rental-gates'); ?></h1>
     <button onclick="openUploadModal()" class="rg-btn rg-btn-primary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         <?php _e('Upload Document', 'rental-gates'); ?>
     </button>
 </div>
@@ -87,7 +87,7 @@ if (!is_array($work_orders)) $work_orders = array();
 <!-- Filters -->
 <form method="get" action="<?php echo esc_url(home_url('/rental-gates/dashboard/documents')); ?>" class="rg-filters-row">
     <div class="rg-search-box">
-        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <svg aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
         <input type="text" name="search" placeholder="<?php _e('Search documents...', 'rental-gates'); ?>" value="<?php echo esc_attr($search); ?>">
     </div>
     
@@ -111,7 +111,7 @@ if (!is_array($work_orders)) $work_orders = array();
 <!-- Documents Grid -->
 <?php if (empty($documents)): ?>
 <div class="rg-empty-state">
-    <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+    <svg aria-hidden="true" width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
     <h3><?php _e('No documents found', 'rental-gates'); ?></h3>
     <p><?php _e('Upload your first document to start organizing your files.', 'rental-gates'); ?></p>
     <button onclick="openUploadModal()" class="rg-btn rg-btn-primary"><?php _e('Upload Document', 'rental-gates'); ?></button>
@@ -129,7 +129,7 @@ if (!is_array($work_orders)) $work_orders = array();
             <?php if ($doc['is_image']): ?>
                 <img src="<?php echo esc_url($doc['file_url']); ?>" alt="<?php echo esc_attr($doc['title']); ?>">
             <?php else: ?>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <?php if ($preview_class === 'pdf'): ?>
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
                     <?php elseif ($preview_class === 'xls'): ?>
@@ -153,15 +153,15 @@ if (!is_array($work_orders)) $work_orders = array();
             </div>
             <div class="rg-doc-actions">
                 <a href="<?php echo esc_url($doc['file_url']); ?>" target="_blank" class="rg-doc-action">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                     <?php _e('View', 'rental-gates'); ?>
                 </a>
                 <a href="<?php echo esc_url($doc['file_url']); ?>" download class="rg-doc-action">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     <?php _e('Download', 'rental-gates'); ?>
                 </a>
-                <button onclick="deleteDocument(<?php echo $doc['id']; ?>)" class="rg-doc-action danger">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                <button onclick="deleteDocument(<?php echo $doc['id']; ?>, '<?php echo esc_js($doc['title']); ?>')" class="rg-doc-action danger" aria-label="<?php printf(esc_attr__('Delete %s', 'rental-gates'), esc_attr($doc['title'])); ?>">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                 </button>
             </div>
         </div>
@@ -171,18 +171,18 @@ if (!is_array($work_orders)) $work_orders = array();
 <?php endif; ?>
 
 <!-- Upload Modal -->
-<div class="rg-modal-overlay" id="uploadModal">
+<div class="rg-modal-overlay" id="uploadModal" role="dialog" aria-modal="true" aria-labelledby="upload-modal-title">
     <div class="rg-modal">
         <div class="rg-modal-header">
-            <h3 class="rg-modal-title"><?php _e('Upload Document', 'rental-gates'); ?></h3>
-            <button class="rg-modal-close" onclick="closeUploadModal()">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <h3 class="rg-modal-title" id="upload-modal-title"><?php _e('Upload Document', 'rental-gates'); ?></h3>
+            <button class="rg-modal-close" onclick="closeUploadModal()" aria-label="<?php esc_attr_e('Close', 'rental-gates'); ?>">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
         <form id="uploadForm" enctype="multipart/form-data">
             <div class="rg-modal-body">
-                <div class="rg-upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <div class="rg-upload-zone" id="uploadZone" role="button" tabindex="0" aria-label="<?php esc_attr_e('Click to upload or drag and drop files', 'rental-gates'); ?>" onclick="document.getElementById('fileInput').click()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();document.getElementById('fileInput').click();}"
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                     <h4><?php _e('Click to upload or drag and drop', 'rental-gates'); ?></h4>
                     <p><?php _e('PDF, Word, Excel, Images (Max 50MB)', 'rental-gates'); ?></p>
                     <input type="file" id="fileInput" name="document" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.webp,.txt,.csv">
@@ -190,34 +190,34 @@ if (!is_array($work_orders)) $work_orders = array();
                 
                 <div class="rg-file-preview" id="filePreview" style="display: none;">
                     <div class="rg-file-preview-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                     </div>
                     <div class="rg-file-preview-info">
                         <div class="rg-file-preview-name" id="fileName"></div>
                         <div class="rg-file-preview-size" id="fileSize"></div>
                     </div>
                     <button type="button" class="rg-file-preview-remove" onclick="clearFile()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </button>
                 </div>
                 
                 <div class="rg-form-row">
-                    <label><?php _e('Document Title', 'rental-gates'); ?></label>
+                    <label for="docTitle"><?php _e('Document Title', 'rental-gates'); ?></label>
                     <input type="text" name="title" id="docTitle" placeholder="<?php _e('Enter document title...', 'rental-gates'); ?>">
                 </div>
-                
+
                 <div class="rg-form-row-half">
                     <div class="rg-form-row">
-                        <label><?php _e('Document Type', 'rental-gates'); ?> *</label>
-                        <select name="document_type" required>
+                        <label for="docType"><?php _e('Document Type', 'rental-gates'); ?> <span aria-hidden="true">*</span></label>
+                        <select name="document_type" id="docType" required aria-required="true">
                             <?php foreach ($document_types as $key => $label): ?>
                                 <option value="<?php echo esc_attr($key); ?>"><?php echo esc_html($label); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="rg-form-row">
-                        <label><?php _e('Associate With', 'rental-gates'); ?> *</label>
-                        <select name="entity_type" id="entityType" required onchange="updateEntityOptions()">
+                        <label for="entityType"><?php _e('Associate With', 'rental-gates'); ?> <span aria-hidden="true">*</span></label>
+                        <select name="entity_type" id="entityType" required aria-required="true" onchange="updateEntityOptions()">
                             <option value=""><?php _e('Select type...', 'rental-gates'); ?></option>
                             <?php foreach ($entity_types as $key => $label): ?>
                                 <option value="<?php echo esc_attr($key); ?>"><?php echo esc_html($label); ?></option>
@@ -227,21 +227,21 @@ if (!is_array($work_orders)) $work_orders = array();
                 </div>
                 
                 <div class="rg-form-row">
-                    <label><?php _e('Select Item', 'rental-gates'); ?> *</label>
-                    <select name="entity_id" id="entityId" required>
+                    <label for="entityId"><?php _e('Select Item', 'rental-gates'); ?> <span aria-hidden="true">*</span></label>
+                    <select name="entity_id" id="entityId" required aria-required="true">
                         <option value=""><?php _e('First select a type above...', 'rental-gates'); ?></option>
                     </select>
                 </div>
                 
                 <div class="rg-form-row">
-                    <label><?php _e('Description (Optional)', 'rental-gates'); ?></label>
-                    <textarea name="description" rows="3" placeholder="<?php _e('Add any notes about this document...', 'rental-gates'); ?>"></textarea>
+                    <label for="docDescription"><?php _e('Description (Optional)', 'rental-gates'); ?></label>
+                    <textarea name="description" id="docDescription" rows="3" placeholder="<?php _e('Add any notes about this document...', 'rental-gates'); ?>"></textarea>
                 </div>
             </div>
             <div class="rg-modal-footer">
                 <button type="button" class="rg-btn rg-btn-secondary" onclick="closeUploadModal()"><?php _e('Cancel', 'rental-gates'); ?></button>
                 <button type="submit" class="rg-btn rg-btn-primary" id="uploadBtn" disabled>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                     <?php _e('Upload', 'rental-gates'); ?>
                 </button>
             </div>
@@ -285,7 +285,9 @@ const entityData = {
 };
 
 function openUploadModal() {
-    document.getElementById('uploadModal').classList.add('active');
+    const modal = document.getElementById('uploadModal');
+    modal.classList.add('active');
+    modal.querySelector('input, select, button').focus();
 }
 
 function closeUploadModal() {
@@ -293,6 +295,24 @@ function closeUploadModal() {
     document.getElementById('uploadForm').reset();
     clearFile();
 }
+
+// ESC key closes modal
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('uploadModal');
+        if (modal.classList.contains('active')) closeUploadModal();
+    }
+});
+
+// Focus trap inside modal
+document.getElementById('uploadModal').addEventListener('keydown', function(e) {
+    if (e.key !== 'Tab') return;
+    const focusable = this.querySelectorAll('button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
 
 function updateEntityOptions() {
     const type = document.getElementById('entityType').value;
@@ -385,12 +405,16 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
         if (data.success) {
             location.reload();
         } else {
-            alert(data.data?.message || '<?php echo esc_js(__('Upload failed', 'rental-gates')); ?>');
+            if (typeof RentalGates !== 'undefined' && RentalGates.toast) {
+                RentalGates.toast(data.data?.message || '<?php echo esc_js(__('Upload failed', 'rental-gates')); ?>', 'error');
+            }
             btn.disabled = false;
             btn.innerHTML = '<?php echo esc_js(__('Upload', 'rental-gates')); ?>';
         }
     } catch (error) {
-        alert('<?php echo esc_js(__('An error occurred', 'rental-gates')); ?>');
+        if (typeof RentalGates !== 'undefined' && RentalGates.toast) {
+            RentalGates.toast('<?php echo esc_js(__('An error occurred', 'rental-gates')); ?>', 'error');
+        }
         btn.disabled = false;
         btn.innerHTML = '<?php echo esc_js(__('Upload', 'rental-gates')); ?>';
     }

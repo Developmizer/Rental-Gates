@@ -79,9 +79,9 @@ $default_zoom = $building ? 16 : 12;
                 
                 <div class="rg-derived-address" id="derived-address-box">
                     <div class="rg-derived-address-icon <?php echo empty($building['derived_address']) ? 'pending' : ''; ?>" id="address-icon">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <svg aria-hidden="true" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
                     </div>
                     <div class="rg-derived-address-text">
@@ -172,7 +172,7 @@ $default_zoom = $building ? 16 : 12;
                     <label class="rg-amenity-item <?php echo in_array($amenity, $selected_amenities) ? 'selected' : ''; ?>">
                         <input type="checkbox" name="amenities[]" value="<?php echo esc_attr($amenity); ?>" <?php checked(in_array($amenity, $selected_amenities)); ?>>
                         <span class="rg-amenity-check">
-                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20">
+                            <svg aria-hidden="true" width="12" height="12" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                             </svg>
                         </span>
@@ -205,7 +205,7 @@ $default_zoom = $building ? 16 : 12;
                     <div class="rg-gallery-item" data-index="<?php echo count($normalized_gallery) - 1; ?>">
                         <img src="<?php echo esc_url($image_url); ?>" alt="">
                         <button type="button" class="rg-gallery-item-remove" onclick="removeGalleryImage(<?php echo count($normalized_gallery) - 1; ?>)">
-                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20">
+                            <svg aria-hidden="true" width="12" height="12" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
                             </svg>
                         </button>
@@ -213,10 +213,10 @@ $default_zoom = $building ? 16 : 12;
                     <?php endforeach; ?>
                     
                     <button type="button" class="rg-gallery-add" id="add-gallery-images">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        <svg aria-hidden="true" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
                         </svg>
-                        <span style="font-size: 12px; margin-top: 4px;"><?php _e('Add Photos', 'rental-gates'); ?></span>
+                        <span class="rg-gallery-add-label"><?php _e('Add Photos', 'rental-gates'); ?></span>
                     </button>
                 </div>
                 <input type="hidden" name="gallery" id="gallery-data" value="<?php echo esc_attr(wp_json_encode($normalized_gallery)); ?>">
@@ -546,7 +546,7 @@ function updateGalleryDisplay() {
         btn.type = 'button';
         btn.className = 'rg-gallery-item-remove';
         btn.setAttribute('onclick', 'removeGalleryImage(' + parseInt(index, 10) + ')');
-        btn.innerHTML = '<svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>';
+        btn.innerHTML = '<svg aria-hidden="true" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>';
         item.appendChild(img);
         item.appendChild(btn);
         grid.insertBefore(item, addButton);
@@ -567,17 +567,17 @@ document.getElementById('building-form').addEventListener('submit', function(e) 
     
     // Validation
     if (!lat || !lng) {
-        alert('<?php _e('Please place a pin on the map to set the building location.', 'rental-gates'); ?>');
+        RentalGates.toast('<?php echo esc_js(__('Please place a pin on the map to set the building location.', 'rental-gates')); ?>', 'warning');
         return;
     }
     
     if (!address) {
-        alert('<?php _e('Please wait for the address to be derived from the map.', 'rental-gates'); ?>');
+        RentalGates.toast('<?php echo esc_js(__('Please wait for the address to be derived from the map.', 'rental-gates')); ?>', 'warning');
         return;
     }
     
     if (!name.trim()) {
-        alert('<?php _e('Please enter a building name.', 'rental-gates'); ?>');
+        RentalGates.toast('<?php echo esc_js(__('Please enter a building name.', 'rental-gates')); ?>', 'warning');
         return;
     }
     
@@ -596,14 +596,14 @@ document.getElementById('building-form').addEventListener('submit', function(e) 
         if (data.success) {
             window.location.href = '<?php echo home_url('/rental-gates/dashboard/buildings'); ?>/' + data.data.id;
         } else {
-            alert(data.data || '<?php _e('Error saving building', 'rental-gates'); ?>');
+            RentalGates.toast(data.data || '<?php echo esc_js(__('Error saving building', 'rental-gates')); ?>', 'error');
             submitBtn.disabled = false;
             submitBtn.textContent = '<?php echo $is_edit ? __('Update Building', 'rental-gates') : __('Create Building', 'rental-gates'); ?>';
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('<?php _e('Error saving building', 'rental-gates'); ?>');
+        RentalGates.toast('<?php echo esc_js(__('Error saving building', 'rental-gates')); ?>', 'error');
         submitBtn.disabled = false;
         submitBtn.textContent = '<?php echo $is_edit ? __('Update Building', 'rental-gates') : __('Create Building', 'rental-gates'); ?>';
     });

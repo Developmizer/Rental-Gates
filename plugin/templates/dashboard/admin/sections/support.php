@@ -122,21 +122,21 @@ $impersonation_log = $wpdb->get_results(
 <div class="admin-content">
     <?php if (isset($_GET['cleared'])): ?>
     <div class="alert alert-success mb-6">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
         <?php _e('Cache cleared successfully.', 'rental-gates'); ?>
     </div>
     <?php endif; ?>
     
     <?php if (isset($_GET['roles_reset'])): ?>
     <div class="alert alert-success mb-6">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
         <?php _e('Roles and capabilities reset successfully.', 'rental-gates'); ?>
     </div>
     <?php endif; ?>
     
     <?php if (isset($_GET['db_upgraded'])): ?>
     <div class="alert alert-success mb-6">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
         <?php _e('Database upgraded successfully.', 'rental-gates'); ?>
     </div>
     <?php endif; ?>
@@ -157,7 +157,7 @@ $impersonation_log = $wpdb->get_results(
     <?php if ($current_tab === 'impersonate'): ?>
     <!-- User Impersonation -->
     <div class="alert alert-warning mb-6">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
         <div>
             <strong><?php _e('Use with caution', 'rental-gates'); ?></strong><br>
             <?php _e('User impersonation allows you to log in as another user for support purposes. All impersonation sessions are logged.', 'rental-gates'); ?>
@@ -169,10 +169,10 @@ $impersonation_log = $wpdb->get_results(
             <h2 class="card-title"><?php _e('Search Users', 'rental-gates'); ?></h2>
         </div>
         <div class="card-body">
-            <form method="get" action="<?php echo home_url('/rental-gates/admin/support'); ?>" style="display: flex; gap: 12px;">
+            <form method="get" action="<?php echo home_url('/rental-gates/admin/support'); ?>" class="rg-flex rg-gap-3">
                 <input type="hidden" name="tab" value="impersonate">
-                <div class="search-box" style="flex: 1; max-width: 400px;">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <div class="search-box rg-flex-1 rg-max-w-sm">
+                    <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                     <input type="text" name="user_search" value="<?php echo esc_attr($_GET['user_search'] ?? ''); ?>" placeholder="<?php esc_attr_e('Search by email or name...', 'rental-gates'); ?>">
                 </div>
                 <button type="submit" class="btn btn-primary"><?php _e('Search', 'rental-gates'); ?></button>
@@ -185,7 +185,7 @@ $impersonation_log = $wpdb->get_results(
         <div class="card-header">
             <h2 class="card-title"><?php _e('Search Results', 'rental-gates'); ?></h2>
         </div>
-        <div class="card-body" style="padding: 0;">
+        <div class="card-body flush">
             <table class="data-table">
                 <thead>
                     <tr>
@@ -200,12 +200,12 @@ $impersonation_log = $wpdb->get_results(
                     ?>
                     <tr>
                         <td>
-                            <div style="font-weight: 500;"><?php echo esc_html($user['display_name']); ?></div>
-                            <div style="font-size: 12px; color: var(--gray-500);"><?php echo esc_html($user['user_email']); ?></div>
+                            <div class="rg-font-medium"><?php echo esc_html($user['display_name']); ?></div>
+                            <div class="rg-text-secondary"><?php echo esc_html($user['user_email']); ?></div>
                         </td>
                         <td>
                             <?php foreach ($user['roles'] as $role): ?>
-                            <span class="badge badge-<?php echo $role === 'administrator' ? 'danger' : 'gray'; ?>" style="margin-right: 4px;">
+                            <span class="badge badge-<?php echo $role === 'administrator' ? 'danger' : 'gray'; ?> rg-mr-1">
                                 <?php echo esc_html(ucwords(str_replace('_', ' ', $role))); ?>
                             </span>
                             <?php endforeach; ?>
@@ -214,7 +214,7 @@ $impersonation_log = $wpdb->get_results(
                             <?php if ($is_admin): ?>
                             <span class="text-muted"><?php _e('Cannot impersonate admins', 'rental-gates'); ?></span>
                             <?php else: ?>
-                            <form method="post" action="" style="display: inline;">
+                            <form method="post" action="" class="rg-inline">
                                 <?php wp_nonce_field('admin_support', 'support_nonce'); ?>
                                 <input type="hidden" name="action_type" value="impersonate">
                                 <input type="hidden" name="user_id" value="<?php echo $user['ID']; ?>">
@@ -248,7 +248,7 @@ $impersonation_log = $wpdb->get_results(
                 <h2 class="card-title"><?php _e('Cache Management', 'rental-gates'); ?></h2>
             </div>
             <div class="card-body">
-                <p style="margin-bottom: 16px; color: var(--gray-600);">
+                <p class="rg-tool-desc">
                     <?php _e('Clear all cached data and transients used by Rental Gates.', 'rental-gates'); ?>
                 </p>
                 <form method="post" action="">
@@ -264,7 +264,7 @@ $impersonation_log = $wpdb->get_results(
                 <h2 class="card-title"><?php _e('Roles & Capabilities', 'rental-gates'); ?></h2>
             </div>
             <div class="card-body">
-                <p style="margin-bottom: 16px; color: var(--gray-600);">
+                <p class="rg-tool-desc">
                     <?php _e('Re-create all Rental Gates roles and capabilities.', 'rental-gates'); ?>
                 </p>
                 <form method="post" action="">
@@ -280,7 +280,7 @@ $impersonation_log = $wpdb->get_results(
                 <h2 class="card-title"><?php _e('Database Upgrade', 'rental-gates'); ?></h2>
             </div>
             <div class="card-body">
-                <p style="margin-bottom: 16px; color: var(--gray-600);">
+                <p class="rg-tool-desc">
                     <?php _e('Force database schema upgrade. Safe to run multiple times.', 'rental-gates'); ?>
                 </p>
                 <form method="post" action="">
@@ -296,7 +296,7 @@ $impersonation_log = $wpdb->get_results(
                 <h2 class="card-title"><?php _e('Debug Information', 'rental-gates'); ?></h2>
             </div>
             <div class="card-body">
-                <p style="margin-bottom: 16px; color: var(--gray-600);">
+                <p class="rg-tool-desc">
                     <?php _e('Copy debug info for support tickets.', 'rental-gates'); ?>
                 </p>
                 <?php
@@ -324,7 +324,7 @@ $impersonation_log = $wpdb->get_results(
         <div class="card-header">
             <h2 class="card-title"><?php _e('Impersonation Log', 'rental-gates'); ?></h2>
         </div>
-        <div class="card-body" style="padding: 0;">
+        <div class="card-body flush">
             <?php if (empty($impersonation_log)): ?>
             <div class="empty-state">
                 <p><?php _e('No impersonation sessions recorded.', 'rental-gates'); ?></p>
@@ -345,17 +345,17 @@ $impersonation_log = $wpdb->get_results(
                         $details = json_decode($log['details'], true);
                     ?>
                     <tr>
-                        <td class="text-muted" style="white-space: nowrap;">
+                        <td class="text-muted rg-nowrap">
                             <?php echo date('M j, Y g:i A', strtotime($log['created_at'])); ?>
                         </td>
-                        <td style="font-weight: 500;"><?php echo esc_html($log['admin_name'] ?? 'Unknown'); ?></td>
+                        <td class="rg-font-medium"><?php echo esc_html($log['admin_name'] ?? 'Unknown'); ?></td>
                         <td>
                             <span class="badge badge-<?php echo strpos($log['action'], 'start') !== false ? 'warning' : 'success'; ?>">
                                 <?php echo strpos($log['action'], 'start') !== false ? __('Started', 'rental-gates') : __('Ended', 'rental-gates'); ?>
                             </span>
                         </td>
                         <td><?php echo esc_html($details['target_user'] ?? 'N/A'); ?></td>
-                        <td class="text-muted font-mono" style="font-size: 12px;"><?php echo esc_html($log['ip_address']); ?></td>
+                        <td class="text-muted font-mono rg-text-xs"><?php echo esc_html($log['ip_address']); ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

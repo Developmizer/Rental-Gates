@@ -62,4 +62,15 @@
         });
     };
 
+    /**
+     * Convenience alias (used by templates without jQuery context).
+     * @param {string} message
+     * @param {string} type
+     * @param {number} duration
+     */
+    RG.toast = function(message, type, duration) {
+        RG.initToast();
+        RG.showToast(message, type, duration);
+    };
+
 })(jQuery);

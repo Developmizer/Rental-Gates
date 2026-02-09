@@ -832,7 +832,7 @@
   backdrop-filter: blur(4px);
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: var(--rg-z-modal);
   padding: var(--rg-space-4);
   animation: rg-fadeIn 150ms ease-out;
 }
@@ -2211,7 +2211,7 @@
   top: var(--rg-space-3);
   left: var(--rg-space-3);
   right: var(--rg-space-3);
-  z-index: 1000;
+  z-index: var(--rg-z-overlay);
   display: flex;
   gap: var(--rg-space-2);
 }
@@ -2558,7 +2558,7 @@
 .rg-report-table .rg-table th {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: var(--rg-z-base);
   background: var(--rg-muted);
 }
 
@@ -3100,6 +3100,78 @@
 
   .rg-portfolio-stats {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* ==========================================================================
+   RESPONSIVE — Small Mobile (max-width: 640px)
+   ========================================================================== */
+
+@media (max-width: 640px) {
+
+  /* Dashboard grid — single column */
+  .rg-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stack quick actions */
+  .rg-quick-actions {
+    grid-template-columns: 1fr;
+  }
+
+  /* Room counts — 2 columns */
+  .rg-room-counts {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--rg-space-2);
+  }
+
+  /* Touch-friendly buttons — min 44px height */
+  .rg-btn {
+    min-height: 44px;
+    padding: var(--rg-space-2) var(--rg-space-3);
+  }
+
+  .rg-btn-sm {
+    min-height: 36px;
+  }
+
+  /* Touch-friendly form controls */
+  .rg-form-input,
+  .rg-form-select,
+  .rg-form-textarea {
+    min-height: 44px;
+    font-size: 16px; /* Prevent iOS zoom on focus */
+  }
+
+  /* Tabs — scroll + larger touch targets */
+  .rg-report-tab {
+    min-height: 44px;
+    padding: var(--rg-space-2) var(--rg-space-3);
+  }
+
+  /* Back link */
+  .rg-back-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Heading scale down */
+  .rg-form-header h1,
+  .rg-card-title {
+    font-size: var(--rg-font-lg);
+  }
+
+  /* Portfolio stats — single column on tiny screens */
+  .rg-portfolio-stats {
+    grid-template-columns: 1fr;
+    gap: var(--rg-space-3);
+  }
+
+  /* Action buttons in tables */
+  .rg-table td .rg-btn {
+    min-height: 36px;
   }
 }
 
@@ -3704,7 +3776,7 @@
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: var(--rg-z-modal);
   padding: var(--rg-space-5);
   overflow-y: auto;
 }
@@ -4385,4 +4457,119 @@
   color: var(--rg-gray-500);
   font-size: var(--rg-font-base);
   margin-bottom: var(--rg-space-4);
+}
+
+
+/* ==========================================================================
+   45. PRIORITY LABELS
+   ========================================================================== */
+
+.rg-priority-label {
+  font-weight: 600;
+  font-size: var(--rg-font-sm);
+}
+
+.rg-priority-label.low       { color: var(--rg-gray-500); }
+.rg-priority-label.medium    { color: var(--rg-primary); }
+.rg-priority-label.high      { color: var(--rg-warning); }
+.rg-priority-label.emergency { color: var(--rg-danger); }
+
+.rg-priority-option.emergency input[type="radio"]:checked + label {
+  border-color: var(--rg-danger);
+  background: var(--rg-danger-light);
+  color: var(--rg-danger);
+}
+
+
+/* ==========================================================================
+   46. TEXTAREA VARIANTS
+   ========================================================================== */
+
+.rg-textarea-sm {
+  min-height: 60px;
+}
+
+
+/* ==========================================================================
+   47. UTILITY CLASSES
+   ========================================================================== */
+
+.rg-inline        { display: inline; }
+.rg-flex          { display: flex; }
+.rg-flex-1        { flex: 1; }
+.rg-gap-3         { gap: var(--rg-space-3); }
+.rg-mr-1          { margin-right: var(--rg-space-1); }
+.rg-font-medium   { font-weight: 500; }
+.rg-text-xs       { font-size: var(--rg-font-xs); }
+.rg-text-secondary { font-size: var(--rg-font-xs); color: var(--rg-gray-500); }
+.rg-nowrap         { white-space: nowrap; }
+.rg-max-w-sm       { max-width: 400px; }
+.flush             { padding: 0; }
+
+/* ── Tool description (admin support cards) ── */
+.rg-tool-desc {
+  margin-bottom: var(--rg-space-4);
+  color: var(--rg-gray-600);
+}
+
+/* ── Input/select width variants ── */
+.rg-input-narrow  { max-width: 200px; }
+.rg-input-medium  { max-width: 250px; }
+.rg-select-narrow { width: 140px; }
+.rg-mb-5          { margin-bottom: var(--rg-space-5); }
+
+/* ── Gallery add button label ── */
+.rg-gallery-add-label {
+  font-size: var(--rg-font-xs);
+  margin-top: var(--rg-space-1);
+}
+
+/* ── Donut chart legend dot colors ── */
+.rg-legend-dot.occupied    { background: var(--rg-primary); }
+.rg-legend-dot.available   { background: var(--rg-success); }
+.rg-legend-dot.coming-soon { background: var(--rg-warning); }
+.rg-legend-dot.unlisted    { background: var(--rg-gray-500); }
+
+/* ── Warning-colored icon ── */
+.rg-text-warning { color: var(--rg-warning); }
+
+/* ── Selected tenant list (lease form JS) ── */
+.rg-selected-tenant-email {
+  font-size: var(--rg-font-sm);
+  color: var(--rg-gray-500);
+  display: block;
+}
+
+.rg-selected-tenant-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--rg-space-2);
+}
+
+.rg-tenant-role-badge {
+  padding: 2px var(--rg-space-2);
+  background: var(--rg-gray-100);
+  border-radius: var(--rg-radius-full);
+  font-size: var(--rg-font-xs);
+}
+
+.rg-btn-icon-ghost {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--rg-gray-400);
+  padding: var(--rg-space-1);
+  border-radius: var(--rg-radius);
+  transition: color var(--rg-transition);
+}
+
+.rg-btn-icon-ghost:hover {
+  color: var(--rg-danger);
+}
+
+/* ── Empty state text ── */
+.rg-empty-placeholder {
+  color: var(--rg-gray-400);
+  text-align: center;
+  padding: var(--rg-space-5);
 }

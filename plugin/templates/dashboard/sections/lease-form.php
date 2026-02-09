@@ -77,8 +77,8 @@ $page_title = $is_edit ? __('Edit Lease', 'rental-gates') : __('New Lease', 'ren
 
 <div class="rg-form-container">
     <a href="<?php echo home_url('/rental-gates/dashboard/leases' . ($is_edit ? '/' . $lease_id : '')); ?>" class="rg-back-link">
-        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        <svg aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/>
         </svg>
         <?php echo $is_edit ? __('Back to Lease', 'rental-gates') : __('Back to Leases', 'rental-gates'); ?>
     </a>
@@ -221,7 +221,7 @@ $page_title = $is_edit ? __('Edit Lease', 'rental-gates') : __('New Lease', 'ren
                     </option>
                     <?php endforeach; ?>
                 </select>
-                <select id="tenant-role" class="rg-form-select" style="width: 140px;">
+                <select id="tenant-role" class="rg-form-select rg-select-narrow">
                     <option value="primary"><?php _e('Primary', 'rental-gates'); ?></option>
                     <option value="co_tenant"><?php _e('Co-Tenant', 'rental-gates'); ?></option>
                     <option value="occupant"><?php _e('Occupant', 'rental-gates'); ?></option>
@@ -361,7 +361,7 @@ function addTenantToList() {
     
     // Check if already added
     if (selectedTenants.find(t => t.tenant_id === tenantId)) {
-        alert('<?php _e('This tenant is already added', 'rental-gates'); ?>');
+        RentalGates.toast('<?php echo esc_js(__('This tenant is already added', 'rental-gates')); ?>', 'warning');
         return;
     }
     
@@ -386,7 +386,7 @@ function renderSelectedTenants() {
     const jsonInput = document.getElementById('tenants-json');
     
     if (selectedTenants.length === 0) {
-        container.innerHTML = '<p style="color: var(--rg-gray-400); text-align: center; padding: 20px;"><?php _e('No tenants added yet', 'rental-gates'); ?></p>';
+        container.innerHTML = '<p class="rg-empty-placeholder"><?php _e('No tenants added yet', 'rental-gates'); ?></p>';
     } else {
         container.innerHTML = selectedTenants.map(t => {
             const initials = t.name.split(' ').map(n => n[0]).join('').toUpperCase();
@@ -397,14 +397,14 @@ function renderSelectedTenants() {
                         <div class="rg-selected-tenant-avatar">${initials}</div>
                         <div>
                             <strong>${t.name}</strong>
-                            <span style="font-size: 13px; color: var(--rg-gray-500); display: block;">${t.email}</span>
+                            <span class="rg-selected-tenant-email">${t.email}</span>
                         </div>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="padding: 2px 8px; background: var(--rg-gray-100); border-radius: 12px; font-size: 12px;">${roleLabels[t.role]}</span>
-                        <button type="button" onclick="removeTenantFromList(${t.tenant_id})" style="background: none; border: none; cursor: pointer; color: var(--rg-gray-400);">
-                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    <div class="rg-selected-tenant-actions">
+                        <span class="rg-tenant-role-badge">${roleLabels[t.role]}</span>
+                        <button type="button" onclick="removeTenantFromList(${t.tenant_id})" class="rg-btn-icon-ghost" aria-label="<?php echo esc_attr__('Remove tenant', 'rental-gates'); ?>">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
                             </svg>
                         </button>
                     </div>
