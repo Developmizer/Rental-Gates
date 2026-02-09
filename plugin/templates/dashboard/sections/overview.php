@@ -60,15 +60,6 @@ $priority_colors = array(
 );
 ?>
 
-<!-- Section spacing -->
-<style>
-    .rg-dashboard-grid { margin-bottom: var(--rg-space-6); }
-    .rg-two-col { margin-bottom: var(--rg-space-6); }
-    .rg-three-col { margin-bottom: var(--rg-space-6); }
-    .rg-card + .rg-card { margin-top: 0; }
-    .rg-section-gap { margin-bottom: var(--rg-space-6); }
-</style>
-
 <!-- Getting Started (show if no buildings) -->
 <?php if ($org_stats['buildings'] === 0): ?>
 <div class="rg-alert-banner" style="background: linear-gradient(135deg, hsl(215 50% 23%) 0%, var(--rg-primary) 100%); color: #fff; border: none; padding: var(--rg-space-6); flex-direction: column; align-items: flex-start; gap: var(--rg-space-4);">
@@ -154,7 +145,7 @@ $priority_colors = array(
         </div>
         <div class="rg-metric-value"><?php echo number_format($occupancy_analytics['occupancy_rate'], 1); ?>%</div>
         <div class="rg-metric-label"><?php _e('Occupancy Rate', 'rental-gates'); ?></div>
-        <div class="rg-metric-trend" style="margin-top: 4px; font-size: 12px; color: var(--gray-500);">
+        <div class="rg-metric-trend" style="margin-top: 4px; font-size: 12px; color: var(--rg-gray-500);">
             <?php printf(__('%d of %d units', 'rental-gates'), $occupancy_analytics['occupied'], $occupancy_analytics['total_units']); ?>
         </div>
     </div>
@@ -216,10 +207,10 @@ $priority_colors = array(
         </div>
         <div class="rg-card-body">
             <div class="rg-chart-container">
-                <canvas id="revenueChart"></canvas>
+                <canvas id="revenueChart" aria-label="<?php esc_attr_e('Revenue trend chart', 'rental-gates'); ?>" role="img"></canvas>
             </div>
         </div>
-        <div class="rg-card-footer" style="justify-content: flex-start;">
+        <div class="rg-card-footer start">
             <button onclick="exportChart('revenueChart', 'revenue-trend')" class="rg-btn rg-btn-outline rg-btn-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -243,7 +234,7 @@ $priority_colors = array(
             $total_units = max(1, $units['total']);
             ?>
             <div class="rg-donut-chart">
-                <svg class="rg-donut-svg" viewBox="0 0 36 36">
+                <svg class="rg-donut-svg" viewBox="0 0 36 36" role="img" aria-label="<?php printf(esc_attr__('Unit status: %d occupied, %d available, %d coming soon, %d unlisted', 'rental-gates'), $units['occupied'], $units['available'], $units['coming_soon'], $units['unlisted']); ?>">
                     <?php
                     $segments = array(
                         array('value' => $units['occupied'], 'color' => '#2563eb', 'label' => 'Occupied'),
@@ -299,7 +290,7 @@ $priority_colors = array(
     </div>
     <div class="rg-card-body">
         <div class="rg-chart-container" style="min-height: 250px;">
-            <canvas id="revenueByBuildingChart"></canvas>
+            <canvas id="revenueByBuildingChart" aria-label="<?php esc_attr_e('Revenue by building chart', 'rental-gates'); ?>" role="img"></canvas>
         </div>
     </div>
 </div>

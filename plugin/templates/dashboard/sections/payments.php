@@ -119,106 +119,6 @@ $method_labels = array(
 );
 ?>
 
-<style>
-    .pm-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
-    .pm-header h1 { font-size: 24px; font-weight: 700; color: var(--gray-900); margin: 0; }
-    .pm-header-actions { display: flex; gap: 12px; }
-    
-    .pm-stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-    .pm-stat-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; padding: 16px 20px; }
-    .pm-stat-card.success { border-color: #10b981; background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%); }
-    .pm-stat-card.warning { border-color: #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #fff 100%); }
-    .pm-stat-card.danger { border-color: #ef4444; background: linear-gradient(135deg, #fef2f2 0%, #fff 100%); }
-    .pm-stat-value { font-size: 28px; font-weight: 700; color: var(--gray-900); }
-    .pm-stat-value.success { color: #10b981; }
-    .pm-stat-value.warning { color: #f59e0b; }
-    .pm-stat-value.danger { color: #ef4444; }
-    .pm-stat-label { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
-    .pm-stat-count { font-size: 12px; color: var(--gray-400); }
-    
-    .pm-filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; background: #fff; padding: 16px; border-radius: 12px; border: 1px solid var(--gray-200); }
-    .pm-search { flex: 1; min-width: 200px; position: relative; }
-    .pm-search input { width: 100%; padding: 10px 14px 10px 40px; border: 1px solid var(--gray-300); border-radius: 8px; font-size: 14px; }
-    .pm-search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gray-400); }
-    .pm-select { padding: 10px 14px; border: 1px solid var(--gray-300); border-radius: 8px; font-size: 14px; min-width: 140px; }
-    
-    .pm-table-container { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; }
-    .pm-table { width: 100%; border-collapse: collapse; }
-    .pm-table th { text-align: left; padding: 12px 16px; background: var(--gray-50); font-weight: 600; font-size: 12px; text-transform: uppercase; color: var(--gray-500); border-bottom: 1px solid var(--gray-200); }
-    .pm-table td { padding: 14px 16px; border-bottom: 1px solid var(--gray-100); font-size: 14px; vertical-align: middle; }
-    .pm-table tr:last-child td { border-bottom: none; }
-    .pm-table tr:hover { background: var(--gray-50); cursor: pointer; }
-    
-    .pm-payment-info { display: flex; flex-direction: column; gap: 2px; }
-    .pm-payment-info strong { color: var(--gray-900); font-size: 14px; }
-    .pm-payment-info span { font-size: 12px; color: var(--gray-500); }
-    
-    .pm-tenant-info { display: flex; align-items: center; gap: 10px; }
-    .pm-tenant-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; flex-shrink: 0; }
-    .pm-tenant-details { display: flex; flex-direction: column; }
-    .pm-tenant-details strong { color: var(--gray-900); font-size: 14px; }
-    .pm-tenant-details span { font-size: 12px; color: var(--gray-500); }
-    
-    .pm-amount { font-weight: 600; }
-    .pm-amount.success { color: #10b981; }
-    .pm-amount.pending { color: #f59e0b; }
-    .pm-amount.failed { color: #ef4444; }
-    
-    .pm-method { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--gray-600); }
-    .pm-method i { font-size: 16px; }
-    .pm-method-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
-    
-    .pm-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
-    .pm-status .dot { width: 6px; height: 6px; border-radius: 50%; }
-    
-    .pm-overdue { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: #fee2e2; color: #dc2626; border-radius: 12px; font-size: 11px; font-weight: 500; margin-left: 6px; }
-    
-    .pm-actions { display: flex; gap: 8px; }
-    .pm-actions button { background: none; border: none; padding: 6px; border-radius: 6px; cursor: pointer; color: var(--gray-400); transition: all 0.2s; }
-    .pm-actions button:hover { background: var(--gray-100); color: var(--gray-700); }
-    
-    .pm-empty { text-align: center; padding: 60px 20px; color: var(--gray-400); }
-    .pm-empty svg { width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.5; }
-    
-    /* Modal Styles */
-    .pm-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; overflow-y: auto; }
-    .pm-modal-overlay.active { display: flex; }
-    .pm-modal { background: #fff; border-radius: 16px; max-width: 560px; width: 100%; max-height: calc(100vh - 40px); overflow: hidden; display: flex; flex-direction: column; margin: auto; }
-    .pm-modal form { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
-    .pm-modal-header { padding: 20px 24px; border-bottom: 1px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-    .pm-modal-header h2 { margin: 0; font-size: 18px; font-weight: 600; }
-    .pm-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--gray-400); padding: 0; line-height: 1; }
-    .pm-modal-close:hover { color: var(--gray-600); }
-    .pm-modal-body { padding: 24px; overflow-y: auto; flex: 1; min-height: 0; }
-    .pm-modal-footer { padding: 16px 24px; border-top: 1px solid var(--gray-200); display: flex; justify-content: flex-end; gap: 12px; flex-shrink: 0; background: #fff; }
-    
-    .pm-form-group { margin-bottom: 20px; }
-    .pm-form-group label { display: block; font-size: 14px; font-weight: 500; color: var(--gray-700); margin-bottom: 6px; }
-    .pm-form-group input, .pm-form-group select, .pm-form-group textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--gray-300); border-radius: 8px; font-size: 14px; }
-    .pm-form-group textarea { min-height: 80px; resize: vertical; }
-    .pm-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    
-    .pm-detail-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
-    .pm-detail-row:last-child { border-bottom: none; }
-    .pm-detail-label { color: var(--gray-500); font-size: 14px; }
-    .pm-detail-value { color: var(--gray-900); font-weight: 500; font-size: 14px; text-align: right; }
-    .pm-detail-value a { color: var(--primary); text-decoration: none; }
-    .pm-detail-value a:hover { text-decoration: underline; }
-    
-    .pm-fee-breakdown { background: var(--gray-50); border-radius: 8px; padding: 16px; margin-top: 16px; }
-    .pm-fee-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; }
-    .pm-fee-row.total { border-top: 1px solid var(--gray-200); margin-top: 8px; padding-top: 12px; font-weight: 600; }
-    
-    @media (max-width: 1024px) {
-        .pm-stats-row { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 768px) {
-        .pm-stats-row { grid-template-columns: 1fr; }
-        .pm-table { display: block; overflow-x: auto; }
-        .pm-form-row { grid-template-columns: 1fr; }
-    }
-</style>
-
 <!-- Page Header -->
 <div class="pm-header">
     <h1><?php _e('Payments', 'rental-gates'); ?></h1>
@@ -236,7 +136,7 @@ $method_labels = array(
             </svg>
             <?php _e('Create Charge', 'rental-gates'); ?>
         </button>
-        <button type="button" class="rg-btn rg-btn-outline" onclick="openGenerateRentModal()" style="border: 1px solid var(--gray-300); background: #fff;">
+        <button type="button" class="rg-btn rg-btn-outline" onclick="openGenerateRentModal()">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
             </svg>
@@ -351,7 +251,7 @@ $method_labels = array(
                                 $<?php echo number_format($payment['amount'], 2); ?>
                             </div>
                             <?php if ($payment['amount_paid'] > 0 && $payment['amount_paid'] < $payment['amount']): ?>
-                                <div style="font-size: 11px; color: var(--gray-500);">
+                                <div class="pm-partial-paid">
                                     <?php printf(__('Paid: $%s', 'rental-gates'), number_format($payment['amount_paid'], 2)); ?>
                                 </div>
                             <?php endif; ?>
@@ -359,17 +259,17 @@ $method_labels = array(
                         <td>
                             <div class="pm-method">
                                 <?php if (strpos($payment['method'] ?? '', 'stripe') !== false): ?>
-                                    <i class="fab fa-cc-stripe" style="color: #635bff;"></i>
+                                    <i class="fab fa-cc-stripe" style="color: #635bff;" aria-hidden="true"></i>
                                 <?php elseif ($payment['method'] === 'cash'): ?>
-                                    <i class="fas fa-money-bill-wave" style="color: #10b981;"></i>
+                                    <i class="fas fa-money-bill-wave" style="color: #10b981;" aria-hidden="true"></i>
                                 <?php elseif ($payment['method'] === 'check'): ?>
-                                    <i class="fas fa-money-check" style="color: #3b82f6;"></i>
+                                    <i class="fas fa-money-check" style="color: #3b82f6;" aria-hidden="true"></i>
                                 <?php else: ?>
-                                    <i class="fas fa-credit-card" style="color: var(--gray-400);"></i>
+                                    <i class="fas fa-credit-card" style="color: var(--rg-gray-400);" aria-hidden="true"></i>
                                 <?php endif; ?>
                                 <?php echo esc_html($method_label); ?>
                                 <?php if ($card_last4): ?>
-                                    <span style="color: var(--gray-400);">•••• <?php echo esc_html($card_last4); ?></span>
+                                    <span style="color: var(--rg-gray-400);">•••• <?php echo esc_html($card_last4); ?></span>
                                 <?php endif; ?>
                             </div>
                         </td>
@@ -383,14 +283,14 @@ $method_labels = array(
                             <?php endif; ?>
                         </td>
                         <td>
-                            <div style="font-size: 13px;">
+                            <div class="pm-date-display">
                                 <?php if ($payment['paid_at']): ?>
-                                    <div style="color: var(--gray-900);"><?php echo date_i18n('M j, Y', strtotime($payment['paid_at'])); ?></div>
-                                    <div style="color: var(--gray-400); font-size: 11px;"><?php echo date_i18n('g:i a', strtotime($payment['paid_at'])); ?></div>
+                                    <div class="pm-date-primary"><?php echo date_i18n('M j, Y', strtotime($payment['paid_at'])); ?></div>
+                                    <div class="pm-date-time"><?php echo date_i18n('g:i a', strtotime($payment['paid_at'])); ?></div>
                                 <?php elseif ($payment['due_date']): ?>
-                                    <div style="color: var(--gray-500);"><?php _e('Due:', 'rental-gates'); ?> <?php echo date_i18n('M j', strtotime($payment['due_date'])); ?></div>
+                                    <div class="pm-date-due"><?php _e('Due:', 'rental-gates'); ?> <?php echo date_i18n('M j', strtotime($payment['due_date'])); ?></div>
                                 <?php else: ?>
-                                    <div style="color: var(--gray-400);">—</div>
+                                    <div class="pm-date-empty">—</div>
                                 <?php endif; ?>
                             </div>
                         </td>
@@ -436,16 +336,16 @@ $method_labels = array(
 </div>
 
 <!-- Record Payment Modal (already paid) -->
-<div class="pm-modal-overlay" id="record-payment-modal">
+<div class="pm-modal-overlay" id="record-payment-modal" role="dialog" aria-modal="true" aria-labelledby="record-payment-title">
     <div class="pm-modal">
         <div class="pm-modal-header">
-            <h2><?php _e('Record Received Payment', 'rental-gates'); ?></h2>
-            <button type="button" class="pm-modal-close" onclick="closeModal('record-payment-modal')">&times;</button>
+            <h2 id="record-payment-title"><?php _e('Record Received Payment', 'rental-gates'); ?></h2>
+            <button type="button" class="pm-modal-close" onclick="closeModal('record-payment-modal')" aria-label="<?php esc_attr_e('Close', 'rental-gates'); ?>">&times;</button>
         </div>
         <form id="record-payment-form">
             <div class="pm-modal-body">
-                <p style="margin: 0 0 20px; padding: 12px; background: #ecfdf5; border-radius: 8px; font-size: 13px; color: #065f46;">
-                    <strong><?php _e('Recording a payment already received', 'rental-gates'); ?></strong> - 
+                <p class="pm-info-callout success">
+                    <strong><?php _e('Recording a payment already received', 'rental-gates'); ?></strong> -
                     <?php _e('Use this for cash, check, or other offline payments.', 'rental-gates'); ?>
                 </p>
                 
@@ -471,12 +371,12 @@ $method_labels = array(
                         <?php endforeach; ?>
                     </select>
                     <?php if (empty($active_leases)): ?>
-                        <p style="margin: 8px 0 0; font-size: 12px; color: #ef4444;">
+                        <p class="pm-error-text">
                             <?php _e('No active leases found. Please create a lease first.', 'rental-gates'); ?>
                         </p>
                     <?php endif; ?>
                 </div>
-                
+
                 <div class="pm-form-row">
                     <div class="pm-form-group">
                         <label><?php _e('Amount Received', 'rental-gates'); ?> *</label>
@@ -530,16 +430,16 @@ $method_labels = array(
 </div>
 
 <!-- Create Pending Payment Modal -->
-<div class="pm-modal-overlay" id="create-pending-modal">
+<div class="pm-modal-overlay" id="create-pending-modal" role="dialog" aria-modal="true" aria-labelledby="create-pending-title">
     <div class="pm-modal">
         <div class="pm-modal-header">
-            <h2><?php _e('Create Pending Charge', 'rental-gates'); ?></h2>
-            <button type="button" class="pm-modal-close" onclick="closeModal('create-pending-modal')">&times;</button>
+            <h2 id="create-pending-title"><?php _e('Create Pending Charge', 'rental-gates'); ?></h2>
+            <button type="button" class="pm-modal-close" onclick="closeModal('create-pending-modal')" aria-label="<?php esc_attr_e('Close', 'rental-gates'); ?>">&times;</button>
         </div>
         <form id="create-pending-form">
             <div class="pm-modal-body">
-                <p style="margin: 0 0 20px; padding: 12px; background: #fef3c7; border-radius: 8px; font-size: 13px; color: #92400e;">
-                    <strong><?php _e('Creating a charge for tenant to pay', 'rental-gates'); ?></strong> - 
+                <p class="pm-info-callout warning">
+                    <strong><?php _e('Creating a charge for tenant to pay', 'rental-gates'); ?></strong> -
                     <?php _e('This will appear in the tenant portal for online payment.', 'rental-gates'); ?>
                 </p>
                 
@@ -566,19 +466,19 @@ $method_labels = array(
                         <?php endforeach; ?>
                     </select>
                     <?php if (empty($active_leases)): ?>
-                        <p style="margin: 8px 0 0; font-size: 12px; color: #ef4444;">
+                        <p class="pm-error-text">
                             <?php _e('No active leases found. Please create a lease first.', 'rental-gates'); ?>
                         </p>
                     <?php endif; ?>
                 </div>
-                
+
                 <!-- Selected tenant info display -->
-                <div id="pending-tenant-info" style="display: none; margin-bottom: 20px; padding: 12px; background: var(--gray-50); border-radius: 8px;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div id="pending-tenant-avatar" style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px;"></div>
+                <div id="pending-tenant-info" class="pm-tenant-preview">
+                    <div class="pm-tenant-preview-inner">
+                        <div id="pending-tenant-avatar" class="pm-tenant-preview-avatar"></div>
                         <div>
-                            <div id="pending-tenant-name" style="font-weight: 600; color: var(--gray-900);"></div>
-                            <div id="pending-tenant-unit" style="font-size: 13px; color: var(--gray-500);"></div>
+                            <div id="pending-tenant-name" class="pm-tenant-preview-name"></div>
+                            <div id="pending-tenant-unit" class="pm-tenant-preview-unit"></div>
                         </div>
                     </div>
                 </div>
@@ -586,9 +486,9 @@ $method_labels = array(
                 <div class="pm-form-row">
                     <div class="pm-form-group">
                         <label><?php _e('Amount', 'rental-gates'); ?> *</label>
-                        <div style="position: relative;">
-                            <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray-400);">$</span>
-                            <input type="number" name="amount" id="pending-amount" step="0.01" min="0.01" required placeholder="0.00" style="padding-left: 28px;">
+                        <div class="pm-amount-input-wrap">
+                            <span class="pm-currency-symbol">$</span>
+                            <input type="number" name="amount" id="pending-amount" step="0.01" min="0.01" required placeholder="0.00">
                         </div>
                     </div>
                     <div class="pm-form-group">
@@ -606,7 +506,7 @@ $method_labels = array(
                 <div class="pm-form-group">
                     <label><?php _e('Due Date', 'rental-gates'); ?></label>
                     <input type="date" name="due_date" id="pending-due-date" value="<?php echo date('Y-m-d', strtotime('+7 days')); ?>">
-                    <p style="margin: 6px 0 0; font-size: 12px; color: var(--gray-500);">
+                    <p class="pm-helper-text">
                         <?php _e('Leave empty for no specific due date. Defaults to 7 days from now.', 'rental-gates'); ?>
                     </p>
                 </div>
@@ -630,29 +530,29 @@ $method_labels = array(
 </div>
 
 <!-- Generate Monthly Rent Modal -->
-<div class="pm-modal-overlay" id="generate-rent-modal">
+<div class="pm-modal-overlay" id="generate-rent-modal" role="dialog" aria-modal="true" aria-labelledby="generate-rent-title">
     <div class="pm-modal" style="max-width: 420px;">
         <div class="pm-modal-header">
-            <h2><?php _e('Generate Monthly Rent Charges', 'rental-gates'); ?></h2>
-            <button type="button" class="pm-modal-close" onclick="closeModal('generate-rent-modal')">&times;</button>
+            <h2 id="generate-rent-title"><?php _e('Generate Monthly Rent Charges', 'rental-gates'); ?></h2>
+            <button type="button" class="pm-modal-close" onclick="closeModal('generate-rent-modal')" aria-label="<?php esc_attr_e('Close', 'rental-gates'); ?>">&times;</button>
         </div>
         <form id="generate-rent-form">
             <div class="pm-modal-body">
-                <p style="margin: 0 0 20px; font-size: 14px; color: var(--gray-600);">
+                <p class="pm-info-callout info">
                     <?php _e('This will create pending rent charges for all active leases for the selected month. Existing charges will be skipped.', 'rental-gates'); ?>
                 </p>
-                
+
                 <div class="pm-form-group">
                     <label><?php _e('Month', 'rental-gates'); ?></label>
                     <input type="month" name="for_month" value="<?php echo date('Y-m'); ?>" required>
                 </div>
-                
-                <div style="padding: 16px; background: var(--gray-50); border-radius: 8px; margin-top: 16px;">
-                    <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px;">
+
+                <div class="pm-generate-summary">
+                    <div class="pm-generate-summary-row">
                         <span><?php _e('Active Leases:', 'rental-gates'); ?></span>
                         <strong><?php echo count($active_leases); ?></strong>
                     </div>
-                    <div style="font-size: 12px; color: var(--gray-500);">
+                    <div class="pm-generate-summary-hint">
                         <?php _e('Rent charges will be created based on each lease\'s rent amount and due date.', 'rental-gates'); ?>
                     </div>
                 </div>
@@ -666,11 +566,11 @@ $method_labels = array(
 </div>
 
 <!-- Payment Detail Modal -->
-<div class="pm-modal-overlay" id="payment-detail-modal">
+<div class="pm-modal-overlay" id="payment-detail-modal" role="dialog" aria-modal="true" aria-labelledby="payment-detail-title">
     <div class="pm-modal">
         <div class="pm-modal-header">
-            <h2><?php _e('Payment Details', 'rental-gates'); ?></h2>
-            <button type="button" class="pm-modal-close" onclick="closeModal('payment-detail-modal')">&times;</button>
+            <h2 id="payment-detail-title"><?php _e('Payment Details', 'rental-gates'); ?></h2>
+            <button type="button" class="pm-modal-close" onclick="closeModal('payment-detail-modal')" aria-label="<?php esc_attr_e('Close', 'rental-gates'); ?>">&times;</button>
         </div>
         <div class="pm-modal-body" id="payment-detail-content">
             <!-- Filled by JavaScript -->
@@ -776,7 +676,7 @@ function openPaymentDetail(paymentId) {
     
     // Transaction IDs
     if (payment.stripe_payment_intent_id || payment.stripe_charge_id) {
-        html += `<div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--gray-200);">
+        html += `<div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--rg-gray-200);">
             <h4 style="margin: 0 0 12px; font-size: 14px; font-weight: 600;"><?php _e('Transaction IDs', 'rental-gates'); ?></h4>`;
         
         if (payment.stripe_payment_intent_id) {
@@ -809,9 +709,9 @@ function openPaymentDetail(paymentId) {
     
     // Notes
     if (payment.notes) {
-        html += `<div style="margin-top: 20px; padding: 12px; background: var(--gray-50); border-radius: 8px;">
-            <strong style="font-size: 13px; color: var(--gray-600);"><?php _e('Notes:', 'rental-gates'); ?></strong>
-            <p style="margin: 8px 0 0; font-size: 14px; color: var(--gray-700);">${payment.notes}</p>
+        html += `<div style="margin-top: 20px; padding: 12px; background: var(--rg-gray-50); border-radius: 8px;">
+            <strong style="font-size: 13px; color: var(--rg-gray-600);"><?php _e('Notes:', 'rental-gates'); ?></strong>
+            <p style="margin: 8px 0 0; font-size: 14px; color: var(--rg-gray-700);">${payment.notes}</p>
         </div>`;
     }
     
@@ -962,14 +862,14 @@ document.getElementById('pending-lease-select').addEventListener('change', funct
         document.getElementById('pending-tenant-avatar').textContent = initials || '?';
         document.getElementById('pending-tenant-name').textContent = tenant;
         document.getElementById('pending-tenant-unit').textContent = unit + ' - ' + building;
-        infoBox.style.display = 'block';
-        
+        infoBox.classList.add('visible');
+
         // Auto-fill amount
         if (rent && parseFloat(rent) > 0) {
             document.getElementById('pending-amount').value = rent;
         }
     } else {
-        infoBox.style.display = 'none';
+        infoBox.classList.remove('visible');
     }
 });
 

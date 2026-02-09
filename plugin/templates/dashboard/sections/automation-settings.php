@@ -149,7 +149,7 @@ $settings = $settings_json ? array_merge($defaults, json_decode($settings_json, 
                         <div class="rg-conditional-row">
                             <label><?php _e('Grace period:', 'rental-gates'); ?></label>
                             <input type="number" name="late_fee_grace_days" value="<?php echo esc_attr($settings['late_fee_grace_days']); ?>" min="0" max="30">
-                            <span style="color: var(--gray-500); font-size: 13px;"><?php _e('days after due date', 'rental-gates'); ?></span>
+                            <span style="color: var(--rg-gray-500); font-size: 13px;"><?php _e('days after due date', 'rental-gates'); ?></span>
                         </div>
                         <div class="rg-conditional-row">
                             <label><?php _e('Fee type:', 'rental-gates'); ?></label>
